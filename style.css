@@ -3,11 +3,11 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --bg:         #0b120b;
-  --bg2:        #0f1a0f;
-  --pine:       #1e3d1e;
-  --pine-mid:   #2a5229;
-  --pine-light: #3d7a3b;
+  --bg:         #182818;
+  --bg2:        #1e3220;
+  --pine:       #274f27;
+  --pine-mid:   #346534;
+  --pine-light: #4a8f48;
   --gold:       #c9a96e;
   --gold-light: #e0c48a;
   --cream:      #f0ebe0;
