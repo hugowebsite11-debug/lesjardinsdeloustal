@@ -91,7 +91,7 @@ a { text-decoration: none; color: inherit; }
 }
 
 .hamburger {
-  display: none; /* hidden on desktop — shown on mobile via media query */
+  display: none !important; /* hidden on desktop — shown on mobile via media query */
   flex-direction: column; gap: 5px;
   cursor: pointer; padding: .4rem; background: none; border: none;
   z-index: 210;
@@ -926,7 +926,7 @@ footer { border-top: 1px solid var(--border); padding: 4rem 2rem 2rem; }
 @media (max-width: 768px) {
 
   /* ── Hamburger visible, nav desktop caché ── */
-  .hamburger { display: flex; }
+  .hamburger { display: flex !important; }
   .nav-links  { display: none !important; }
   .nav-reserver { display: none !important; }
   .nav-dropdown { display: none !important; }
