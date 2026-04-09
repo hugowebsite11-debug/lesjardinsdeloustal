@@ -91,10 +91,12 @@ a { text-decoration: none; color: inherit; }
 }
 
 .hamburger {
-  display: flex; flex-direction: column; gap: 5px;
+  display: none; /* hidden on desktop — shown on mobile via media query */
+  flex-direction: column; gap: 5px;
   cursor: pointer; padding: .4rem; background: none; border: none;
+  z-index: 210;
 }
-.hamburger span { display: block; width: 22px; height: 1.5px; background: var(--cream); transition: transform .3s, opacity .3s; }
+.hamburger span { display: block; width: 24px; height: 1.5px; background: var(--cream); transition: transform .3s, opacity .3s; }
 .hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
 .hamburger.open span:nth-child(2) { opacity: 0; }
 .hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
@@ -227,12 +229,12 @@ a { text-decoration: none; color: inherit; }
   display: inline-block;
 }
 .hero-usp-main {
-  font-size: .82rem;
-  letter-spacing: .18em;
+  font-size: 1.05rem;
+  letter-spacing: .22em;
   text-transform: uppercase;
   color: var(--cream);
-  font-weight: 500;
-  margin-bottom: .2rem;
+  font-weight: 600;
+  margin-bottom: .3rem;
 }
 .hero-usp-sub {
   font-size: .8rem;
@@ -563,7 +565,7 @@ footer { border-top: 1px solid var(--border); padding: 4rem 2rem 2rem; }
 ══════════════════════════════════════ */
 .hero-logo-img {
   width: auto;
-  max-width: 280px;
+  max-width: 400px;
   height: auto;
   object-fit: contain;
   display: block;
@@ -916,5 +918,72 @@ footer { border-top: 1px solid var(--border); padding: 4rem 2rem 2rem; }
 @media (max-width: 768px) {
   .contact-page-grid { grid-template-columns: 1fr; gap: 3rem; }
   .contact-form-wrap { padding: 1.5rem; }
+}
+
+/* ══════════════════════════════════════
+   MOBILE — Toutes les règles spécifiques
+══════════════════════════════════════ */
+@media (max-width: 768px) {
+
+  /* ── Hamburger visible, nav desktop caché ── */
+  .hamburger { display: flex; }
+  .nav-links  { display: none !important; }
+  .nav-reserver { display: none !important; }
+  .nav-dropdown { display: none !important; }
+
+  /* ── Booking bar cachée sur mobile ── */
+  .booking-bar { display: none !important; }
+  #hero { padding-bottom: 3rem; }
+
+  /* ── Cottage cards : carousel horizontal ── */
+  #cottages .cottages-grid {
+    display: flex !important;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    gap: 1.2rem;
+    padding: 0 1.5rem 1.5rem;
+    margin: 2rem -1.5rem 0;
+    scrollbar-width: none;
+  }
+  #cottages .cottages-grid::-webkit-scrollbar { display: none; }
+  #cottages .cottage-card {
+    flex: 0 0 82vw !important;
+    scroll-snap-align: start;
+    max-width: none !important;
+  }
+
+  /* ── Avis Google : carousel horizontal ── */
+  .avis-grid {
+    display: flex !important;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    gap: 1.2rem;
+    padding: 0 1.5rem 1.5rem;
+    margin: 2rem -1.5rem 0;
+    scrollbar-width: none;
+  }
+  .avis-grid::-webkit-scrollbar { display: none; }
+  .avis-card {
+    flex: 0 0 82vw !important;
+    scroll-snap-align: start;
+  }
+
+  /* ── Page Nos Cottages (slider) : fixes mobile ── */
+  /* Masque le numéro interne du slide (le counter en bas suffit) */
+  .cottage-slide-num { display: none; }
+
+  /* Le contenu ne doit pas dépasser sous la navbar */
+  .cottage-slide { padding-top: 70px; }
+  .cottage-slide-content {
+    padding: 1.5rem 1.5rem 9rem;
+    max-width: 100%;
+  }
+
+  /* Arrows et counter positionnés sans chevaucher la navbar */
+  .slider-counter { bottom: 1rem; left: 1rem; }
+  .slider-arrows  { bottom: 1rem; right: 1rem; }
+  .scroll-hint    { display: none; }
 }
 
