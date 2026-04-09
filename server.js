@@ -33,7 +33,11 @@ http.createServer((req, res) => {
       });
       return;
     }
-    res.writeHead(200, { 'Content-Type': contentType });
+    const headers = { 'Content-Type': contentType };
+    if (ext === '.css' || ext === '.js') {
+      headers['Cache-Control'] = 'no-cache, no-store, must-revalidate';
+    }
+    res.writeHead(200, headers);
     res.end(data);
   });
 }).listen(PORT, () => {
