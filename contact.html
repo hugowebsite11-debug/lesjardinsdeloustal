@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact & Réservation — Les Jardins de l'Oustal</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌲</text></svg>" />
+</head>
+<body>
+
+<nav id="navbar">
+  <ul class="nav-links">
+    <li><a href="index.html">Accueil</a></li>
+    <li class="nav-has-dropdown">
+      <a href="cottages.html">Nos cottages</a>
+      <ul class="nav-dropdown">
+        <li><a href="sous-les-pins-1.html">Sous les Pins 1</a></li>
+        <li><a href="sous-les-pins-2.html">Sous les Pins 2</a></li>
+        <li><a href="chalet-zen.html">Le Chalet Zen</a></li>
+        <li><a href="falaise.html">La Falaise</a></li>
+        <li><a href="bois-flottee.html">La Bois Flottée</a></li>
+      </ul>
+    </li>
+    <li><a href="navette-services.html">Navette & services</a></li>
+    <li><a href="contact.html" class="nav-active">Contact</a></li>
+  </ul>
+  <a href="#form" class="nav-reserver">Réserver<span>Meilleur tarif</span></a>
+</nav>
+
+<!-- ── HERO ────────────────────────── -->
+<section class="page-hero page-hero--short">
+  <div class="page-hero-bg">
+    <img src="images/hero.jpg" alt="Contact — Les Jardins de l'Oustal" loading="eager" />
+    <div class="page-hero-overlay"></div>
+  </div>
+  <div class="page-hero-content">
+    <span class="section-label">Nous écrire</span>
+    <h1 class="page-hero-title">Contact &<br><em>Réservation</em></h1>
+    <p class="page-hero-sub">Nous répondons à chaque demande sous 24h.</p>
+  </div>
+</section>
+
+<!-- ── CONTENU PRINCIPAL ─────────── -->
+<section style="padding:7rem 2rem;">
+  <div class="container">
+    <div class="contact-page-grid">
+
+      <!-- Infos + carte -->
+      <div class="contact-page-info">
+
+        <div class="reveal">
+          <span class="section-label">Coordonnées</span>
+          <h2 class="section-title">Parlons de<br>votre <em>séjour</em></h2>
+          <p class="section-desc">Que ce soit pour une réservation, une question sur nos cottages ou la navette, nous sommes là pour vous répondre.</p>
+        </div>
+
+        <div class="contact-details reveal reveal-delay-1">
+          <a href="tel:+33600000000" class="contact-detail-link">
+            <div class="contact-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.46 9.18 19.79 19.79 0 01.42 4.4 2 2 0 012.4 2h3a2 2 0 012 1.72c.13.96.36 1.9.7 2.81a2 2 0 01-.45 2.11L6.91 9.4a16 16 0 006.72 6.72l.77-.76a2 2 0 012.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0122 16.92z"/></svg>
+            </div>
+            <div>
+              <div class="contact-detail-label">Téléphone</div>
+              <div class="contact-detail-val">+33 (0)6 XX XX XX XX</div>
+            </div>
+          </a>
+
+          <a href="mailto:contact@jardins-oustal.fr" class="contact-detail-link">
+            <div class="contact-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </div>
+            <div>
+              <div class="contact-detail-label">Email</div>
+              <div class="contact-detail-val">contact@jardins-oustal.fr</div>
+            </div>
+          </a>
+
+          <div class="contact-detail-link">
+            <div class="contact-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <div>
+              <div class="contact-detail-label">Adresse</div>
+              <div class="contact-detail-val">Narbonne, Aude (11100)<br><span style="font-size:.8rem;color:var(--muted);">À 5 min des Grands Buffets</span></div>
+            </div>
+          </div>
+
+          <div class="contact-detail-link">
+            <div class="contact-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <div>
+              <div class="contact-detail-label">Disponibilité</div>
+              <div class="contact-detail-val">Réponse sous 24h<br><span style="font-size:.8rem;color:var(--muted);">7j/7 en saison</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Carte -->
+        <div class="contact-map reveal reveal-delay-2">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d46527.5!2d2.996!3d43.18!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12b0aaef23c4e181%3A0x40819a5fd97d890!2sNarbonne!5e0!3m2!1sfr!2sfr!4v1"
+            title="Narbonne" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+        </div>
+
+      </div>
+
+      <!-- Formulaire -->
+      <div class="reveal reveal-delay-1" id="form">
+        <div class="contact-form-wrap">
+          <div class="contact-form-header">
+            <h3>Nous contacter</h3>
+            <p>Une question sur nos cottages, la navette ou votre séjour ? Nous vous répondons sous 24h.</p>
+          </div>
+
+          <form id="contact-form" class="contact-form">
+            <div class="form-row">
+              <div class="field">
+                <label>Prénom *</label>
+                <input type="text" placeholder="Marie" required />
+              </div>
+              <div class="field">
+                <label>Nom *</label>
+                <input type="text" placeholder="Dupont" required />
+              </div>
+            </div>
+
+            <div class="field">
+              <label>Email *</label>
+              <input type="email" placeholder="marie@exemple.fr" required />
+            </div>
+
+            <div class="field">
+              <label>Téléphone</label>
+              <input type="tel" placeholder="+33 6 00 00 00 00" />
+            </div>
+
+            <div class="field">
+              <label>Message *</label>
+              <textarea placeholder="Votre question, ou décrivez votre projet de séjour…" required style="min-height:140px;"></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-fill form-submit-btn">
+              Envoyer mon message
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </button>
+          </form>
+
+          <div class="form-success">
+            ✓ Demande envoyée ! Nous vous répondons sous 24h.
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ────────────────────── -->
+<footer>
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="nav-logo-footer">Les Jardins de <em>l'Oustal</em></div>
+        <p>Cottages de luxe à Narbonne.<br>À 5 minutes des Grands Buffets,<br>navette incluse dans votre séjour.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="index.html">Accueil</a></li>
+          <li><a href="cottages.html">Nos cottages</a></li>
+          <li><a href="navette-services.html">Navette & services</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Cottages</h4>
+        <ul>
+          <li><a href="cottages.html">Sous les pins 1</a></li>
+          <li><a href="cottages.html">Sous les pins 2</a></li>
+          <li><a href="cottages.html">Le Chalet</a></li>
+          <li><a href="cottages.html">La Falaise</a></li>
+          <li><a href="cottages.html">La Bois Flottée</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="tel:+33600000000">+33 (0)6 XX XX XX XX</a></li>
+          <li><a href="mailto:contact@jardins-oustal.fr">contact@jardins-oustal.fr</a></li>
+          <li><a href="contact.html">Réserver</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2026 Les Jardins de l'Oustal — Tous droits réservés</p>
+      <div class="footer-legal"><a href="#">Mentions légales</a><a href="#">CGV</a></div>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
