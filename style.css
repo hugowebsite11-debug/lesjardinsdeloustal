@@ -607,14 +607,14 @@ footer { border-top: 1px solid var(--border); padding: 4rem 2rem 2rem; }
 .nav-has-dropdown { position: relative; }
 .nav-dropdown {
   position: absolute;
-  top: calc(100% + 1rem);
+  top: 100%;
   left: 50%;
   transform: translateX(-50%) translateY(-6px);
   background: rgba(11,18,11,.97);
   backdrop-filter: blur(16px);
   border: 1px solid var(--border);
   border-radius: 8px;
-  padding: .4rem 0;
+  padding: .8rem 0 .4rem;
   min-width: 210px;
   opacity: 0;
   pointer-events: none;
