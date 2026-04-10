@@ -96,6 +96,27 @@
     .booking-card-note { text-align: center; font-size: .72rem; color: var(--muted); margin-top: .8rem; }
 
     .cottage-nav-btns { display: flex; gap: 1rem; margin-top: 2rem; flex-wrap: wrap; }
+
+    /* ── Galerie ── */
+    .gallery-section { padding: 0 2rem 5rem; }
+    .gallery-section-title { font-family: 'Playfair Display', serif; font-size: 1.6rem; color: var(--gold); margin-bottom: 1.8rem; }
+    .gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: .8rem; }
+    @media (max-width: 700px) { .gallery-grid { grid-template-columns: repeat(2, 1fr); } }
+    .gallery-thumb { aspect-ratio: 4/3; overflow: hidden; border-radius: 6px; cursor: pointer; border: 1px solid var(--border); }
+    .gallery-thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform .4s var(--ease); display: block; }
+    .gallery-thumb:hover img { transform: scale(1.06); }
+
+    /* ── Lightbox ── */
+    .lightbox { display: none; position: fixed; inset: 0; z-index: 1000; background: rgba(0,0,0,.92); align-items: center; justify-content: center; }
+    .lightbox.open { display: flex; }
+    .lightbox-img { max-width: 90vw; max-height: 88vh; object-fit: contain; border-radius: 4px; user-select: none; }
+    .lightbox-close { position: absolute; top: 1.2rem; right: 1.5rem; background: none; border: none; color: #fff; font-size: 2rem; cursor: pointer; opacity: .7; line-height: 1; }
+    .lightbox-close:hover { opacity: 1; }
+    .lightbox-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,.12); border: none; color: #fff; font-size: 1.8rem; width: 3rem; height: 3rem; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background .2s; }
+    .lightbox-btn:hover { background: rgba(255,255,255,.25); }
+    .lightbox-prev { left: 1rem; }
+    .lightbox-next { right: 1rem; }
+    .lightbox-counter { position: absolute; bottom: 1.2rem; left: 50%; transform: translateX(-50%); font-size: .8rem; color: rgba(255,255,255,.6); letter-spacing: .12em; }
   </style>
 </head>
 <body>
@@ -132,7 +153,7 @@
 
 <!-- ── HERO ── -->
 <div class="cottage-detail-hero">
-  <img src="images/hero.jpg" alt="Sous les Pins 1" loading="eager" />
+  <img src="images/slp.png" alt="Sous les Pins 1" loading="eager" />
   <div class="cottage-detail-hero-overlay"></div>
   <div class="cottage-detail-hero-content">
     <a href="cottages.html" class="back-link">
@@ -149,6 +170,33 @@
       <span class="cottage-detail-chip chip-green">Animaux bienvenus</span>
     </div>
   </div>
+</div>
+
+<!-- ── GALERIE ── -->
+<div class="gallery-section">
+  <div class="container">
+    <h2 class="gallery-section-title">Le cottage en images</h2>
+    <div class="gallery-grid">
+      <div class="gallery-thumb" data-index="0"><img src="images/slp-1.png" alt="Sous les Pins 1 - photo 1" loading="lazy" /></div>
+      <div class="gallery-thumb" data-index="1"><img src="images/slp-2.png" alt="Sous les Pins 1 - photo 2" loading="lazy" /></div>
+      <div class="gallery-thumb" data-index="2"><img src="images/slp-3.png" alt="Sous les Pins 1 - photo 3" loading="lazy" /></div>
+      <div class="gallery-thumb" data-index="3"><img src="images/slp-4.png" alt="Sous les Pins 1 - photo 4" loading="lazy" /></div>
+      <div class="gallery-thumb" data-index="4"><img src="images/slp-5.png" alt="Sous les Pins 1 - photo 5" loading="lazy" /></div>
+      <div class="gallery-thumb" data-index="5"><img src="images/slp-6.png" alt="Sous les Pins 1 - photo 6" loading="lazy" /></div>
+      <div class="gallery-thumb" data-index="6"><img src="images/slp-7.png" alt="Sous les Pins 1 - photo 7" loading="lazy" /></div>
+      <div class="gallery-thumb" data-index="7"><img src="images/slp-8.png" alt="Sous les Pins 1 - photo 8" loading="lazy" /></div>
+      <div class="gallery-thumb" data-index="8"><img src="images/slp-9.png" alt="Sous les Pins 1 - photo 9" loading="lazy" /></div>
+    </div>
+  </div>
+</div>
+
+<!-- ── LIGHTBOX ── -->
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" id="lbClose">&#x2715;</button>
+  <button class="lightbox-btn lightbox-prev" id="lbPrev">&#8249;</button>
+  <img class="lightbox-img" id="lbImg" src="" alt="" />
+  <button class="lightbox-btn lightbox-next" id="lbNext">&#8250;</button>
+  <div class="lightbox-counter" id="lbCounter"></div>
 </div>
 
 <!-- ── CONTENU ── -->
@@ -351,5 +399,35 @@
 </footer>
 
 <script src="script.js"></script>
+<script>
+  const images = [
+    'images/slp-1.png','images/slp-2.png','images/slp-3.png',
+    'images/slp-4.png','images/slp-5.png','images/slp-6.png',
+    'images/slp-7.png','images/slp-8.png','images/slp-9.png'
+  ];
+  let current = 0;
+  const lb = document.getElementById('lightbox');
+  const lbImg = document.getElementById('lbImg');
+  const lbCounter = document.getElementById('lbCounter');
+
+  function openLb(idx) { current = idx; lbImg.src = images[current]; lbCounter.textContent = (current + 1) + ' / ' + images.length; lb.classList.add('open'); document.body.style.overflow = 'hidden'; }
+  function closeLb() { lb.classList.remove('open'); document.body.style.overflow = ''; }
+  function goPrev() { current = (current - 1 + images.length) % images.length; lbImg.src = images[current]; lbCounter.textContent = (current + 1) + ' / ' + images.length; }
+  function goNext() { current = (current + 1) % images.length; lbImg.src = images[current]; lbCounter.textContent = (current + 1) + ' / ' + images.length; }
+
+  document.querySelectorAll('.gallery-thumb').forEach(thumb => {
+    thumb.addEventListener('click', () => openLb(parseInt(thumb.dataset.index)));
+  });
+  document.getElementById('lbClose').addEventListener('click', closeLb);
+  document.getElementById('lbPrev').addEventListener('click', goPrev);
+  document.getElementById('lbNext').addEventListener('click', goNext);
+  lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+  document.addEventListener('keydown', e => {
+    if (!lb.classList.contains('open')) return;
+    if (e.key === 'ArrowLeft') goPrev();
+    if (e.key === 'ArrowRight') goNext();
+    if (e.key === 'Escape') closeLb();
+  });
+</script>
 </body>
 </html>
