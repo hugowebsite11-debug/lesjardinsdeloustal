@@ -35,10 +35,7 @@ http.createServer((req, res) => {
       });
       return;
     }
-    const headers = { 'Content-Type': contentType };
-    if (ext === '.css' || ext === '.js') {
-      headers['Cache-Control'] = 'no-cache, no-store, must-revalidate';
-    }
+    const headers = { 'Content-Type': contentType, 'Cache-Control': 'no-cache, no-store, must-revalidate' };
     res.writeHead(200, headers);
     res.end(data);
   });
