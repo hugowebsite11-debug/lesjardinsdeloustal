@@ -984,6 +984,8 @@ footer { border-top: 1px solid var(--border); padding: 4rem 2rem 2rem; }
   /* ── Booking bar cachée sur mobile ── */
   .booking-bar { display: none !important; }
   #hero { padding-bottom: 3rem; }
+  .hero-logo-img { margin-bottom: .3rem; }
+  .hero-logo-wrap { margin-bottom: .7rem; }
 
   /* ── Cottage cards : carousel horizontal avec peek ── */
   #cottages .cottages-grid {
