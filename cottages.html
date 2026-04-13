@@ -56,15 +56,15 @@
       z-index: 1;
     }
 
-    /* Mobile: gradient from bottom */
+    /* Mobile: gradient couvrant pour lisibilité du texte centré */
     @media (max-width: 768px) {
       .cottage-slide-overlay {
         background: linear-gradient(
-          to top,
-          rgba(11,18,11,.97) 0%,
-          rgba(11,18,11,.8)  45%,
-          rgba(11,18,11,.3)  75%,
-          rgba(11,18,11,.1)  100%
+          to bottom,
+          rgba(11,18,11,.55) 0%,
+          rgba(11,18,11,.70) 35%,
+          rgba(11,18,11,.85) 70%,
+          rgba(11,18,11,.95) 100%
         );
       }
     }
@@ -260,13 +260,13 @@
 
     /* ── Mobile swipe ── */
     @media (max-width: 768px) {
-      .cottage-slide { align-items: flex-end; }
+      .cottage-slide { align-items: center; }
       .cottage-slide-content {
-        padding: 1.5rem 1.5rem 6rem;
+        padding: 5rem 1.5rem 6rem;
         max-width: 100%;
       }
       .cottage-slide-name { font-size: clamp(2rem, 8vw, 3rem); margin-bottom: 0.7rem; }
-      .cottage-slide-desc { font-size: .88rem; line-height: 1.65; margin-bottom: 1rem; max-height: 80px; overflow: hidden; }
+      .cottage-slide-desc { font-size: .88rem; line-height: 1.65; margin-bottom: 1rem; }
       .cottage-slide-meta { display: none; }
       .cottage-slide-amenities { gap: 0.35rem; margin-bottom: 1rem; }
       .amenity-tag { font-size: .68rem; padding: .3rem .7rem; }
