@@ -931,10 +931,10 @@ footer { border-top: 1px solid var(--border); padding: 4rem 2rem 2rem; }
 .mobile-sticky-cta { display: none; }
 .carousel-dots { display: none; }
 
-/* ── Bouton calendrier rond — coin haut-droit de la carte, caché sur desktop ── */
+/* ── Bouton calendrier rond — au-dessus de la carte côté droit, caché sur desktop ── */
 .cottage-book-btn {
   display: none;
-  position: absolute; top: 0.6rem; right: 0.6rem;
+  position: absolute; top: -20px; right: 0.75rem;
   width: 40px; height: 40px; border-radius: 50%;
   background: var(--pine-light);
   align-items: center; justify-content: center;
@@ -963,10 +963,11 @@ footer { border-top: 1px solid var(--border); padding: 4rem 2rem 2rem; }
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
+    overflow-y: visible !important;
     touch-action: pan-x;
     gap: 1.2rem;
-    padding: 0 1.5rem 1.5rem;
-    margin: 2rem -1.5rem 0;
+    padding: 1.5rem 1.5rem 1.5rem;  /* top 1.5rem → bouton -20px visible sans clipping */
+    margin: 0.5rem -1.5rem 0;
     scrollbar-width: none;
   }
   #cottages .cottages-grid::-webkit-scrollbar { display: none; }
@@ -1067,7 +1068,7 @@ footer { border-top: 1px solid var(--border); padding: 4rem 2rem 2rem; }
     scroll-snap-type: x mandatory;
     scrollbar-width: none;
     -webkit-overflow-scrolling: touch;
-    padding: 1rem 0 1.5rem 1.5rem; /* left padding only → peek naturel à droite */
+    padding: 1.5rem 0 1.5rem 1.5rem; /* top 1.5rem > bouton -20px → visible sans clipping */
     gap: 1rem;
   }
   #cottagesGrid::-webkit-scrollbar { display: none; }

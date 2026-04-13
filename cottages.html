@@ -260,8 +260,17 @@
 
     /* ── Mobile swipe ── */
     @media (max-width: 768px) {
-      .cottage-slide-content { padding: 2rem 1.5rem; padding-bottom: 8rem; max-width: 100%; }
       .cottage-slide { align-items: flex-end; }
+      .cottage-slide-content {
+        padding: 1.5rem 1.5rem 6rem;
+        max-width: 100%;
+      }
+      .cottage-slide-name { font-size: clamp(1.8rem, 7vw, 2.6rem); margin-bottom: 0.7rem; }
+      .cottage-slide-desc { display: none; }
+      .cottage-slide-meta { display: none; }
+      .cottage-slide-amenities { gap: 0.35rem; margin-bottom: 1rem; }
+      .amenity-tag { font-size: .68rem; padding: .3rem .7rem; }
+      .cottage-slide-actions { gap: 0.6rem; }
       .slider-nav { display: none; }
       .slider-arrows { bottom: 1.5rem; right: 1.5rem; }
       .slider-counter { bottom: 1.5rem; left: 1.5rem; }
