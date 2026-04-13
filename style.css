@@ -931,10 +931,10 @@ footer { border-top: 1px solid var(--border); padding: 4rem 2rem 2rem; }
 .mobile-sticky-cta { display: none; }
 .carousel-dots { display: none; }
 
-/* ── Bouton calendrier rond — relatif à l'article, caché sur desktop ── */
+/* ── Bouton calendrier rond — coin haut-droit de la carte, caché sur desktop ── */
 .cottage-book-btn {
   display: none;
-  position: absolute; top: -14px; right: 0.75rem;
+  position: absolute; top: 0.6rem; right: 0.6rem;
   width: 40px; height: 40px; border-radius: 50%;
   background: var(--pine-light);
   align-items: center; justify-content: center;
@@ -1094,8 +1094,7 @@ footer { border-top: 1px solid var(--border); padding: 4rem 2rem 2rem; }
     pointer-events: none;
   }
 
-  /* ── 4. Pages cottages individuelles — hero padding-top ── */
-  .cottage-detail-hero { padding-top: 70px; min-height: 65vw; }
+  /* ── 4. Pages cottages individuelles — hero mobile ── */
   .cottage-detail-title {
     font-size: clamp(1.4rem, 5.5vw, 2rem) !important;
     white-space: normal;
