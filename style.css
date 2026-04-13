@@ -90,6 +90,27 @@ a { text-decoration: none; color: inherit; }
   border-bottom: 1px solid var(--border);
 }
 
+/* Logo centré dans la navbar — visible uniquement après scroll */
+.nav-logo-scroll {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .3s var(--ease);
+}
+.nav-logo-scroll img {
+  height: 38px;
+  width: auto;
+  filter: drop-shadow(0 1px 6px rgba(0,0,0,.4));
+}
+#navbar.scrolled .nav-logo-scroll {
+  opacity: 1;
+  pointer-events: auto;
+}
+
 .hamburger {
   display: none !important; /* hidden on desktop — shown on mobile via media query */
   flex-direction: column; gap: 5px;
