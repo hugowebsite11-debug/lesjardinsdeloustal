@@ -130,10 +130,38 @@ a { text-decoration: none; color: inherit; }
   display: none; position: fixed; inset: 0; z-index: 190;
   background: var(--bg);
   flex-direction: column; align-items: center; justify-content: center; gap: 2.5rem;
+  overflow-y: auto;
 }
 .mobile-menu.open { display: flex; }
-.mobile-menu a { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-style: italic; color: var(--cream); transition: color .2s; }
-.mobile-menu a:hover { color: var(--gold); }
+.mobile-menu > a { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-style: italic; color: var(--cream); transition: color .2s; }
+.mobile-menu > a:hover { color: var(--gold); }
+
+/* Sous-menu "Nos cottages" dans le menu mobile */
+.mobile-menu details { text-align: center; }
+.mobile-menu details summary {
+  font-family: 'Playfair Display', serif; font-size: 1.8rem; font-style: italic;
+  color: var(--cream); cursor: pointer; list-style: none;
+  display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+  transition: color .2s;
+}
+.mobile-menu details summary::-webkit-details-marker { display: none; }
+.mobile-menu details summary::marker { display: none; }
+.mobile-menu details summary:hover,
+.mobile-menu details[open] summary { color: var(--gold); }
+.mobile-menu details summary .details-arrow { font-size: 1.2rem; font-style: normal; transition: transform .25s; }
+.mobile-menu details[open] summary .details-arrow { transform: rotate(90deg); }
+.mobile-sub-links {
+  display: flex; flex-direction: column; align-items: center;
+  gap: 0.75rem; padding: 0.9rem 0 0.2rem;
+}
+.mobile-sub-links a {
+  font-family: 'Playfair Display', serif !important;
+  font-size: 1.2rem !important;
+  font-style: italic;
+  color: var(--muted) !important;
+  transition: color .2s;
+}
+.mobile-sub-links a:hover { color: var(--gold) !important; }
 
 /* ── Hero ────────────────────────────── */
 #hero {
@@ -157,15 +185,15 @@ a { text-decoration: none; color: inherit; }
 }
 .hero-bg img.loaded { transform: scale(1); }
 
-/* Overlay : sombre partout, totalement opaque en bas pour fondre dans --bg */
+/* Overlay : léger en haut pour laisser voir l'image, opaque en bas pour fondre dans --bg */
 .hero-overlay {
   position: absolute; inset: 0;
   background: linear-gradient(
     to bottom,
-    rgba(11,18,11,.55)  0%,
-    rgba(11,18,11,.45) 25%,
-    rgba(11,18,11,.62) 55%,
-    rgba(11,18,11,.92) 78%,
+    rgba(11,18,11,.20)  0%,
+    rgba(11,18,11,.18) 25%,
+    rgba(11,18,11,.38) 55%,
+    rgba(11,18,11,.88) 78%,
     rgba(11,18,11,1)   100%
   );
 }
@@ -1097,12 +1125,20 @@ footer { border-top: 1px solid var(--border); padding: 4rem 2rem 2rem; }
 
   /* ── 4. Pages cottages individuelles — hero mobile ── */
   .cottage-detail-title {
-    font-size: clamp(1.4rem, 5.5vw, 2rem) !important;
+    font-size: clamp(2.8rem, 11vw, 4rem) !important;
     white-space: normal;
     overflow: visible;
     text-overflow: unset;
-    line-height: 1.2;
+    line-height: 1.1;
   }
+  /* Chips infos (25m², jacuzzi…) plus compactes sur mobile */
+  .cottage-detail-chip {
+    padding: .22rem .6rem !important;
+    font-size: .6rem !important;
+  }
+  .cottage-detail-chips { gap: .4rem !important; margin-top: .8rem !important; }
+  /* Supprime l'effet de surélèvement des cartes cottages (ombres) sur mobile */
+  .cottage-card:hover { transform: none !important; box-shadow: none !important; }
 
   /* ── 5. Galerie photos → carousel horizontal full-width ── */
   .gallery-section { padding-left: 0 !important; padding-right: 0 !important; }
