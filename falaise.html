@@ -6,7 +6,7 @@
   <title>La Falaise — Les Jardins de l'Oustal</title>
   <meta name="theme-color" content="#0b120b" />
   <link rel="preload" as="image" href="images/falaise.png" />
-  <link rel="stylesheet" href="style.css?v=2" />
+  <link rel="stylesheet" href="style.css?v=4" />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌲</text></svg>" />
   <style>
     .cottage-detail-hero { position: relative; height: 75vh; min-height: 500px; overflow: hidden; }
@@ -47,63 +47,15 @@
     .booking-card-btn svg { width: 16px; height: 16px; }
     .booking-card-note { text-align: center; font-size: .72rem; color: var(--muted); margin-top: .8rem; }
     .cottage-nav-btns { display: flex; gap: 1rem; margin-top: 2rem; flex-wrap: wrap; }
+    .hero-gallery-btn { display: inline-flex; align-items: center; gap: .6rem; margin-top: 1.6rem; padding: .85rem 1.7rem; background: rgba(11,18,11,.5); backdrop-filter: blur(10px) saturate(1.4); -webkit-backdrop-filter: blur(10px) saturate(1.4); border: 1px solid var(--gold); color: var(--cream); font-family: 'Inter', sans-serif; font-size: .78rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; border-radius: 30px; cursor: pointer; transition: background .25s, color .25s, transform .25s; }
+    .hero-gallery-btn:hover { background: var(--gold); color: var(--bg); transform: translateY(-2px); }
+    .hero-gallery-btn svg { width: 17px; height: 17px; flex-shrink: 0; }
+    .highlight-box { background: rgba(201,169,110,.08); border: 1px solid rgba(201,169,110,.25); border-radius: 8px; padding: 1.2rem 1.5rem; margin-bottom: 2rem; font-size: .9rem; color: var(--gold); }
 
-    /* ── Galerie ── */
-    .gallery-section { padding: 0 2rem 5rem; }
-    .gallery-section-title { font-family: 'Playfair Display', serif; font-size: 1.6rem; color: var(--gold); margin-bottom: 1.8rem; }
-    .gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: .8rem; }
-    @media (max-width: 700px) { .gallery-grid { grid-template-columns: repeat(2, 1fr); } }
-    .gallery-thumb { aspect-ratio: 4/3; overflow: hidden; border-radius: 6px; cursor: pointer; border: 1px solid var(--border); }
-    .gallery-thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform .4s var(--ease); display: block; }
-    .gallery-thumb:hover img { transform: scale(1.06); }
-
-    /* ── MOBILE : carousel galerie pleine largeur ── */
+    /* ── MOBILE : titre cottage ── */
     @media (max-width: 768px) {
       .cottage-detail-title { font-size: clamp(1.6rem, 6vw, 2.4rem) !important; white-space: normal !important; }
-      .gallery-section { padding: 1.5rem 0 2rem !important; }
-      .gallery-section .container { padding: 0 !important; }
-      .gallery-section-title { padding: 0 1.5rem !important; margin-bottom: 1rem !important; }
-      .gallery-grid {
-        display: flex !important;
-        flex-wrap: nowrap !important;
-        overflow-x: scroll !important;
-        overflow-y: hidden !important;
-        scroll-snap-type: x mandatory !important;
-        scrollbar-width: none !important;
-        gap: 0.5rem !important;
-        padding: 0 0 0 0 !important;
-        touch-action: pan-x;
-        -webkit-overflow-scrolling: touch;
-        height: auto !important;
-      }
-      .gallery-grid::-webkit-scrollbar { display: none !important; }
-      .gallery-thumb {
-        flex: 0 0 88vw !important;
-        width: 88vw !important;
-        min-width: 88vw !important;
-        max-width: 88vw !important;
-        height: auto !important;
-        aspect-ratio: 4/3 !important;
-        scroll-snap-align: start !important;
-        border-radius: 8px !important;
-        overflow: hidden !important;
-        border: none !important;
-        cursor: default !important;
-      }
-      .gallery-thumb img { touch-action: none; pointer-events: none; }
     }
-
-    /* ── Lightbox ── */
-    .lightbox { display: none; position: fixed; inset: 0; z-index: 1000; background: rgba(0,0,0,.92); align-items: center; justify-content: center; }
-    .lightbox.open { display: flex; }
-    .lightbox-img { max-width: 90vw; max-height: 88vh; object-fit: contain; border-radius: 4px; user-select: none; }
-    .lightbox-close { position: absolute; top: 1.2rem; right: 1.5rem; background: none; border: none; color: #fff; font-size: 2rem; cursor: pointer; opacity: .7; line-height: 1; }
-    .lightbox-close:hover { opacity: 1; }
-    .lightbox-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,.12); border: none; color: #fff; font-size: 1.8rem; width: 3rem; height: 3rem; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background .2s; }
-    .lightbox-btn:hover { background: rgba(255,255,255,.25); }
-    .lightbox-prev { left: 1rem; }
-    .lightbox-next { right: 1rem; }
-    .lightbox-counter { position: absolute; bottom: 1.2rem; left: 50%; transform: translateX(-50%); font-size: .8rem; color: rgba(255,255,255,.6); letter-spacing: .12em; }
   </style>
 </head>
 <body>
@@ -163,30 +115,17 @@
     <div class="cottage-breadcrumb">Nos cottages</div>
     <h1 class="cottage-detail-title">La <em>Falaise</em></h1>
     <div class="cottage-detail-chips">
-      <span class="cottage-detail-chip chip-spec">25 m²</span>
-      <span class="cottage-detail-chip chip-spec">2 personnes</span>
+      <span class="cottage-detail-chip chip-spec">45 m²</span>
+      <span class="cottage-detail-chip chip-spec">4 personnes</span>
       <span class="cottage-detail-chip chip-spec">Jacuzzi privatif</span>
       <span class="cottage-detail-chip chip-spec">Terrasse privée</span>
       <span class="cottage-detail-chip chip-spec">Vue jardin</span>
       <span class="cottage-detail-chip chip-green">Animaux bienvenus</span>
     </div>
-  </div>
-</div>
-
-<!-- ── GALERIE ── -->
-<div class="gallery-section">
-  <div class="container">
-    <div class="gallery-grid">
-      <div class="gallery-thumb" data-index="0"><img src="images/falaise-1.png" alt="La Falaise - photo 1" loading="lazy" /></div>
-      <div class="gallery-thumb" data-index="1"><img src="images/falaise-2.png" alt="La Falaise - photo 2" loading="lazy" /></div>
-      <div class="gallery-thumb" data-index="2"><img src="images/falaise-3.png" alt="La Falaise - photo 3" loading="lazy" /></div>
-      <div class="gallery-thumb" data-index="3"><img src="images/falaise-4.png" alt="La Falaise - photo 4" loading="lazy" /></div>
-      <div class="gallery-thumb" data-index="4"><img src="images/falaise-5.png" alt="La Falaise - photo 5" loading="lazy" /></div>
-      <div class="gallery-thumb" data-index="5"><img src="images/falaise-6.png" alt="La Falaise - photo 6" loading="lazy" /></div>
-      <div class="gallery-thumb" data-index="6"><img src="images/falaise-7.png" alt="La Falaise - photo 7" loading="lazy" /></div>
-      <div class="gallery-thumb" data-index="7"><img src="images/falaise-8.png" alt="La Falaise - photo 8" loading="lazy" /></div>
-      <div class="gallery-thumb" data-index="8"><img src="images/falaise-9.png" alt="La Falaise - photo 9" loading="lazy" /></div>
-    </div>
+    <button class="hero-gallery-btn" id="openGalleryBtn" type="button">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="14" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+      Voir plus de photos
+    </button>
   </div>
 </div>
 
@@ -206,9 +145,12 @@
 
       <div>
         <div class="reveal">
+          <div class="highlight-box">
+            👨‍👩‍👧‍👦 Capacité 4 personnes — idéal pour 2 adultes + 2 enfants. Le 2e couchage est composé de 2 lits superposés 1 place, pensés pour des enfants plutôt que 2 adultes supplémentaires.
+          </div>
           <div class="cottage-detail-desc">
-            <p>La Falaise est un cottage de caractère pour deux, alliant intimité et confort naturel. Depuis sa terrasse privée, la vue s'ouvre sur le jardin arboré du domaine — le cadre idéal pour débuter ou clore une journée aux Grands Buffets avec la navette incluse.</p>
-            <p>Son jacuzzi privatif chauffé, son entrée indépendante et ses équipements soignés en font un cocon parfait pour les couples en quête de dépaysement et de calme à Narbonne.</p>
+            <p>La Falaise est un cottage de caractère pour 2 adultes, avec un coin mezzanine équipé de 2 lits superposés pour 2 enfants en plus. Depuis sa terrasse privée, la vue s'ouvre sur le jardin arboré du domaine — le cadre idéal pour débuter ou clore une journée aux Grands Buffets avec la navette incluse (départ 19h, retour 22h).</p>
+            <p>Son jacuzzi privatif chauffé, son entrée indépendante et ses équipements soignés en font un cocon parfait pour les familles et les couples en quête de dépaysement et de calme à Narbonne.</p>
           </div>
         </div>
 
@@ -218,6 +160,10 @@
             <div class="amenity-item">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>
               Grand lit double
+            </div>
+            <div class="amenity-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="14" height="8" rx="1"/><rect x="3" y="13" width="14" height="8" rx="1"/></svg>
+              2 lits superposés 1 place (mezzanine enfants)
             </div>
             <div class="amenity-item">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>
@@ -322,11 +268,11 @@
           <div class="booking-card-specs">
             <div class="booking-card-spec">
               <span class="booking-card-spec-label">Surface</span>
-              <span class="booking-card-spec-val">25 m²</span>
+              <span class="booking-card-spec-val">45 m²</span>
             </div>
             <div class="booking-card-spec">
               <span class="booking-card-spec-label">Capacité</span>
-              <span class="booking-card-spec-val">2 personnes</span>
+              <span class="booking-card-spec-val">4 personnes</span>
             </div>
             <div class="booking-card-spec">
               <span class="booking-card-spec-label">Jacuzzi</span>
@@ -342,7 +288,7 @@
             </div>
             <div class="booking-card-spec">
               <span class="booking-card-spec-label">Navette Grands Buffets</span>
-              <span class="booking-card-spec-val">Incluse ✓</span>
+              <span class="booking-card-spec-val">Incluse · 19h-22h ✓</span>
             </div>
           </div>
           <a href="https://direct-book.com/properties/lesjardinsdeloustal?locale=fr&items[0][adults]=2&items[0][children]=0&items[0][infants]=0&currency=EUR&checkInDate=2026-11-23&checkOutDate=2026-11-26&trackPage=yes" target="_blank" class="booking-card-btn">
@@ -363,7 +309,7 @@
     <div class="footer-top">
       <div class="footer-brand">
         <div class="nav-logo-footer">Les Jardins de <em>l'Oustal</em></div>
-        <p>Cottages de luxe à Narbonne.<br>À 5 minutes des Grands Buffets,<br>navette incluse dans votre séjour.</p>
+        <p>Cottages de luxe à Narbonne.<br>À 5 minutes des Grands Buffets,<br>navette incluse dans votre séjour (19h-22h).</p>
       </div>
       <div class="footer-col">
         <h4>Navigation</h4>
@@ -387,7 +333,7 @@
       <div class="footer-col">
         <h4>Contact</h4>
         <ul>
-          <li><a href="tel:+33761321983">07 61 32 19 83</a></li>
+          <li><a href="tel:+33761507550">07 61 50 75 50</a></li>
           <li><a href="mailto:lesjardinsdeloustal@gmail.com">lesjardinsdeloustal@gmail.com</a></li>
           <li><a href="contact.html">Nous écrire</a></li>
         </ul>
@@ -402,7 +348,7 @@
 
 <!-- ── Sticky CTA mobile ── -->
 <div class="mobile-sticky-cta">
-  <a href="tel:+33761321983" class="cta-call">
+  <a href="tel:+33761507550" class="cta-call">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.1 1.18 2 2 0 012.11 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.09a16 16 0 006 6l.45-.45a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>
     Appeler
   </a>
@@ -419,37 +365,36 @@
     'images/falaise-4.png','images/falaise-5.png','images/falaise-6.png',
     'images/falaise-7.png','images/falaise-8.png','images/falaise-9.png'
   ];
-  let current = 0;
   const lb = document.getElementById('lightbox');
   const lbImg = document.getElementById('lbImg');
   const lbCounter = document.getElementById('lbCounter');
 
+  let lbCurrent = 0;
   function openLb(idx) {
-    current = idx;
-    lbImg.src = images[current];
-    lbCounter.textContent = (current + 1) + ' / ' + images.length;
+    lbCurrent = idx;
+    lbImg.src = images[lbCurrent];
+    lbCounter.textContent = (lbCurrent + 1) + ' / ' + images.length;
     lb.classList.add('open');
     document.body.style.overflow = 'hidden';
   }
-  function closeLb() {
-    lb.classList.remove('open');
-    document.body.style.overflow = '';
+  function closeLb() { lb.classList.remove('open'); document.body.style.overflow = ''; }
+  function lbGoTo(idx) {
+    lbCurrent = (idx + images.length) % images.length;
+    lbImg.src = images[lbCurrent];
+    lbCounter.textContent = (lbCurrent + 1) + ' / ' + images.length;
   }
-  function goPrev() { current = (current - 1 + images.length) % images.length; lbImg.src = images[current]; lbCounter.textContent = (current + 1) + ' / ' + images.length; }
-  function goNext() { current = (current + 1) % images.length; lbImg.src = images[current]; lbCounter.textContent = (current + 1) + ' / ' + images.length; }
 
-  document.querySelectorAll('.gallery-thumb').forEach(thumb => {
-    thumb.addEventListener('click', () => openLb(parseInt(thumb.dataset.index)));
-  });
+  document.getElementById('openGalleryBtn').addEventListener('click', () => openLb(0));
   document.getElementById('lbClose').addEventListener('click', closeLb);
-  document.getElementById('lbPrev').addEventListener('click', goPrev);
-  document.getElementById('lbNext').addEventListener('click', goNext);
+  document.getElementById('lbPrev').addEventListener('click', () => lbGoTo(lbCurrent - 1));
+  document.getElementById('lbNext').addEventListener('click', () => lbGoTo(lbCurrent + 1));
   lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
   document.addEventListener('keydown', e => {
-    if (!lb.classList.contains('open')) return;
-    if (e.key === 'ArrowLeft') goPrev();
-    if (e.key === 'ArrowRight') goNext();
-    if (e.key === 'Escape') closeLb();
+    if (lb.classList.contains('open')) {
+      if (e.key === 'ArrowLeft') lbGoTo(lbCurrent - 1);
+      if (e.key === 'ArrowRight') lbGoTo(lbCurrent + 1);
+      if (e.key === 'Escape') closeLb();
+    }
   });
 </script>
 </body>
