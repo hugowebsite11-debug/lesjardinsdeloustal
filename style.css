@@ -90,15 +90,24 @@ a { text-decoration: none; color: inherit; }
   border-bottom: 1px solid var(--border);
 }
 
-/* Logo — toujours visible, en tête de colonne */
+/* Logo navbar — caché sur la hero (aucun espace), visible après scroll */
 .nav-logo-scroll {
   order: -1;
   position: static;
   transform: none;
   display: flex;
   align-items: center;
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transition: max-height .35s var(--ease), opacity .3s var(--ease);
+}
+#navbar.scrolled .nav-logo-scroll {
+  max-height: 100px;
   opacity: 1;
   pointer-events: auto;
+  overflow: visible;
 }
 .nav-logo-scroll img {
   height: 56px;
@@ -691,7 +700,7 @@ footer { border-top: 1px solid var(--border); padding: 4rem 2rem 2rem; }
 ══════════════════════════════════════ */
 .hero-logo-img {
   width: auto;
-  max-width: 400px;
+  max-width: 180px;
   height: auto;
   object-fit: contain;
   display: block;
