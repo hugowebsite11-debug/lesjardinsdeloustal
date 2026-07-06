@@ -1322,5 +1322,75 @@ footer { border-top: 1px solid var(--border); padding: 4rem 2rem 2rem; }
   .ns-feature-icon-big svg { width: 38px; height: 38px; }
   .ns-feature-stat { padding: 1rem 1.5rem; }
   .ns-feature-stat strong { font-size: 1.7rem; }
+
+  /* ── 17. Hero USP : typo hiérarchisée sur mobile ── */
+  .hero-usp { padding: 0.7rem 1rem; margin-bottom: 1.5rem; }
+  .hero-usp-main { font-size: 0; /* masque l'espace inter-spans */ line-height: 1.2; }
+  .hero-usp-accent {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    color: var(--cream);
+    display: inline;
+  }
+  .hero-usp-connector {
+    font-size: 0.68rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(240,235,224,.55);
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    display: inline;
+  }
+  .hero-usp-sub { font-size: 0.8rem; }
+
+  /* ── 18. Logo hero : plus petit sur mobile ── */
+  .hero-logo-img { max-width: 130px; }
+
+  /* ── 19. Hamburger : position correcte dans la navbar ── */
+  .hamburger { top: 0.85rem; transform: none; }
+
+  /* ── 20. Carousel cottages : peek gauche + droite ── */
+  /* #cottages a padding:2rem (inline) + .container a padding:2rem = 4rem de chaque côté.
+     margin:-4rem brise les deux couches, la grille devient plein écran. */
+  #cottages .cottages-grid,
+  #cottagesGrid {
+    padding: 1.5rem 0 !important;
+    margin: 0.5rem -4rem 0 !important;
+    gap: 1rem !important;
+  }
+  #cottages .cottages-grid::before,
+  #cottages .cottages-grid::after,
+  #cottagesGrid::before,
+  #cottagesGrid::after { display: none !important; }
+  /* scroll-snap center : carte centrée dans le viewport, peek visible des deux côtés */
+  #cottages .cottage-card,
+  #cottagesGrid .cottage-card {
+    flex: 0 0 72vw !important;
+    min-width: 72vw;
+    scroll-snap-align: center !important;
+  }
+
+  /* ── 21. Navette cards : 2 colonnes sur mobile ── */
+  .navette-cards {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.6rem;
+  }
+  /* Reset le layout grid interne et compacte les cartes */
+  .navette-card {
+    display: flex !important;
+    flex-direction: column;
+    gap: 0.4rem;
+    padding: 0.85rem 0.8rem;
+    grid-template-columns: unset;
+  }
+  .navette-card .navette-icon {
+    width: 30px; height: 30px;
+    grid-column: unset; grid-row: unset;
+  }
+  .navette-card h3 { grid-column: unset; grid-row: unset; font-size: 0.8rem; }
+  .navette-card p  { grid-column: unset; grid-row: unset; font-size: 0.72rem; }
 }
 
