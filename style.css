@@ -692,7 +692,7 @@ footer { border-top: 1px solid var(--border); padding: 4rem 2rem 2rem; }
   .cottages-grid { grid-template-columns: 1fr; }
   .footer-top { grid-template-columns: 1fr; }
   .form-row { grid-template-columns: 1fr; }
-  section, #navette, #cottages { padding: 5rem 1.5rem; }
+  section, #navette, #cottages { padding: 3rem 1.5rem; }
 }
 
 /* ══════════════════════════════════════
@@ -1087,22 +1087,22 @@ footer { border-top: 1px solid var(--border); padding: 4rem 2rem 2rem; }
   .hero-logo-img { margin-bottom: .3rem; }
   .hero-logo-wrap { margin-bottom: .7rem; }
 
-  /* ── Cottage cards : carousel horizontal avec peek ── */
+  /* ── Cottage cards : carousel horizontal avec peek gauche/droite ── */
   #cottages .cottages-grid {
     display: flex !important;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
     overflow-y: visible !important;
-    touch-action: pan-x;
-    gap: 1.2rem;
-    padding: 1.5rem 1.5rem 1.5rem;  /* top 1.5rem → bouton -20px visible sans clipping */
+    /* pas de touch-action: pan-x → le navigateur gère les deux axes */
+    gap: 1rem;
+    padding: 1.5rem 1rem 1.5rem 1.5rem;
     margin: 0.5rem -1.5rem 0;
     scrollbar-width: none;
   }
   #cottages .cottages-grid::-webkit-scrollbar { display: none; }
   #cottages .cottage-card {
-    flex: 0 0 76vw !important;
+    flex: 0 0 72vw !important;   /* plus étroit → on voit le bord de la carte suivante */
     scroll-snap-align: start;
     max-width: none !important;
   }
@@ -1198,13 +1198,14 @@ footer { border-top: 1px solid var(--border); padding: 4rem 2rem 2rem; }
     scroll-snap-type: x mandatory;
     scrollbar-width: none;
     -webkit-overflow-scrolling: touch;
-    padding: 1.5rem 0 1.5rem 1.5rem; /* top 1.5rem > bouton -20px → visible sans clipping */
+    /* pas de touch-action: pan-x → scroll vertical page conservé */
+    padding: 1.5rem 1rem 1.5rem 1.5rem;
     gap: 1rem;
   }
   #cottagesGrid::-webkit-scrollbar { display: none; }
   #cottagesGrid .cottage-card {
-    min-width: 80vw;
-    flex: 0 0 80vw !important;
+    min-width: 72vw;
+    flex: 0 0 72vw !important;   /* carte plus étroite → peek de la suivante visible */
     flex-shrink: 0;
     scroll-snap-align: start;
     position: relative;
@@ -1277,5 +1278,49 @@ footer { border-top: 1px solid var(--border); padding: 4rem 2rem 2rem; }
   .service-icon svg, .service-card svg { width: 28px; height: 28px; }
   .service-card h3 { font-size: 0.72rem; margin-top: 0.4rem; }
   .service-card p { display: none; }
+
+  /* ── 8. Pages internes : hero moins haute, contenu collé en bas ── */
+  .page-hero {
+    height: 40vh;
+    min-height: 280px;
+    justify-content: flex-end; /* contenu ancré en bas de l'image */
+  }
+  .page-hero--short { height: 32vh; min-height: 240px; }
+  .page-hero-content { padding: 0 1.5rem 1.5rem; width: 100%; text-align: left; }
+
+  /* ── 9. Sections navette/services/contact : padding réduit ── */
+  .ns-section { padding: 3rem 1.5rem !important; }
+
+  /* ── 10. Bouton Réserver dans section navette home : centré ── */
+  #navette .btn {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    box-sizing: border-box;
+  }
+
+  /* ── 11. Activités : cartes plus compactes ── */
+  .activite-card { padding: 1.1rem; gap: 0.6rem; }
+  .activite-desc { font-size: .82rem; line-height: 1.6; }
+
+  /* ── 12. Texte corps cottage pages : espacement réduit ── */
+  .section-desc { font-size: .88rem; line-height: 1.65; }
+
+  /* ── 13. Avis grid : hauteur padding réduite ── */
+  .avis-grid { margin-top: 1.5rem; }
+  .avis-card { padding: 1.3rem; }
+
+  /* ── 14. Cottages header : margin réduit (plus d'espace vide) ── */
+  .cottages-header { margin-bottom: 0.8rem; gap: 0.5rem; }
+
+  /* ── 15. Section title & label : espacement réduit ── */
+  .section-title { font-size: clamp(1.6rem, 6vw, 2.2rem); margin-bottom: 0.7rem; }
+  .section-label { margin-bottom: 0.4rem; }
+
+  /* ── 16. Navette feature block : icône pas trop haute ── */
+  .ns-feature-icon-big { width: 80px; height: 80px; }
+  .ns-feature-icon-big svg { width: 38px; height: 38px; }
+  .ns-feature-stat { padding: 1rem 1.5rem; }
+  .ns-feature-stat strong { font-size: 1.7rem; }
 }
 
