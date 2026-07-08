@@ -1452,36 +1452,53 @@ footer { border-top: 1px solid var(--border); padding: 4rem 2rem 2rem; }
   /* ── 26. Barre fixe de réservation sur pages cottage ── */
   .mobile-cottage-bar {
     display: flex !important;
+    flex-direction: column;
     position: fixed; bottom: 0; left: 0; right: 0; z-index: 999;
-    align-items: center; gap: 0.7rem;
-    padding: 0.7rem 1rem;
+    padding: 0.85rem 1.1rem 1.1rem;
     background: #0b120b;
-    border-top: 1px solid rgba(201,169,110,.3);
+    border-top: 1.5px solid rgba(201,169,110,.35);
+    gap: 0.7rem;
   }
-  .mcb-info { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 0.25rem; }
+  .mcb-top {
+    display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+  }
   .mcb-price {
     font-family: 'Playfair Display', serif;
-    font-size: 1.1rem; color: var(--gold); line-height: 1; white-space: nowrap;
+    font-size: 1.65rem; color: var(--gold); line-height: 1;
   }
-  .mcb-price span { font-size: 0.6rem; color: var(--muted); font-family: 'Inter', sans-serif; }
-  .mcb-specs {
-    display: flex; gap: 0.3rem;
-    overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch;
-  }
-  .mcb-specs::-webkit-scrollbar { display: none; }
-  .mcb-specs span {
-    flex-shrink: 0; font-size: 0.58rem; white-space: nowrap;
-    color: var(--muted);
-    background: rgba(201,169,110,.07); border: 1px solid rgba(201,169,110,.2);
-    padding: 0.12rem 0.38rem; border-radius: 8px;
+  .mcb-price span {
+    font-size: 0.62rem; color: rgba(240,235,224,.45);
+    font-family: 'Inter', sans-serif; margin-left: 0.15rem;
   }
   .mcb-btn {
     flex-shrink: 0;
-    display: flex; align-items: center; justify-content: center;
-    background: var(--gold); color: #0b120b;
-    padding: 0.72rem 1rem; border-radius: 4px;
-    font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em;
-    text-transform: uppercase; text-decoration: none; white-space: nowrap;
+    background: #2a4a2a; color: var(--cream);
+    padding: 0.65rem 1.15rem; border-radius: 8px;
+    font-size: 0.68rem; font-weight: 700; letter-spacing: 0.06em;
+    text-transform: uppercase; text-decoration: none;
+    text-align: center; line-height: 1.45;
+    border: 1px solid rgba(201,169,110,.25);
+  }
+  .mcb-specs {
+    display: flex; gap: 0;
+    overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch;
+  }
+  .mcb-specs::-webkit-scrollbar { display: none; }
+  .mcb-spec {
+    display: flex; flex-direction: column; align-items: flex-start;
+    gap: 0.2rem; flex-shrink: 0;
+    padding: 0 0.9rem 0 0;
+    border-right: 1px solid rgba(201,169,110,.18);
+    margin-right: 0.9rem;
+  }
+  .mcb-spec:last-child { border-right: none; margin-right: 0; }
+  .mcb-spec-label {
+    font-size: 0.5rem; color: rgba(240,235,224,.42);
+    text-transform: uppercase; letter-spacing: 0.09em; white-space: nowrap;
+  }
+  .mcb-spec-val {
+    font-size: 0.72rem; color: var(--cream);
+    white-space: nowrap; font-weight: 500;
   }
 }
 
