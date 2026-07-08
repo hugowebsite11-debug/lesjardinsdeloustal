@@ -1353,10 +1353,11 @@ footer { border-top: 1px solid var(--border); padding: 4rem 2rem 2rem; }
 
   /* ── 20. Carousel cottages : peek gauche + droite ── */
   /* #cottages a padding:2rem (inline) + .container a padding:2rem = 4rem de chaque côté.
-     margin:-4rem brise les deux couches, la grille devient plein écran. */
+     margin:-4rem brise les deux couches, la grille devient plein écran.
+     padding-left:1.2rem = marge gauche sur la première carte. */
   #cottages .cottages-grid,
   #cottagesGrid {
-    padding: 1.5rem 0 !important;
+    padding: 1.5rem 0 1.5rem 1.2rem !important;
     margin: 0.5rem -4rem 0 !important;
     gap: 1rem !important;
   }
@@ -1367,9 +1368,25 @@ footer { border-top: 1px solid var(--border); padding: 4rem 2rem 2rem; }
   /* scroll-snap center : carte centrée dans le viewport, peek visible des deux côtés */
   #cottages .cottage-card,
   #cottagesGrid .cottage-card {
-    flex: 0 0 72vw !important;
-    min-width: 72vw;
+    flex: 0 0 76vw !important;
+    min-width: 76vw;
     scroll-snap-align: center !important;
+  }
+  /* Carte : police réduite d'1px + body compact pour accueillir 3 tags */
+  #cottages .cottage-name, #cottagesGrid .cottage-name {
+    font-size: 1.08rem;
+  }
+  #cottages .cottage-desc, #cottagesGrid .cottage-desc {
+    font-size: 0.75rem;
+    margin-bottom: 0.7rem;
+  }
+  #cottages .cottage-body, #cottagesGrid .cottage-body {
+    padding: 0.9rem 1rem 1.1rem;
+  }
+  /* Tags : plus compacts → 3 par ligne */
+  #cottages .cottage-tag, #cottagesGrid .cottage-tag {
+    font-size: 0.6rem;
+    padding: 0.15rem 0.45rem;
   }
 
   /* ── 21. Navette cards : 2 colonnes sur mobile ── */
