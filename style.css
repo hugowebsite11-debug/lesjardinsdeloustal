@@ -1057,6 +1057,7 @@ footer { border-top: 1px solid var(--border); padding: 4rem 2rem 2rem; }
 
 /* ── Sticky CTA : caché sur desktop ── */
 .mobile-sticky-cta { display: none; }
+.mobile-cottage-bar { display: none; }
 .carousel-dots { display: none; }
 
 /* ── Bouton calendrier rond — au-dessus de la carte côté droit, caché sur desktop ── */
@@ -1435,35 +1436,52 @@ footer { border-top: 1px solid var(--border); padding: 4rem 2rem 2rem; }
   .hero-usp-sub { font-size: 0.88rem !important; font-weight: 500; color: var(--cream) !important; }
   .hero-usp-time { font-size: 0.68rem; color: rgba(240,235,224,.55); letter-spacing: 0.1em; text-align: center; margin-top: 0.15rem; }
 
-  /* ── 25. Pages cottage : contenu hero remonté + booking card horizontale ── */
+  /* ── 25. Pages cottage : hero remonté + chips sur 4 colonnes ── */
   .cottage-detail-hero { height: 65vh !important; min-height: 420px !important; }
-  .cottage-detail-hero-content { bottom: 22% !important; }
-  /* Booking card remontée au-dessus du contenu (avant la description) */
-  .cottage-detail-grid { display: flex !important; flex-direction: column !important; gap: 0 !important; }
-  .cottage-detail-grid > div:nth-child(2) { order: -1; }
-  .cottage-detail-body { padding-top: 0 !important; padding-left: 0 !important; padding-right: 0 !important; }
-  /* Format horizontal : prix à gauche, bouton à droite */
-  .cottage-booking-card {
-    position: static !important;
-    top: auto !important;
+  /* Contenu remonté + padding réduit pour caser 4 chips de large */
+  .cottage-detail-hero-content { bottom: 22% !important; padding: 0 1.2rem !important; }
+  .cottage-detail-chips { gap: 0.4rem !important; }
+  /* Titres cottage : même taille sur toutes les pages (référence : Chalet Zen / Bois Flottée) */
+  .cottage-detail-title { font-size: clamp(2rem, 8vw, 3rem) !important; }
+  /* Booking card : cachée sur mobile (remplacée par la barre fixe) */
+  body.cottage-page .cottage-booking-card { display: none !important; }
+  body.cottage-page .cottage-detail-body { padding: 2rem 1.5rem 3rem !important; }
+  /* Cacher le bouton sticky Appeler/Réserver sur pages cottage */
+  body.cottage-page .mobile-sticky-cta { display: none !important; }
+
+  /* ── 26. Barre fixe de réservation sur pages cottage ── */
+  .mobile-cottage-bar {
     display: flex !important;
-    flex-direction: row !important;
-    align-items: center !important;
-    gap: 1rem !important;
-    padding: 0.9rem 1.5rem !important;
-    border-radius: 0 !important;
-    border-left: none !important;
-    border-right: none !important;
-    border-top: none !important;
-    margin: 0 0 0 0 !important;
+    position: fixed; bottom: 0; left: 0; right: 0; z-index: 999;
+    align-items: center; gap: 0.7rem;
+    padding: 0.7rem 1rem;
+    background: #0b120b;
+    border-top: 1px solid rgba(201,169,110,.3);
   }
-  .booking-card-price-label { display: none !important; }
-  .booking-card-price { font-size: 1.3rem !important; flex-shrink: 0; line-height: 1 !important; }
-  .booking-card-price span { font-size: 0.72rem !important; }
-  .booking-card-specs { display: none !important; }
-  .booking-card-btn { flex: 1 !important; padding: 0.8rem 1rem !important; font-size: 0.75rem !important; }
-  .booking-card-note { display: none !important; }
-  /* Description + équipements : padding rétabli */
-  .cottage-detail-grid > div:first-of-type { padding: 0 1.5rem; }
+  .mcb-info { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 0.25rem; }
+  .mcb-price {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem; color: var(--gold); line-height: 1; white-space: nowrap;
+  }
+  .mcb-price span { font-size: 0.6rem; color: var(--muted); font-family: 'Inter', sans-serif; }
+  .mcb-specs {
+    display: flex; gap: 0.3rem;
+    overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch;
+  }
+  .mcb-specs::-webkit-scrollbar { display: none; }
+  .mcb-specs span {
+    flex-shrink: 0; font-size: 0.58rem; white-space: nowrap;
+    color: var(--muted);
+    background: rgba(201,169,110,.07); border: 1px solid rgba(201,169,110,.2);
+    padding: 0.12rem 0.38rem; border-radius: 8px;
+  }
+  .mcb-btn {
+    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--gold); color: #0b120b;
+    padding: 0.72rem 1rem; border-radius: 4px;
+    font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em;
+    text-transform: uppercase; text-decoration: none; white-space: nowrap;
+  }
 }
 
