@@ -1390,37 +1390,38 @@ footer { border-top: 1px solid var(--border); padding: 4rem 2rem 2rem; }
     padding: 0.15rem 0.45rem;
   }
 
-  /* ── 21. Navette cards : 2 colonnes sur mobile ── */
+  /* ── 21. Navette cards : 1 colonne pleine largeur, centré ── */
   .navette-cards {
-    display: grid !important;
-    grid-template-columns: 1fr 1fr;
+    display: flex !important;
+    flex-direction: column !important;
     gap: 0.6rem;
   }
-  /* Reset le layout grid interne et compacte les cartes */
   .navette-card {
     display: flex !important;
     flex-direction: column;
-    gap: 0.4rem;
-    padding: 0.85rem 0.8rem;
+    align-items: center !important;
+    text-align: center !important;
+    gap: 0.35rem;
+    padding: 0.9rem 1rem;
     grid-template-columns: unset;
   }
   .navette-card .navette-icon {
-    width: 30px; height: 30px;
+    width: 32px; height: 32px;
     grid-column: unset; grid-row: unset;
   }
-  .navette-card h3 { grid-column: unset; grid-row: unset; font-size: 0.8rem; }
-  .navette-card p  { grid-column: unset; grid-row: unset; font-size: 0.72rem; }
+  .navette-card h3 { grid-column: unset; grid-row: unset; font-size: 0.88rem; }
+  .navette-card p  { grid-column: unset; grid-row: unset; font-size: 0.75rem; text-align: center; }
 
   /* ── 22. Menu mobile : masquer "Tous les cottages" ── */
   .mobile-sub-links a[href="cottages.html"] { display: none !important; }
 
-  /* ── 23. Activités : 2 colonnes + accordion ── */
-  #activites .activites-grid { grid-template-columns: 1fr 1fr !important; gap: 0.5rem !important; }
-  .activite-card { padding: 0.75rem !important; gap: 0.2rem !important; }
-  .activite-icon { font-size: 1.3rem !important; }
-  .activite-top { margin-bottom: 0 !important; gap: 0.25rem !important; }
-  .activite-dist { font-size: 0.65rem !important; }
-  .activite-name { font-size: 0.82rem !important; }
+  /* ── 23. Activités : 1 colonne, tout visible ── */
+  #activites .activites-grid { grid-template-columns: 1fr !important; gap: 0.8rem !important; }
+  .activite-card { padding: 1rem !important; gap: 0.5rem !important; }
+  .activite-icon { font-size: 1.4rem !important; }
+  .activite-top { margin-bottom: 0 !important; gap: 0.3rem !important; }
+  .activite-dist { font-size: 0.68rem !important; }
+  .activite-name { font-size: 0.9rem !important; }
   /* Bouton accordion */
   .acc-toggle {
     background: none; border: none; color: var(--gold);

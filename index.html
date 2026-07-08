@@ -610,23 +610,6 @@
       });
     });
 
-    /* Activité cards */
-    document.querySelectorAll('.activite-card').forEach(card => {
-      const desc = card.querySelector('.activite-desc');
-      if (!desc) return;
-      desc.style.display = 'none';
-      const btn = document.createElement('button');
-      btn.className = 'acc-toggle';
-      btn.innerHTML = arrowSVG;
-      btn.setAttribute('aria-label', 'Voir la description');
-      const name = card.querySelector('.activite-name');
-      name.after(btn);
-      btn.addEventListener('click', () => {
-        const open = desc.style.display !== 'none';
-        desc.style.display = open ? 'none' : '';
-        btn.classList.toggle('open', !open);
-      });
-    });
   }
 </script>
 </body>
