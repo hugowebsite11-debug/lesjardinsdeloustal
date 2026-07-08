@@ -1409,5 +1409,61 @@ footer { border-top: 1px solid var(--border); padding: 4rem 2rem 2rem; }
   }
   .navette-card h3 { grid-column: unset; grid-row: unset; font-size: 0.8rem; }
   .navette-card p  { grid-column: unset; grid-row: unset; font-size: 0.72rem; }
+
+  /* ── 22. Menu mobile : masquer "Tous les cottages" ── */
+  .mobile-sub-links a[href="cottages.html"] { display: none !important; }
+
+  /* ── 23. Activités : 2 colonnes + accordion ── */
+  #activites .activites-grid { grid-template-columns: 1fr 1fr !important; gap: 0.5rem !important; }
+  .activite-card { padding: 0.75rem !important; gap: 0.2rem !important; }
+  .activite-icon { font-size: 1.3rem !important; }
+  .activite-top { margin-bottom: 0 !important; gap: 0.25rem !important; }
+  .activite-dist { font-size: 0.65rem !important; }
+  .activite-name { font-size: 0.82rem !important; }
+  /* Bouton accordion */
+  .acc-toggle {
+    background: none; border: none; color: var(--gold);
+    cursor: pointer; padding: 0.2rem 0; width: 100%;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .acc-toggle svg { transition: transform 0.25s; }
+  .acc-toggle.open svg { transform: rotate(180deg); }
+  /* description accordion navette */
+  .navette-card p.acc-desc { font-size: 0.7rem; }
+
+  /* ── 24. Hero USP : "navette incluse" plus visible, horaires en-dessous ── */
+  .hero-usp-sub { font-size: 0.88rem !important; font-weight: 500; color: var(--cream) !important; }
+  .hero-usp-time { font-size: 0.68rem; color: rgba(240,235,224,.55); letter-spacing: 0.1em; text-align: center; margin-top: 0.15rem; }
+
+  /* ── 25. Pages cottage : contenu hero remonté + booking card horizontale ── */
+  .cottage-detail-hero { height: 65vh !important; min-height: 420px !important; }
+  .cottage-detail-hero-content { bottom: 22% !important; }
+  /* Booking card remontée au-dessus du contenu (avant la description) */
+  .cottage-detail-grid { display: flex !important; flex-direction: column !important; gap: 0 !important; }
+  .cottage-detail-grid > div:nth-child(2) { order: -1; }
+  .cottage-detail-body { padding-top: 0 !important; padding-left: 0 !important; padding-right: 0 !important; }
+  /* Format horizontal : prix à gauche, bouton à droite */
+  .cottage-booking-card {
+    position: static !important;
+    top: auto !important;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    gap: 1rem !important;
+    padding: 0.9rem 1.5rem !important;
+    border-radius: 0 !important;
+    border-left: none !important;
+    border-right: none !important;
+    border-top: none !important;
+    margin: 0 0 0 0 !important;
+  }
+  .booking-card-price-label { display: none !important; }
+  .booking-card-price { font-size: 1.3rem !important; flex-shrink: 0; line-height: 1 !important; }
+  .booking-card-price span { font-size: 0.72rem !important; }
+  .booking-card-specs { display: none !important; }
+  .booking-card-btn { flex: 1 !important; padding: 0.8rem 1rem !important; font-size: 0.75rem !important; }
+  .booking-card-note { display: none !important; }
+  /* Description + équipements : padding rétabli */
+  .cottage-detail-grid > div:first-of-type { padding: 0 1.5rem; }
 }
 

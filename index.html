@@ -116,7 +116,8 @@
       <p class="hero-usp-main">
         <span class="hero-usp-accent">5 min</span><span class="hero-usp-connector"> en voiture des </span><span class="hero-usp-accent">Grands&nbsp;Buffets</span>
       </p>
-      <p class="hero-usp-sub">Navette incluse dans votre séjour — départ 19h, retour 22h.</p>
+      <p class="hero-usp-sub">Navette incluse dans votre séjour</p>
+      <p class="hero-usp-time">Départ 19h · Retour 22h</p>
     </div>
     <div class="hero-buttons">
       <a href="https://direct-book.com/properties/lesjardinsdeloustal?locale=fr&items[0][adults]=2&items[0][children]=0&items[0][infants]=0&currency=EUR&checkInDate=2026-11-23&checkOutDate=2026-11-26&trackPage=yes" target="_blank" class="btn btn-fill hero-btn">
@@ -586,6 +587,47 @@
   }
   initDots('cottagesGrid', 'cottagesDots');
   initDots('avisGrid', 'avisDots');
+
+  /* ── Accordion mobile : navette cards + activité cards ── */
+  if (window.matchMedia('(max-width: 768px)').matches) {
+    const arrowSVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16"><path d="M6 9l6 6 6-6"/></svg>';
+
+    /* Navette cards */
+    document.querySelectorAll('.navette-card').forEach(card => {
+      const p = card.querySelector('p');
+      if (!p) return;
+      p.classList.add('acc-desc');
+      p.style.display = 'none';
+      const btn = document.createElement('button');
+      btn.className = 'acc-toggle';
+      btn.innerHTML = arrowSVG;
+      btn.setAttribute('aria-label', 'Voir la description');
+      card.appendChild(btn);
+      btn.addEventListener('click', () => {
+        const open = p.style.display !== 'none';
+        p.style.display = open ? 'none' : '';
+        btn.classList.toggle('open', !open);
+      });
+    });
+
+    /* Activité cards */
+    document.querySelectorAll('.activite-card').forEach(card => {
+      const desc = card.querySelector('.activite-desc');
+      if (!desc) return;
+      desc.style.display = 'none';
+      const btn = document.createElement('button');
+      btn.className = 'acc-toggle';
+      btn.innerHTML = arrowSVG;
+      btn.setAttribute('aria-label', 'Voir la description');
+      const name = card.querySelector('.activite-name');
+      name.after(btn);
+      btn.addEventListener('click', () => {
+        const open = desc.style.display !== 'none';
+        desc.style.display = open ? 'none' : '';
+        btn.classList.toggle('open', !open);
+      });
+    });
+  }
 </script>
 </body>
 </html>
