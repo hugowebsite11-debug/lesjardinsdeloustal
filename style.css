@@ -80,7 +80,7 @@ a { text-decoration: none; color: inherit; }
 #navbar {
   position: fixed; top: 0; left: 0; right: 0; z-index: 200;
   padding: 0.9rem 2rem 0.7rem;
-  display: flex; flex-direction: column; align-items: center; gap: 0.35rem;
+  display: flex; flex-direction: row; align-items: center; justify-content: center; gap: 0;
   transition: background .3s var(--ease), padding .3s var(--ease);
 }
 #navbar.scrolled {
@@ -90,24 +90,21 @@ a { text-decoration: none; color: inherit; }
   border-bottom: 1px solid var(--border);
 }
 
-/* Logo navbar — caché sur la hero (aucun espace), visible après scroll */
+/* Logo navbar — caché au départ, visible après scroll, positionné à gauche */
 .nav-logo-scroll {
-  order: -1;
-  position: static;
-  transform: none;
+  position: absolute;
+  left: 2rem;
+  top: 50%;
+  transform: translateY(-50%);
   display: flex;
   align-items: center;
-  max-height: 0;
-  overflow: hidden;
   opacity: 0;
   pointer-events: none;
-  transition: max-height .35s var(--ease), opacity .3s var(--ease);
+  transition: opacity .3s var(--ease);
 }
 #navbar.scrolled .nav-logo-scroll {
-  max-height: 100px;
   opacity: 1;
   pointer-events: auto;
-  overflow: visible;
 }
 .nav-logo-scroll img {
   height: 56px;
@@ -1349,24 +1346,29 @@ footer { border-top: 1px solid var(--border); padding: 4rem 2rem 2rem; }
   /* ── 18. Logo hero : plus petit sur mobile ── */
   .hero-logo-img { max-width: 130px; }
 
-  /* ── 19. Hamburger + logo : navbar en ligne, logo centré toujours visible ── */
+  /* ── 19. Navbar mobile : hauteur fixe, hamburger gauche, logo centré ── */
   #navbar {
+    height: 56px !important;
+    padding: 0 !important;
     flex-direction: row !important;
-    align-items: center !important;
-    padding: 0.65rem 1rem !important;
+    align-items: stretch !important;
+    justify-content: flex-start !important;
   }
-  .hamburger { top: auto !important; transform: none; }
+  .hamburger {
+    position: absolute !important;
+    left: 1rem !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+  }
   .nav-logo-scroll {
     position: absolute !important;
     left: 50% !important;
-    transform: translateX(-50%) !important;
-    order: 0 !important;
-    max-height: 70px !important;
+    top: 50% !important;
+    transform: translate(-50%, -50%) !important;
     opacity: 1 !important;
     pointer-events: auto !important;
-    overflow: visible !important;
   }
-  .nav-logo-scroll img { height: 48px !important; }
+  .nav-logo-scroll img { height: 44px !important; }
 
   /* ── 20. Carousel cottages : peek gauche + droite ── */
   /* #cottages a padding:2rem (inline) + .container a padding:2rem = 4rem de chaque côté.
