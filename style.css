@@ -1349,8 +1349,22 @@ footer { border-top: 1px solid var(--border); padding: 4rem 2rem 2rem; }
   /* ── 18. Logo hero : plus petit sur mobile ── */
   .hero-logo-img { max-width: 130px; }
 
-  /* ── 19. Hamburger : position correcte dans la navbar ── */
-  .hamburger { top: 0.85rem; transform: none; }
+  /* ── 19. Hamburger + logo : navbar en ligne, logo toujours visible ── */
+  #navbar {
+    flex-direction: row !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    padding: 0.65rem 1rem !important;
+  }
+  .hamburger { top: auto !important; transform: none; }
+  .nav-logo-scroll {
+    order: 1 !important;
+    max-height: 60px !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    overflow: visible !important;
+  }
+  .nav-logo-scroll img { height: 36px !important; }
 
   /* ── 20. Carousel cottages : peek gauche + droite ── */
   /* #cottages a padding:2rem (inline) + .container a padding:2rem = 4rem de chaque côté.
