@@ -289,11 +289,18 @@ a { text-decoration: none; color: inherit; }
   margin-bottom: .3rem;
 }
 .hero-usp-sub {
-  font-size: .8rem;
+  font-size: 1.05rem;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--cream);
+  font-weight: 600;
+  margin-bottom: .25rem;
+}
+.hero-usp-time {
+  font-size: 1rem;
   color: var(--gold);
   font-family: 'Cormorant Garamond', serif;
   font-style: italic;
-  font-size: 1rem;
 }
 
 /* Boutons hero */
