@@ -281,7 +281,7 @@ a { text-decoration: none; color: inherit; }
   display: inline-block;
 }
 .hero-usp-main {
-  font-size: 1.05rem;
+  font-size: 1.15rem;
   letter-spacing: .22em;
   text-transform: uppercase;
   color: var(--cream);
