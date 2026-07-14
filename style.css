@@ -80,6 +80,7 @@ a { text-decoration: none; color: inherit; }
 #navbar {
   position: fixed; top: 0; left: 0; right: 0; z-index: 200;
   padding: 0.9rem 2rem 0.7rem;
+  min-height: 70px;
   display: flex; flex-direction: row; align-items: center; justify-content: center; gap: 0;
   transition: background .3s var(--ease), padding .3s var(--ease);
 }
