@@ -113,37 +113,53 @@
   </div>
 </section>
 
-<!-- ══ GALERIE ════════════════════════════ -->
-<!-- Titre galerie -->
-<section style="padding:5rem 2rem 2.5rem;background:var(--bg);text-align:center;">
-  <div class="container">
-    <span class="section-label">Galerie</span>
-    <h2 class="section-title reveal">Le domaine <em>en images</em></h2>
-    <p class="section-desc reveal reveal-delay-1" style="margin:0 auto;">Faites défiler pour explorer.</p>
+<!-- ══ GALERIE : DOMAINE (split-scroll, desktop) ═════════════ -->
+<div class="split-scroll">
+  <div class="split-photos">
+    <div class="split-photo-item"><img src="images/domaine1.jpg" alt="Le domaine" loading="eager" /></div>
+    <div class="split-photo-item"><img src="images/domaine2.png" alt="Le domaine" loading="lazy" /></div>
+    <div class="split-photo-item"><img src="images/domaine%203.png" alt="Le domaine" loading="lazy" /></div>
+    <div class="split-photo-item"><img src="images/domaine%204.png" alt="Le domaine" loading="lazy" /></div>
+    <div class="split-photo-item"><img src="images/domaine5.png" alt="Le domaine" loading="lazy" /></div>
+    <div class="split-photo-item"><img src="images/domaine6.png" alt="Le domaine" loading="lazy" /></div>
+    <div class="split-photo-item"><img src="images/domaine7.png" alt="Le domaine" loading="lazy" /></div>
   </div>
-</section>
+  <div class="split-text-col">
+    <div class="split-text-inner">
+      <span class="section-label">Galerie</span>
+      <h2 class="section-title">Le domaine <em>en images</em></h2>
+      <p>Niché entre ciel et garrigue, le domaine s'étend sur un terrain arboré où chaque recoin invite à la contemplation. Des allées ombragées serpentent entre les cottages, menant à des terrasses baignées de lumière dorée.</p>
+      <p>Ici, le temps s'étire. On se lève au chant des cigales, on s'endort sous les étoiles. C'est cela, l'Oustal : un art de vivre languedocien, entre nature préservée et douceur de vivre.</p>
+      <a href="https://direct-book.com/properties/lesjardinsdeloustal?locale=fr&items[0][adults]=2&items[0][children]=0&items[0][infants]=0&currency=EUR&checkInDate=2026-11-23&checkOutDate=2026-11-26&trackPage=yes" target="_blank" class="btn btn-fill" style="margin-top:1.5rem;">Réserver un cottage →</a>
+    </div>
+  </div>
+</div>
 
-<!-- Filmstrip desktop -->
-<div class="filmstrip-wrapper">
-  <div class="filmstrip-sticky">
-    <div class="filmstrip-track">
-      <img class="filmstrip-photo" src="images/domaine1.jpg" alt="Le domaine" loading="eager" />
-      <img class="filmstrip-photo" src="images/domaine2.png" alt="Le domaine" loading="lazy" />
-      <img class="filmstrip-photo" src="images/domaine%203.png" alt="Le domaine" loading="lazy" />
-      <img class="filmstrip-photo" src="images/domaine%204.png" alt="Le domaine" loading="lazy" />
-      <img class="filmstrip-photo" src="images/domaine5.png" alt="Le domaine" loading="lazy" />
-      <img class="filmstrip-photo" src="images/domaine6.png" alt="Le domaine" loading="lazy" />
-      <img class="filmstrip-photo" src="images/domaine7.png" alt="Le domaine" loading="lazy" />
+<!-- ══ GALERIE : RÉSIDENTS (split-scroll inversé, desktop) ══ -->
+<div class="cats-scroll">
+  <div class="split-text-col">
+    <div class="split-text-inner">
+      <span class="section-label">Nos résidents</span>
+      <h2 class="section-title">Les âmes <em>du domaine</em></h2>
+      <p>Le domaine a ses propres habitants permanents. Ces petites présences feutrées se glissent entre les lavandes, s'installent sur vos terrasses au soleil et vous regardent de leurs yeux dorés d'un air entendu.</p>
+      <p>Ils ne demandent pas grand-chose — une caresse au passage, peut-être. Mais ils ajoutent à l'Oustal ce supplément d'âme que seuls les endroits vraiment vivants possèdent.</p>
     </div>
-    <div class="filmstrip-progress">
-      <div class="filmstrip-bar-inner"></div>
-    </div>
-    <div class="filmstrip-hint">Faites défiler ↓</div>
+  </div>
+  <div class="cats-photos">
+    <div class="split-photo-item"><img src="images/708093400.jpg" alt="Résidents du domaine" loading="lazy" /></div>
+    <div class="split-photo-item"><img src="images/708093407.jpg" alt="Résidents du domaine" loading="lazy" /></div>
+    <div class="split-photo-item"><img src="images/708093417.jpg" alt="Résidents du domaine" loading="lazy" /></div>
+    <div class="split-photo-item"><img src="images/708093464.jpg" alt="Résidents du domaine" loading="lazy" /></div>
+    <div class="split-photo-item"><img src="images/708093481.jpg" alt="Résidents du domaine" loading="lazy" /></div>
+    <div class="split-photo-item"><img src="images/708093487.jpg" alt="Résidents du domaine" loading="lazy" /></div>
+    <div class="split-photo-item"><img src="images/708093495.jpg" alt="Résidents du domaine" loading="lazy" /></div>
+    <div class="split-photo-item"><img src="images/708093504.jpg" alt="Résidents du domaine" loading="lazy" /></div>
   </div>
 </div>
 
 <!-- Fallback mobile : grille simple -->
 <div class="domaine-mobile-gallery" style="padding:0 1.2rem 3rem;background:var(--bg);">
+  <p style="font-family:'Playfair Display',serif;font-size:1.4rem;color:var(--cream);margin-bottom:1rem;">Le domaine <em>en images</em></p>
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.4rem;border-radius:10px;overflow:hidden;">
     <div class="domaine-photo" style="height:150px;"><img src="images/domaine1.jpg" loading="lazy" style="width:100%;height:100%;object-fit:cover;" /><div class="domaine-overlay"></div></div>
     <div class="domaine-photo" style="height:150px;"><img src="images/domaine2.png" loading="lazy" style="width:100%;height:100%;object-fit:cover;" /><div class="domaine-overlay"></div></div>
@@ -249,42 +265,5 @@
 </div>
 
 <script src="script.js"></script>
-<script>
-(function () {
-  const wrapper = document.querySelector('.filmstrip-wrapper');
-  const track   = document.querySelector('.filmstrip-track');
-  const barInner = document.querySelector('.filmstrip-bar-inner');
-  if (!wrapper || !track) return;
-  if (window.matchMedia('(max-width:768px)').matches) return;
-
-  /* Ajuste la hauteur du wrapper après chargement des images */
-  function setHeight() {
-    const overflow = track.scrollWidth - window.innerWidth;
-    wrapper.style.height = (overflow + window.innerHeight * 1.2) + 'px';
-  }
-
-  const imgs = track.querySelectorAll('img');
-  let loaded = 0;
-  imgs.forEach(img => {
-    if (img.complete) { if (++loaded === imgs.length) setHeight(); }
-    else img.addEventListener('load', () => { if (++loaded === imgs.length) setHeight(); });
-  });
-  window.addEventListener('resize', setHeight);
-
-  function update() {
-    const rect     = wrapper.getBoundingClientRect();
-    const scrolled = -rect.top;
-    const total    = wrapper.offsetHeight - window.innerHeight;
-    if (total <= 0) return;
-    const progress = Math.max(0, Math.min(1, scrolled / total));
-    const maxX     = -(track.scrollWidth - window.innerWidth);
-    track.style.transform = 'translateX(' + (progress * maxX) + 'px)';
-    if (barInner) barInner.style.width = (progress * 100) + '%';
-  }
-
-  window.addEventListener('scroll', update, { passive: true });
-  update();
-})();
-</script>
 </body>
 </html>

@@ -702,45 +702,54 @@ footer { border-top: 1px solid var(--border); padding: 4rem 2rem 2rem; }
 }
 .domaine-cta { text-align: center; margin-top: 2.5rem; }
 
-/* ── Filmstrip horizontal (page domaine, desktop) ── */
-.filmstrip-wrapper { position: relative; background: #080e08; }
-.filmstrip-sticky {
+/* ── Split scroll gallery (page domaine, desktop) ── */
+.split-scroll, .cats-scroll {
+  display: flex;
+  align-items: flex-start;
+}
+.split-scroll { background: var(--bg); }
+.cats-scroll  { background: var(--bg2); }
+
+/* Colonne photos (gauche phase 1 / droite phase 2) */
+.split-photos {
+  width: 58%;
+  padding: 3rem 1.5rem 3rem 2rem;
+  display: flex; flex-direction: column; gap: 1.2rem;
+}
+.cats-photos {
+  width: 58%;
+  padding: 3rem 2rem 3rem 1.5rem;
+  display: flex; flex-direction: column; gap: 1.2rem;
+}
+.split-photo-item {
+  border-radius: 10px;
+  overflow: hidden;
+  height: 82vh;
+}
+.split-photo-item img {
+  width: 100%; height: 100%;
+  object-fit: cover; display: block;
+  transition: transform 0.6s ease;
+}
+.split-photo-item:hover img { transform: scale(1.03); }
+
+/* Colonne texte sticky */
+.split-text-col {
+  width: 42%;
   position: sticky; top: 0;
-  height: 100vh; overflow: hidden;
+  height: 100vh;
   display: flex; align-items: center;
-  background: #080e08;
+  padding: 0 3.5rem;
 }
-.filmstrip-track {
-  display: flex; align-items: center;
-  gap: 3.5rem;
-  padding: 0 10vw;
-  will-change: transform;
-}
-.filmstrip-photo {
-  flex-shrink: 0;
-  height: 72vh; width: auto;
-  border-radius: 6px;
-  display: block;
-  box-shadow: 0 24px 64px rgba(0,0,0,.55);
-}
-.filmstrip-progress {
-  position: absolute; bottom: 2.2rem;
-  left: 10vw; right: 10vw;
-  height: 1px; background: rgba(240,235,224,.12);
-}
-.filmstrip-bar-inner {
-  height: 100%; width: 0%;
-  background: var(--gold);
-  transition: width 0.08s linear;
-}
-.filmstrip-hint {
-  position: absolute; bottom: 3rem; right: 10vw;
-  font-size: 0.58rem; letter-spacing: .2em; text-transform: uppercase;
-  color: rgba(240,235,224,.35);
-}
+.split-text-inner { max-width: 340px; }
+.split-text-inner .section-label { margin-bottom: 1rem; }
+.split-text-inner h2 { margin-bottom: 1.2rem; }
+.split-text-inner p { color: var(--muted); font-size: .93rem; line-height: 1.85; margin-bottom: 1rem; }
+.split-text-inner .btn { margin-top: 0.5rem; }
+
 .domaine-mobile-gallery { display: none; }
 @media (max-width: 768px) {
-  .filmstrip-wrapper { display: none; }
+  .split-scroll, .cats-scroll { display: none; }
   .domaine-mobile-gallery { display: block; }
 }
 
