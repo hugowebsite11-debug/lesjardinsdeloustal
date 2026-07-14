@@ -114,40 +114,50 @@
 </section>
 
 <!-- ══ GALERIE ════════════════════════════ -->
-<section style="padding:6rem 2rem;background:var(--bg);">
+<!-- Titre galerie -->
+<section style="padding:5rem 2rem 2.5rem;background:var(--bg);text-align:center;">
   <div class="container">
-    <div style="text-align:center;margin-bottom:3rem;">
-      <span class="section-label">Galerie</span>
-      <h2 class="section-title reveal">Le domaine <em>en images</em></h2>
-    </div>
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:0.5rem;border-radius:14px;overflow:hidden;" class="domaine-gallery-grid">
-      <div class="domaine-photo" style="height:260px;">
-        <img src="images/domaine1.jpg" alt="Le domaine" loading="lazy" />
-        <div class="domaine-overlay"></div>
-      </div>
-      <div class="domaine-photo" style="height:260px;">
-        <img src="images/domaine2.png" alt="Le domaine" loading="lazy" />
-        <div class="domaine-overlay"></div>
-      </div>
-      <div class="domaine-photo" style="height:260px;">
-        <img src="images/domaine%203.png" alt="Le domaine" loading="lazy" />
-        <div class="domaine-overlay"></div>
-      </div>
-      <div class="domaine-photo" style="height:260px;">
-        <img src="images/domaine%204.png" alt="Le domaine" loading="lazy" />
-        <div class="domaine-overlay"></div>
-      </div>
-      <div class="domaine-photo" style="height:260px;">
-        <img src="images/domaine5.png" alt="Le domaine" loading="lazy" />
-        <div class="domaine-overlay"></div>
-      </div>
-      <div class="domaine-photo" style="height:260px;">
-        <img src="images/domaine6.png" alt="Le domaine" loading="lazy" />
-        <div class="domaine-overlay"></div>
+    <span class="section-label">Galerie</span>
+    <h2 class="section-title reveal">Le domaine <em>en images</em></h2>
+    <p class="section-desc reveal reveal-delay-1" style="margin:0 auto;">Faites défiler pour explorer.</p>
+  </div>
+</section>
+
+<!-- Scroll gallery desktop -->
+<div class="domaine-scroll-gallery">
+  <div class="dsg-sticky">
+    <img class="dsg-img active" src="images/domaine1.jpg" alt="Le domaine" loading="eager" />
+    <img class="dsg-img" src="images/domaine2.png" alt="Le domaine" loading="lazy" />
+    <img class="dsg-img" src="images/domaine%203.png" alt="Le domaine" loading="lazy" />
+    <img class="dsg-img" src="images/domaine%204.png" alt="Le domaine" loading="lazy" />
+    <img class="dsg-img" src="images/domaine5.png" alt="Le domaine" loading="lazy" />
+    <img class="dsg-img" src="images/domaine6.png" alt="Le domaine" loading="lazy" />
+    <img class="dsg-img" src="images/domaine7.png" alt="Le domaine" loading="lazy" />
+    <div class="dsg-overlay"></div>
+    <div class="dsg-ui">
+      <div class="dsg-counter"><strong>01</strong> / 07</div>
+      <div class="dsg-dots">
+        <div class="dsg-dot active"></div>
+        <div class="dsg-dot"></div>
+        <div class="dsg-dot"></div>
+        <div class="dsg-dot"></div>
+        <div class="dsg-dot"></div>
+        <div class="dsg-dot"></div>
+        <div class="dsg-dot"></div>
       </div>
     </div>
   </div>
-</section>
+</div>
+
+<!-- Fallback mobile : grille simple -->
+<div class="domaine-mobile-gallery" style="padding:0 1.2rem 3rem;background:var(--bg);">
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.4rem;border-radius:10px;overflow:hidden;">
+    <div class="domaine-photo" style="height:150px;"><img src="images/domaine1.jpg" loading="lazy" style="width:100%;height:100%;object-fit:cover;" /><div class="domaine-overlay"></div></div>
+    <div class="domaine-photo" style="height:150px;"><img src="images/domaine2.png" loading="lazy" style="width:100%;height:100%;object-fit:cover;" /><div class="domaine-overlay"></div></div>
+    <div class="domaine-photo" style="height:150px;"><img src="images/domaine%203.png" loading="lazy" style="width:100%;height:100%;object-fit:cover;" /><div class="domaine-overlay"></div></div>
+    <div class="domaine-photo" style="height:150px;"><img src="images/domaine%204.png" loading="lazy" style="width:100%;height:100%;object-fit:cover;" /><div class="domaine-overlay"></div></div>
+  </div>
+</div>
 
 <!-- ══ POINTS FORTS ══════════════════════ -->
 <section style="padding:6rem 2rem;background:var(--bg2);">
@@ -246,5 +256,39 @@
 </div>
 
 <script src="script.js"></script>
+<script>
+(function () {
+  const gallery = document.querySelector('.domaine-scroll-gallery');
+  if (!gallery || window.matchMedia('(max-width:768px)').matches) return;
+
+  const imgs  = gallery.querySelectorAll('.dsg-img');
+  const dots  = gallery.querySelectorAll('.dsg-dot');
+  const counter = gallery.querySelector('.dsg-counter');
+  const n = imgs.length;
+  let current = 0;
+
+  function update() {
+    const rect     = gallery.getBoundingClientRect();
+    const scrolled = -rect.top;
+    const total    = rect.height - window.innerHeight;
+    const progress = Math.max(0, Math.min(1, scrolled / total));
+    const idx      = Math.min(n - 1, Math.floor(progress * n));
+
+    if (idx === current) return;
+    current = idx;
+
+    imgs.forEach((img, i) => img.classList.toggle('active', i === idx));
+    dots.forEach((dot, i) => dot.classList.toggle('active', i === idx));
+    if (counter) {
+      counter.innerHTML =
+        '<strong>' + String(idx + 1).padStart(2, '0') + '</strong> / ' +
+        String(n).padStart(2, '0');
+    }
+  }
+
+  window.addEventListener('scroll', update, { passive: true });
+  update();
+})();
+</script>
 </body>
 </html>
