@@ -702,46 +702,45 @@ footer { border-top: 1px solid var(--border); padding: 4rem 2rem 2rem; }
 }
 .domaine-cta { text-align: center; margin-top: 2.5rem; }
 
-/* ── Scroll Gallery (page domaine, desktop) ── */
-.domaine-scroll-gallery { position: relative; height: 700vh; }
-.dsg-sticky {
+/* ── Filmstrip horizontal (page domaine, desktop) ── */
+.filmstrip-wrapper { position: relative; background: #080e08; }
+.filmstrip-sticky {
   position: sticky; top: 0;
   height: 100vh; overflow: hidden;
-  background: #0b120b;
+  display: flex; align-items: center;
+  background: #080e08;
 }
-.dsg-img {
-  position: absolute; inset: 0;
-  width: 100%; height: 100%;
-  object-fit: cover;
-  opacity: 0;
-  transform: scale(1.05);
-  transition: opacity 0.9s cubic-bezier(.4,0,.2,1), transform 0.9s cubic-bezier(.4,0,.2,1);
-  will-change: opacity, transform;
+.filmstrip-track {
+  display: flex; align-items: center;
+  gap: 3.5rem;
+  padding: 0 10vw;
+  will-change: transform;
 }
-.dsg-img.active { opacity: 1; transform: scale(1); }
-.dsg-overlay {
-  position: absolute; inset: 0; z-index: 1; pointer-events: none;
-  background: linear-gradient(to bottom, rgba(11,18,11,.3) 0%, rgba(11,18,11,.05) 40%, rgba(11,18,11,.45) 100%);
+.filmstrip-photo {
+  flex-shrink: 0;
+  height: 72vh; width: auto;
+  border-radius: 6px;
+  display: block;
+  box-shadow: 0 24px 64px rgba(0,0,0,.55);
 }
-.dsg-ui {
-  position: absolute; bottom: 2.5rem; right: 2.5rem; z-index: 2;
-  display: flex; flex-direction: column; align-items: flex-end; gap: 1rem;
+.filmstrip-progress {
+  position: absolute; bottom: 2.2rem;
+  left: 10vw; right: 10vw;
+  height: 1px; background: rgba(240,235,224,.12);
 }
-.dsg-counter {
-  font-size: 0.62rem; letter-spacing: .2em; text-transform: uppercase;
-  color: rgba(240,235,224,.5);
+.filmstrip-bar-inner {
+  height: 100%; width: 0%;
+  background: var(--gold);
+  transition: width 0.08s linear;
 }
-.dsg-counter strong { color: var(--gold); font-size: 0.85rem; }
-.dsg-dots { display: flex; flex-direction: column; gap: 0.35rem; }
-.dsg-dot {
-  width: 3px; height: 18px; border-radius: 2px;
-  background: rgba(240,235,224,.22);
-  transition: background .35s, height .35s;
+.filmstrip-hint {
+  position: absolute; bottom: 3rem; right: 10vw;
+  font-size: 0.58rem; letter-spacing: .2em; text-transform: uppercase;
+  color: rgba(240,235,224,.35);
 }
-.dsg-dot.active { background: var(--gold); height: 34px; }
 .domaine-mobile-gallery { display: none; }
 @media (max-width: 768px) {
-  .domaine-scroll-gallery { display: none; }
+  .filmstrip-wrapper { display: none; }
   .domaine-mobile-gallery { display: block; }
 }
 

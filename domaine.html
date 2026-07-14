@@ -123,29 +123,22 @@
   </div>
 </section>
 
-<!-- Scroll gallery desktop -->
-<div class="domaine-scroll-gallery">
-  <div class="dsg-sticky">
-    <img class="dsg-img active" src="images/domaine1.jpg" alt="Le domaine" loading="eager" />
-    <img class="dsg-img" src="images/domaine2.png" alt="Le domaine" loading="lazy" />
-    <img class="dsg-img" src="images/domaine%203.png" alt="Le domaine" loading="lazy" />
-    <img class="dsg-img" src="images/domaine%204.png" alt="Le domaine" loading="lazy" />
-    <img class="dsg-img" src="images/domaine5.png" alt="Le domaine" loading="lazy" />
-    <img class="dsg-img" src="images/domaine6.png" alt="Le domaine" loading="lazy" />
-    <img class="dsg-img" src="images/domaine7.png" alt="Le domaine" loading="lazy" />
-    <div class="dsg-overlay"></div>
-    <div class="dsg-ui">
-      <div class="dsg-counter"><strong>01</strong> / 07</div>
-      <div class="dsg-dots">
-        <div class="dsg-dot active"></div>
-        <div class="dsg-dot"></div>
-        <div class="dsg-dot"></div>
-        <div class="dsg-dot"></div>
-        <div class="dsg-dot"></div>
-        <div class="dsg-dot"></div>
-        <div class="dsg-dot"></div>
-      </div>
+<!-- Filmstrip desktop -->
+<div class="filmstrip-wrapper">
+  <div class="filmstrip-sticky">
+    <div class="filmstrip-track">
+      <img class="filmstrip-photo" src="images/domaine1.jpg" alt="Le domaine" loading="eager" />
+      <img class="filmstrip-photo" src="images/domaine2.png" alt="Le domaine" loading="lazy" />
+      <img class="filmstrip-photo" src="images/domaine%203.png" alt="Le domaine" loading="lazy" />
+      <img class="filmstrip-photo" src="images/domaine%204.png" alt="Le domaine" loading="lazy" />
+      <img class="filmstrip-photo" src="images/domaine5.png" alt="Le domaine" loading="lazy" />
+      <img class="filmstrip-photo" src="images/domaine6.png" alt="Le domaine" loading="lazy" />
+      <img class="filmstrip-photo" src="images/domaine7.png" alt="Le domaine" loading="lazy" />
     </div>
+    <div class="filmstrip-progress">
+      <div class="filmstrip-bar-inner"></div>
+    </div>
+    <div class="filmstrip-hint">Faites défiler ↓</div>
   </div>
 </div>
 
@@ -258,32 +251,35 @@
 <script src="script.js"></script>
 <script>
 (function () {
-  const gallery = document.querySelector('.domaine-scroll-gallery');
-  if (!gallery || window.matchMedia('(max-width:768px)').matches) return;
+  const wrapper = document.querySelector('.filmstrip-wrapper');
+  const track   = document.querySelector('.filmstrip-track');
+  const barInner = document.querySelector('.filmstrip-bar-inner');
+  if (!wrapper || !track) return;
+  if (window.matchMedia('(max-width:768px)').matches) return;
 
-  const imgs  = gallery.querySelectorAll('.dsg-img');
-  const dots  = gallery.querySelectorAll('.dsg-dot');
-  const counter = gallery.querySelector('.dsg-counter');
-  const n = imgs.length;
-  let current = 0;
+  /* Ajuste la hauteur du wrapper après chargement des images */
+  function setHeight() {
+    const overflow = track.scrollWidth - window.innerWidth;
+    wrapper.style.height = (overflow + window.innerHeight * 1.2) + 'px';
+  }
+
+  const imgs = track.querySelectorAll('img');
+  let loaded = 0;
+  imgs.forEach(img => {
+    if (img.complete) { if (++loaded === imgs.length) setHeight(); }
+    else img.addEventListener('load', () => { if (++loaded === imgs.length) setHeight(); });
+  });
+  window.addEventListener('resize', setHeight);
 
   function update() {
-    const rect     = gallery.getBoundingClientRect();
+    const rect     = wrapper.getBoundingClientRect();
     const scrolled = -rect.top;
-    const total    = rect.height - window.innerHeight;
+    const total    = wrapper.offsetHeight - window.innerHeight;
+    if (total <= 0) return;
     const progress = Math.max(0, Math.min(1, scrolled / total));
-    const idx      = Math.min(n - 1, Math.floor(progress * n));
-
-    if (idx === current) return;
-    current = idx;
-
-    imgs.forEach((img, i) => img.classList.toggle('active', i === idx));
-    dots.forEach((dot, i) => dot.classList.toggle('active', i === idx));
-    if (counter) {
-      counter.innerHTML =
-        '<strong>' + String(idx + 1).padStart(2, '0') + '</strong> / ' +
-        String(n).padStart(2, '0');
-    }
+    const maxX     = -(track.scrollWidth - window.innerWidth);
+    track.style.transform = 'translateX(' + (progress * maxX) + 'px)';
+    if (barInner) barInner.style.width = (progress * 100) + '%';
   }
 
   window.addEventListener('scroll', update, { passive: true });
