@@ -158,7 +158,7 @@
 <div class="dgallery-wrapper" id="dGallery">
   <div class="dgallery-sticky">
 
-    <!-- Images empilées : 7 domaine + 8 chats -->
+    <!-- Images du domaine -->
     <div class="dgallery-img active"  style="background-image:url('images/domaine1.jpg')"></div>
     <div class="dgallery-img"         style="background-image:url('images/domaine2.png')"></div>
     <div class="dgallery-img"         style="background-image:url('images/domaine%203.png')"></div>
@@ -166,14 +166,6 @@
     <div class="dgallery-img"         style="background-image:url('images/domaine5.png')"></div>
     <div class="dgallery-img"         style="background-image:url('images/domaine6.png')"></div>
     <div class="dgallery-img"         style="background-image:url('images/domaine7.png')"></div>
-    <div class="dgallery-img"         style="background-image:url('images/708093400.jpg')"></div>
-    <div class="dgallery-img"         style="background-image:url('images/708093407.jpg')"></div>
-    <div class="dgallery-img"         style="background-image:url('images/708093417.jpg')"></div>
-    <div class="dgallery-img"         style="background-image:url('images/708093464.jpg')"></div>
-    <div class="dgallery-img"         style="background-image:url('images/708093481.jpg')"></div>
-    <div class="dgallery-img"         style="background-image:url('images/708093487.jpg')"></div>
-    <div class="dgallery-img"         style="background-image:url('images/708093495.jpg')"></div>
-    <div class="dgallery-img"         style="background-image:url('images/708093504.jpg')"></div>
 
     <div class="dgallery-overlay"></div>
 
@@ -184,19 +176,12 @@
         <p class="dgallery-line" data-from="1">Niché entre ciel et garrigue, le domaine s'étend sur un terrain arboré où chaque recoin invite à la contemplation.</p>
         <p class="dgallery-line" data-from="2">Des allées ombragées serpentent entre les cottages, menant à des terrasses baignées de lumière dorée.</p>
         <p class="dgallery-line" data-from="3">Ici, le temps s'étire. On se lève au chant des cigales, on s'endort sous les étoiles. C'est cela, l'Oustal — un art de vivre languedocien entre nature préservée et douceur de vivre.</p>
-        <p class="dgallery-line" data-from="7">Sur le domaine, quelques résidents à quatre pattes ont élu domicile. Discrets le matin, aventuriers le soir.</p>
-        <p class="dgallery-line" data-from="8">Ils connaissent chaque recoin du jardin, chaque pierre tiède au soleil.</p>
-        <p class="dgallery-line" data-from="9">Leurs ronrons se mêlent au chant des grillons — une musique de fond qui berce les soirées d'été.</p>
-        <p class="dgallery-line" data-from="10">Imprévisibles et attachants, ils s'invitent parfois sur votre terrasse avec une autorité toute naturelle.</p>
-        <p class="dgallery-line" data-from="11">Certains fuient le contact, d'autres réclament une caresse avec insistance. Chacun a son caractère.</p>
-        <p class="dgallery-line" data-from="12">Ils veillent sur le domaine à leur façon — silencieux gardiens d'un territoire qu'ils ont apprivoisé.</p>
-        <p class="dgallery-line" data-from="13">Leur présence ajoute à l'Oustal ce supplément d'âme que seuls les endroits vraiment vivants possèdent.</p>
-        <p class="dgallery-line" data-from="14">Croiser leur regard doré dans l'allée des lavandes reste l'un des petits bonheurs de l'Oustal.</p>
+        <p class="dgallery-line" data-from="6">Découvrez nos magnifiques Servals — résidents sauvages et attachants, gardiens silencieux de l'Oustal.</p>
       </div>
     </div>
 
     <div class="dgallery-progress"><div class="dgallery-bar" id="dBar"></div></div>
-    <div class="dgallery-counter"><span id="dCurrent">01</span> <span style="opacity:.4;margin:0 .3rem">/</span> 15</div>
+    <div class="dgallery-counter"><span id="dCurrent">01</span> <span style="opacity:.4;margin:0 .3rem">/</span> <span id="dTotal">07</span></div>
     <div class="dgallery-hint">↓ Défiler pour explorer</div>
   </div>
 </div>
@@ -356,8 +341,10 @@
   const bar   = document.getElementById('dBar');
   const curr  = document.getElementById('dCurrent');
   const n     = imgs.length;
+  const total = document.getElementById('dTotal');
 
   wrapper.style.height = (n * 100) + 'vh';
+  if (total) total.textContent = String(n).padStart(2, '0');
 
   let lastSlide = -1;
 
