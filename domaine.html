@@ -154,25 +154,50 @@
   </div>
 </section>
 
-<!-- ══ GALERIE : DOMAINE (split-scroll, desktop) ═════════════ -->
-<div class="split-scroll">
-  <div class="split-photos">
-    <div class="split-photo-item"><img src="images/domaine1.jpg" alt="Le domaine" loading="eager" /></div>
-    <div class="split-photo-item"><img src="images/domaine2.png" alt="Le domaine" loading="lazy" /></div>
-    <div class="split-photo-item"><img src="images/domaine%203.png" alt="Le domaine" loading="lazy" /></div>
-    <div class="split-photo-item"><img src="images/domaine%204.png" alt="Le domaine" loading="lazy" /></div>
-    <div class="split-photo-item"><img src="images/domaine5.png" alt="Le domaine" loading="lazy" /></div>
-    <div class="split-photo-item"><img src="images/domaine6.png" alt="Le domaine" loading="lazy" /></div>
-    <div class="split-photo-item"><img src="images/domaine7.png" alt="Le domaine" loading="lazy" /></div>
-  </div>
-  <div class="split-text-col">
-    <div class="split-text-inner">
-      <span class="section-label">Galerie</span>
-      <h2 class="section-title">Le domaine <em>en images</em></h2>
-      <p>Niché entre ciel et garrigue, le domaine s'étend sur un terrain arboré où chaque recoin invite à la contemplation. Des allées ombragées serpentent entre les cottages, menant à des terrasses baignées de lumière dorée.</p>
-      <p>Ici, le temps s'étire. On se lève au chant des cigales, on s'endort sous les étoiles. C'est cela, l'Oustal : un art de vivre languedocien, entre nature préservée et douceur de vivre.</p>
-      <a href="https://direct-book.com/properties/lesjardinsdeloustal?locale=fr&items[0][adults]=2&items[0][children]=0&items[0][infants]=0&currency=EUR&checkInDate=2026-11-23&checkOutDate=2026-11-26&trackPage=yes" target="_blank" class="btn btn-fill" style="margin-top:1.5rem;">Réserver un cottage →</a>
+<!-- ══ GALERIE PLEIN ÉCRAN (sticky scroll, desktop) ══════════ -->
+<div class="dgallery-wrapper" id="dGallery">
+  <div class="dgallery-sticky">
+
+    <!-- Images empilées : 7 domaine + 8 chats -->
+    <div class="dgallery-img active"  style="background-image:url('images/domaine1.jpg')"></div>
+    <div class="dgallery-img"         style="background-image:url('images/domaine2.png')"></div>
+    <div class="dgallery-img"         style="background-image:url('images/domaine%203.png')"></div>
+    <div class="dgallery-img"         style="background-image:url('images/domaine%204.png')"></div>
+    <div class="dgallery-img"         style="background-image:url('images/domaine5.png')"></div>
+    <div class="dgallery-img"         style="background-image:url('images/domaine6.png')"></div>
+    <div class="dgallery-img"         style="background-image:url('images/domaine7.png')"></div>
+    <div class="dgallery-img"         style="background-image:url('images/708093400.jpg')"></div>
+    <div class="dgallery-img"         style="background-image:url('images/708093407.jpg')"></div>
+    <div class="dgallery-img"         style="background-image:url('images/708093417.jpg')"></div>
+    <div class="dgallery-img"         style="background-image:url('images/708093464.jpg')"></div>
+    <div class="dgallery-img"         style="background-image:url('images/708093481.jpg')"></div>
+    <div class="dgallery-img"         style="background-image:url('images/708093487.jpg')"></div>
+    <div class="dgallery-img"         style="background-image:url('images/708093495.jpg')"></div>
+    <div class="dgallery-img"         style="background-image:url('images/708093504.jpg')"></div>
+
+    <div class="dgallery-overlay"></div>
+
+    <!-- Texte central qui s'accumule -->
+    <div class="dgallery-content">
+      <h2 class="dgallery-title">Notre domaine <em>en images</em></h2>
+      <div class="dgallery-lines" id="dLines">
+        <p class="dgallery-line" data-from="1">Niché entre ciel et garrigue, le domaine s'étend sur un terrain arboré où chaque recoin invite à la contemplation.</p>
+        <p class="dgallery-line" data-from="2">Des allées ombragées serpentent entre les cottages, menant à des terrasses baignées de lumière dorée.</p>
+        <p class="dgallery-line" data-from="3">Ici, le temps s'étire. On se lève au chant des cigales, on s'endort sous les étoiles. C'est cela, l'Oustal — un art de vivre languedocien entre nature préservée et douceur de vivre.</p>
+        <p class="dgallery-line" data-from="7">Sur le domaine, quelques résidents à quatre pattes ont élu domicile. Discrets le matin, aventuriers le soir.</p>
+        <p class="dgallery-line" data-from="8">Ils connaissent chaque recoin du jardin, chaque pierre tiède au soleil.</p>
+        <p class="dgallery-line" data-from="9">Leurs ronrons se mêlent au chant des grillons — une musique de fond qui berce les soirées d'été.</p>
+        <p class="dgallery-line" data-from="10">Imprévisibles et attachants, ils s'invitent parfois sur votre terrasse avec une autorité toute naturelle.</p>
+        <p class="dgallery-line" data-from="11">Certains fuient le contact, d'autres réclament une caresse avec insistance. Chacun a son caractère.</p>
+        <p class="dgallery-line" data-from="12">Ils veillent sur le domaine à leur façon — silencieux gardiens d'un territoire qu'ils ont apprivoisé.</p>
+        <p class="dgallery-line" data-from="13">Leur présence ajoute à l'Oustal ce supplément d'âme que seuls les endroits vraiment vivants possèdent.</p>
+        <p class="dgallery-line" data-from="14">Croiser leur regard doré dans l'allée des lavandes reste l'un des petits bonheurs de l'Oustal.</p>
+      </div>
     </div>
+
+    <div class="dgallery-progress"><div class="dgallery-bar" id="dBar"></div></div>
+    <div class="dgallery-counter"><span id="dCurrent">01</span> <span style="opacity:.4;margin:0 .3rem">/</span> 15</div>
+    <div class="dgallery-hint">↓ Défiler pour explorer</div>
   </div>
 </div>
 
@@ -321,11 +346,54 @@
 
 <script src="script.js"></script>
 <script>
+/* ── Galerie plein écran (sticky scroll) ── */
+(function () {
+  const wrapper = document.getElementById('dGallery');
+  if (!wrapper || window.matchMedia('(max-width:768px)').matches) return;
+
+  const imgs  = Array.from(wrapper.querySelectorAll('.dgallery-img'));
+  const lines = Array.from(wrapper.querySelectorAll('.dgallery-line'));
+  const bar   = document.getElementById('dBar');
+  const curr  = document.getElementById('dCurrent');
+  const n     = imgs.length;
+
+  wrapper.style.height = (n * 100) + 'vh';
+
+  let lastSlide = -1;
+
+  function update() {
+    const rect     = wrapper.getBoundingClientRect();
+    const scrolled = -rect.top;
+    const total    = wrapper.offsetHeight - window.innerHeight;
+    if (total <= 0) return;
+
+    const progress = Math.max(0, Math.min(1, scrolled / total));
+    const slide    = Math.min(n - 1, Math.floor(progress * n));
+
+    if (slide !== lastSlide) {
+      imgs.forEach((img, i) => img.classList.toggle('active', i === slide));
+      if (curr) curr.textContent = String(slide + 1).padStart(2, '0');
+      lastSlide = slide;
+    }
+
+    lines.forEach(function (line) {
+      line.classList.toggle('visible', slide >= +line.dataset.from);
+    });
+
+    if (bar) bar.style.width = (progress * 100) + '%';
+  }
+
+  window.addEventListener('scroll', update, { passive: true });
+  update();
+})();
+
+/* ── Lightbox masonry ── */
 (function () {
   const lb      = document.getElementById('lightbox');
   const lbImg   = document.getElementById('lightboxImg');
   const lbCap   = document.getElementById('lightboxCaption');
   const lbClose = document.getElementById('lightboxClose');
+  if (!lb) return;
 
   document.querySelectorAll('.masonry-item').forEach(function (item) {
     item.addEventListener('click', function () {
