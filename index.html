@@ -303,23 +303,23 @@
       <p class="section-desc reveal reveal-delay-1">Niché dans un jardin arboré aux portes de Narbonne, Les Jardins de l'Oustal vous accueillent dans 5 cottages d'exception, entourés de verdure, de silence et de douceur.</p>
     </div>
     <div class="domaine-grid reveal reveal-delay-2">
-      <div class="domaine-photo">
+      <div class="domaine-photo" data-index="0">
         <img src="images/domaine1.jpg" alt="Vue générale du domaine" loading="lazy" />
         <div class="domaine-overlay"></div>
       </div>
-      <div class="domaine-photo">
+      <div class="domaine-photo" data-index="1">
         <img src="images/domaine2.png" alt="Le domaine" loading="lazy" />
         <div class="domaine-overlay"></div>
       </div>
-      <div class="domaine-photo">
+      <div class="domaine-photo" data-index="6">
         <img src="images/domaine7.png" alt="Le domaine" loading="lazy" />
         <div class="domaine-overlay"></div>
       </div>
-      <div class="domaine-photo">
+      <div class="domaine-photo" data-index="3">
         <img src="images/domaine4.png" alt="Le domaine" loading="lazy" />
         <div class="domaine-overlay"></div>
       </div>
-      <div class="domaine-photo">
+      <div class="domaine-photo" data-index="4">
         <img src="images/domaine5.png" alt="Le domaine" loading="lazy" />
         <div class="domaine-overlay"></div>
         <div class="domaine-count">
@@ -336,6 +336,15 @@
     </div>
   </div>
 </section>
+
+<!-- ── LIGHTBOX DOMAINE ── -->
+<div class="lightbox" id="domaineLightbox">
+  <button class="lightbox-close" id="domaineLbClose">&#x2715;</button>
+  <button class="lightbox-btn lightbox-prev" id="domaineLbPrev">&#8249;</button>
+  <img class="lightbox-img" id="domaineLbImg" src="" alt="" />
+  <button class="lightbox-btn lightbox-next" id="domaineLbNext">&#8250;</button>
+  <div class="lightbox-counter" id="domaineLbCounter"></div>
+</div>
 
 <!-- ══ ACTIVITÉS ════════════════════════ -->
 <section id="activites" style="padding:7rem 2rem;background:var(--bg2);">
@@ -657,6 +666,51 @@
   initDots('cottagesGrid', 'cottagesDots');
   initDots('avisGrid', 'avisDots');
 
+  /* ── Lightbox domaine (bibliothèque photo) ── */
+  (function () {
+    const images = [
+      'images/domaine1.jpg','images/domaine2.png','images/domaine3.png',
+      'images/domaine4.png','images/domaine5.png','images/domaine6.png',
+      'images/domaine7.png'
+    ];
+    const lb = document.getElementById('domaineLightbox');
+    if (!lb) return;
+    const lbImg = document.getElementById('domaineLbImg');
+    const lbCounter = document.getElementById('domaineLbCounter');
+    let current = 0;
+
+    function openLb(idx) {
+      current = idx;
+      lbImg.src = images[current];
+      lbCounter.textContent = (current + 1) + ' / ' + images.length;
+      lb.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeLb() {
+      lb.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    function goTo(idx) {
+      current = (idx + images.length) % images.length;
+      lbImg.src = images[current];
+      lbCounter.textContent = (current + 1) + ' / ' + images.length;
+    }
+
+    document.querySelectorAll('.domaine-photo').forEach(photo => {
+      photo.addEventListener('click', () => openLb(parseInt(photo.dataset.index, 10) || 0));
+    });
+    document.getElementById('domaineLbClose').addEventListener('click', closeLb);
+    document.getElementById('domaineLbPrev').addEventListener('click', () => goTo(current - 1));
+    document.getElementById('domaineLbNext').addEventListener('click', () => goTo(current + 1));
+    lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+    document.addEventListener('keydown', e => {
+      if (lb.classList.contains('open')) {
+        if (e.key === 'ArrowLeft') goTo(current - 1);
+        if (e.key === 'ArrowRight') goTo(current + 1);
+        if (e.key === 'Escape') closeLb();
+      }
+    });
+  })();
 </script>
 </body>
 </html>
