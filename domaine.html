@@ -7,45 +7,6 @@
   <meta name="theme-color" content="#0b120b" />
   <link rel="stylesheet" href="style.css?v=5" />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2020/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌿</text></svg>" />
-  <style>
-    .cottage-detail-hero {
-      position: relative;
-      height: 80vh; min-height: 560px;
-      overflow: hidden;
-      background-size: cover;
-      background-position: center;
-    }
-    .cottage-detail-hero-overlay {
-      position: absolute; inset: 0;
-      background: linear-gradient(to bottom, rgba(11,18,11,.28) 0%, rgba(11,18,11,.52) 55%, var(--bg) 100%);
-    }
-    .cottage-detail-hero-content {
-      position: absolute;
-      bottom: 4.5rem; left: 50%;
-      transform: translateX(-50%);
-      width: 100%; max-width: 1200px;
-      padding: 0 2rem;
-    }
-    .cottage-back-link {
-      display: inline-flex; align-items: center; gap: .45rem;
-      font-size: .72rem; letter-spacing: .14em; text-transform: uppercase;
-      color: var(--gold); opacity: .8; text-decoration: none;
-      margin-bottom: 1.2rem;
-      transition: opacity .2s;
-    }
-    .cottage-back-link:hover { opacity: 1; }
-    .cottage-detail-label {
-      font-size: .65rem; letter-spacing: .2em; text-transform: uppercase;
-      color: var(--gold); margin-bottom: .6rem;
-    }
-    .cottage-detail-title {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2.8rem, 5vw, 4.2rem);
-      color: var(--cream); line-height: 1.08;
-      font-weight: 700; margin: 0;
-    }
-    .cottage-detail-title em { font-style: italic; color: var(--gold); font-weight: 400; }
-  </style>
 </head>
 <body>
 
@@ -95,13 +56,15 @@
 </div>
 
 <!-- ══ HERO ══════════════════════════════ -->
-<section class="cottage-detail-hero" style="background-image:url('images/hero.jpg');">
-  <div class="cottage-detail-hero-overlay"></div>
-  <div class="cottage-detail-hero-content">
-    <a href="index.html" class="cottage-back-link">← Accueil</a>
-    <p class="cottage-detail-label">Les Jardins de l'Oustal</p>
-    <h1 class="cottage-detail-title">Notre <em>Domaine</em></h1>
-    <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.1rem;color:rgba(240,235,224,.8);margin-top:0.5rem;">Un jardin de paix aux portes de Narbonne</p>
+<section class="page-hero">
+  <div class="page-hero-bg">
+    <img src="images/hero.jpg" alt="Les Jardins de l'Oustal — Notre domaine" loading="eager" />
+    <div class="page-hero-overlay"></div>
+  </div>
+  <div class="page-hero-content">
+    <span class="section-label">Les Jardins de l'Oustal</span>
+    <h1 class="page-hero-title">Notre <em>Domaine</em></h1>
+    <p class="page-hero-sub" style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.15rem;max-width:520px;">Un jardin de paix aux portes de Narbonne</p>
   </div>
 </section>
 
@@ -210,8 +173,8 @@
         <img src="images/falaise-2.png" alt="La Falaise" loading="lazy" />
         <div class="masonry-caption">La Falaise</div>
       </div>
-      <div class="masonry-item" data-src="images/bf-hero.png" data-caption="La Bois Flottée">
-        <img src="images/bf-hero.png" alt="La Bois Flottée" loading="lazy" />
+      <div class="masonry-item" data-src="images/bf-1.png" data-caption="La Bois Flottée">
+        <img src="images/bf-1.png" alt="La Bois Flottée" loading="lazy" />
         <div class="masonry-caption">La Bois Flottée</div>
       </div>
       <div class="masonry-links-panel">
