@@ -563,14 +563,35 @@ a { text-decoration: none; color: inherit; }
 
 /* ── Activités autour de Narbonne ────── */
 .activites-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); gap: 1.4rem; }
-.activite-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; padding: 1.8rem; display: flex; flex-direction: column; gap: .9rem; transition: border-color .25s, transform .25s; }
+.activite-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; padding: 1.8rem; display: flex; flex-direction: column; gap: .9rem; transition: border-color .25s, transform .25s; cursor: default; }
 .activite-card:hover { border-color: rgba(201,169,110,.4); transform: translateY(-3px); }
 .activite-top { display: flex; align-items: flex-start; justify-content: space-between; gap: .8rem; }
 .activite-icon { font-size: 1.8rem; line-height: 1; flex-shrink: 0; }
 .activite-dist { font-size: .66rem; letter-spacing: .12em; text-transform: uppercase; color: var(--gold); background: rgba(201,169,110,.1); border: 1px solid rgba(201,169,110,.25); padding: .25rem .75rem; border-radius: 20px; white-space: nowrap; }
 .activite-name { font-family: 'Playfair Display', serif; font-size: 1.08rem; color: var(--cream); font-weight: 600; line-height: 1.3; }
 .activite-desc { font-size: .86rem; color: var(--muted); line-height: 1.75; }
+
+/* Volet photo + horaires révélé au survol (tap sur mobile) */
+.activite-photo {
+  height: 0; opacity: 0; border-radius: 8px; overflow: hidden;
+  background-size: cover; background-position: center;
+  transition: height .35s ease, opacity .3s ease, margin .35s ease;
+  margin-top: 0; flex-shrink: 0;
+}
+.activite-card:hover .activite-photo,
+.activite-card.open .activite-photo { height: 130px; opacity: 1; margin-top: .1rem; }
+.activite-hours {
+  display: none; align-items: center; gap: .4rem;
+  font-size: .78rem; color: var(--gold);
+}
+.activite-card:hover .activite-hours,
+.activite-card.open .activite-hours { display: flex; }
 @media (max-width: 600px) { .activites-grid { grid-template-columns: 1fr; } }
+@media (max-width: 768px) {
+  /* Pas de survol tactile : la photo & les horaires restent visibles en permanence */
+  .activite-photo { height: 110px !important; opacity: 1 !important; margin-top: .3rem !important; }
+  .activite-hours { display: flex !important; }
+}
 
 /* ── Avis ────────────────────────────── */
 .avis-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 3.5rem; }
