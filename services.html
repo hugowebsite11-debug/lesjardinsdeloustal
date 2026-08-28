@@ -8,6 +8,95 @@
   <link rel="preload" as="image" href="images/hero.jpg" />
   <link rel="stylesheet" href="style.css?v=4" />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌲</text></svg>" />
+  <style>
+    .balneo-teaser {
+      position: relative;
+      overflow: hidden;
+      padding: 6rem 2rem;
+      text-align: center;
+      background:
+        radial-gradient(ellipse 60% 50% at 20% 15%, rgba(201,169,110,.16), transparent 60%),
+        radial-gradient(ellipse 55% 45% at 85% 85%, rgba(61,122,59,.22), transparent 60%),
+        var(--bg);
+    }
+    .balneo-glow {
+      position: absolute; border-radius: 50%; filter: blur(60px); pointer-events: none;
+      background: radial-gradient(circle, rgba(201,169,110,.28), transparent 70%);
+      width: 420px; height: 420px; top: -140px; left: -120px;
+      animation: balneoPulse 7s ease-in-out infinite;
+    }
+    .balneo-glow--2 {
+      background: radial-gradient(circle, rgba(61,122,59,.32), transparent 70%);
+      width: 380px; height: 380px; bottom: -160px; right: -100px; top: auto; left: auto;
+      animation-delay: 2.2s;
+    }
+    @keyframes balneoPulse { 0%, 100% { opacity: .55; transform: scale(1); } 50% { opacity: .9; transform: scale(1.12); } }
+
+    .balneo-badge {
+      position: relative; display: inline-flex; align-items: center; gap: .5rem;
+      padding: .5rem 1.2rem; border-radius: 30px;
+      background: rgba(201,169,110,.1); border: 1px solid rgba(201,169,110,.4);
+      color: var(--gold); font-size: .72rem; letter-spacing: .18em; text-transform: uppercase;
+      margin-bottom: 1.6rem;
+    }
+    .balneo-badge svg { width: 14px; height: 14px; }
+
+    .balneo-title {
+      position: relative;
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.2rem, 5vw, 3.6rem);
+      font-weight: 600; line-height: 1.15;
+      color: var(--cream); margin-bottom: 1.2rem;
+    }
+    .balneo-title em { font-style: italic; color: var(--gold); font-weight: 400; }
+
+    .balneo-sub {
+      position: relative;
+      max-width: 560px; margin: 0 auto 3rem;
+      color: rgba(240,235,224,.72); font-size: 1rem; line-height: 1.85;
+    }
+
+    .balneo-countdown {
+      position: relative;
+      display: flex; align-items: center; justify-content: center;
+      gap: 1.1rem; flex-wrap: wrap; margin-bottom: 3.2rem;
+    }
+    .balneo-cd-item {
+      display: flex; flex-direction: column; align-items: center; gap: .3rem;
+      background: rgba(11,18,11,.35); border: 1px solid rgba(201,169,110,.3);
+      border-radius: 14px; padding: 1.1rem 1.3rem; min-width: 84px;
+      backdrop-filter: blur(6px);
+    }
+    .balneo-cd-num {
+      font-family: 'Playfair Display', serif; font-size: 2.1rem;
+      color: var(--gold); line-height: 1; font-style: italic;
+    }
+    .balneo-cd-label {
+      font-size: .62rem; letter-spacing: .16em; text-transform: uppercase; color: var(--muted);
+    }
+    .balneo-cd-sep { color: rgba(201,169,110,.4); font-size: 1.6rem; font-family: 'Playfair Display', serif; }
+    @media (max-width: 600px) {
+      .balneo-cd-sep { display: none; }
+      .balneo-countdown { gap: .7rem; }
+      .balneo-cd-item { min-width: 68px; padding: .8rem .7rem; }
+      .balneo-cd-num { font-size: 1.5rem; }
+    }
+
+    .balneo-amenities {
+      position: relative;
+      display: flex; align-items: center; justify-content: center;
+      gap: .8rem; flex-wrap: wrap;
+    }
+    .balneo-amenity {
+      display: flex; align-items: center; gap: .55rem;
+      padding: .65rem 1.2rem; border-radius: 30px;
+      background: rgba(201,169,110,.07); border: 1px solid rgba(201,169,110,.28);
+      color: var(--cream); font-size: .8rem; letter-spacing: .03em;
+      transition: background .25s, border-color .25s, transform .25s;
+    }
+    .balneo-amenity:hover { background: rgba(201,169,110,.16); border-color: var(--gold); transform: translateY(-2px); }
+    .balneo-amenity svg { width: 17px; height: 17px; stroke: var(--gold); flex-shrink: 0; }
+  </style>
 </head>
 <body>
 
@@ -68,34 +157,80 @@
 </section>
 
 <!-- ── BALNÉO (BIENTÔT) ──────────────────────── -->
-<section class="ns-section">
+<section class="balneo-teaser">
+  <div class="balneo-glow"></div>
+  <div class="balneo-glow balneo-glow--2"></div>
   <div class="container">
-    <div class="ns-feature-block reveal">
-      <div class="ns-feature-visual">
-        <div class="ns-feature-icon-big">
-          <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M4 24a10 10 0 0110-10h30a4 4 0 014 4v6" stroke="#c9a96e" stroke-width="1.5" stroke-linecap="round"/>
-            <rect x="6" y="24" width="46" height="18" rx="4" stroke="#c9a96e" stroke-width="1.5"/>
-            <path d="M4 48c2.5 2 5 2 7.5 0s5-2 7.5 0 5 2 7.5 0 5-2 7.5 0 5 2 7.5 0 5-2 7.5 0" stroke="#c9a96e" stroke-width="1.5" stroke-linecap="round"/>
-            <path d="M18 24v-6M30 24v-6M42 24v-6" stroke="#c9a96e" stroke-width="1.5" stroke-linecap="round"/>
-            <circle cx="52" cy="14" r="2" stroke="#c9a96e" stroke-width="1.2"/>
-            <circle cx="46" cy="10" r="1.3" stroke="#c9a96e" stroke-width="1.2"/>
-          </svg>
-        </div>
-        <div class="ns-feature-stat">
-          <strong>Bientôt</strong>
-          <span>Espace balnéo</span>
-        </div>
+    <span class="balneo-badge">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+      En préparation
+    </span>
+    <h2 class="balneo-title">L'Espace Balnéo<br><em>arrive à l'Oustal</em></h2>
+    <p class="balneo-sub">Bar, spa, massages, piscine intérieure chauffée et rooftop — un tout nouveau cocon de détente pour prolonger votre séjour, en toute saison.</p>
+
+    <div class="balneo-countdown" id="balneoCountdown">
+      <div class="balneo-cd-item"><span class="balneo-cd-num" id="cdDays">00</span><span class="balneo-cd-label">Jours</span></div>
+      <div class="balneo-cd-sep">:</div>
+      <div class="balneo-cd-item"><span class="balneo-cd-num" id="cdHours">00</span><span class="balneo-cd-label">Heures</span></div>
+      <div class="balneo-cd-sep">:</div>
+      <div class="balneo-cd-item"><span class="balneo-cd-num" id="cdMins">00</span><span class="balneo-cd-label">Min</span></div>
+      <div class="balneo-cd-sep">:</div>
+      <div class="balneo-cd-item"><span class="balneo-cd-num" id="cdSecs">00</span><span class="balneo-cd-label">Sec</span></div>
+    </div>
+
+    <div class="balneo-amenities">
+      <div class="balneo-amenity">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 3h14l-7 9v7m-4 0h8"/></svg>
+        <span>Bar</span>
       </div>
-      <div class="ns-feature-text">
-        <span class="section-label">En préparation</span>
-        <h2 class="section-title">Un espace balnéo<br><em>bientôt à l'Oustal</em></h2>
-        <p class="section-desc">Nous préparons actuellement un tout nouvel espace balnéo aux Jardins de l'Oustal : piscine intérieure chauffée et bar, pour prolonger la détente en toute saison.</p>
-        <p class="section-desc" style="margin-top:.8rem;">Ouverture prévue prochainement — on vous tient au courant dès que les portes ouvrent !</p>
+      <div class="balneo-amenity">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2s6 6.8 6 11.2A6 6 0 016 13.2C6 8.8 12 2 12 2z"/></svg>
+        <span>Spa</span>
+      </div>
+      <div class="balneo-amenity">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="8" cy="16" r="3"/><circle cx="14" cy="10" r="4"/><circle cx="18" cy="17" r="2"/></svg>
+        <span>Massages</span>
+      </div>
+      <div class="balneo-amenity">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="4" y="9" width="16" height="8" rx="2"/><path d="M2 20c1.5 1.2 3 1.2 4.5 0s3-1.2 4.5 0 3 1.2 4.5 0 3-1.2 4.5 0"/></svg>
+        <span>Piscine intérieure</span>
+      </div>
+      <div class="balneo-amenity">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 21h18M5 21V10l7-7 7 7v11M9 21v-6h6v6"/></svg>
+        <span>Rooftop</span>
       </div>
     </div>
   </div>
 </section>
+
+<script>
+  (function () {
+    const target = new Date('2026-12-01T00:00:00');
+    const dEl = document.getElementById('cdDays');
+    const hEl = document.getElementById('cdHours');
+    const mEl = document.getElementById('cdMins');
+    const sEl = document.getElementById('cdSecs');
+    if (!dEl) return;
+    function pad(n) { return String(n).padStart(2, '0'); }
+    function tick() {
+      const diff = target - new Date();
+      if (diff <= 0) {
+        dEl.textContent = hEl.textContent = mEl.textContent = sEl.textContent = '00';
+        return;
+      }
+      const days = Math.floor(diff / 86400000);
+      const hours = Math.floor((diff % 86400000) / 3600000);
+      const mins = Math.floor((diff % 3600000) / 60000);
+      const secs = Math.floor((diff % 60000) / 1000);
+      dEl.textContent = pad(days);
+      hEl.textContent = pad(hours);
+      mEl.textContent = pad(mins);
+      sEl.textContent = pad(secs);
+    }
+    tick();
+    setInterval(tick, 1000);
+  })();
+</script>
 
 <div class="divider"></div>
 
@@ -147,7 +282,7 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 20c1.5 1.2 3 1.2 4.5 0s3-1.2 4.5 0 3 1.2 4.5 0 3-1.2 4.5 0"/><path d="M4 16V8a2 2 0 012-2h12a2 2 0 012 2v8"/><path d="M8 6V4M16 6V4"/></svg>
         </div>
         <h3>Balnéo (bientôt)</h3>
-        <p>Piscine intérieure chauffée et bar — un nouvel espace détente en préparation aux Jardins de l'Oustal.</p>
+        <p>Bar, spa, massages, piscine intérieure chauffée et rooftop — un nouvel espace détente en préparation aux Jardins de l'Oustal.</p>
       </div>
     </div>
   </div>
