@@ -35,7 +35,9 @@ document.addEventListener('DOMContentLoaded', () => {
     hamburger.addEventListener('click', () => {
       hamburger.classList.toggle('open');
       mobileMenu.classList.toggle('open');
-      document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+      const isOpen = mobileMenu.classList.contains('open');
+      document.body.style.overflow = isOpen ? 'hidden' : '';
+      document.body.classList.toggle('menu-open', isOpen);
     });
 
     mobileMenu.querySelectorAll('a').forEach(link => {
@@ -43,6 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
         hamburger.classList.remove('open');
         mobileMenu.classList.remove('open');
         document.body.style.overflow = '';
+        document.body.classList.remove('menu-open');
       });
     });
   }

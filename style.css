@@ -1396,6 +1396,12 @@ footer { border-top: 1px solid var(--border); padding: 4rem 2rem 2rem; }
   }
   body { padding-bottom: 80px; }
 
+  /* ── Masquer les barres fixes Appeler/Réserver quand le menu hamburger est ouvert ── */
+  body.menu-open .mobile-sticky-cta,
+  body.menu-open .mobile-cottage-bar {
+    display: none !important;
+  }
+
   /* ── Font size minimum 14px sur badges/labels ── */
   .cottage-chip, .cottage-detail-chip, .section-label, .booking-card-price-label { font-size: .875rem !important; }
 
