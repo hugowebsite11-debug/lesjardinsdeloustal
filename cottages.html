@@ -640,18 +640,10 @@ document.addEventListener('touchstart', e => {
 document.addEventListener('touchend', e => {
   const dy = touchStartY - e.changedTouches[0].clientY;
   const dx = touchStartX - e.changedTouches[0].clientX;
-  if (window.innerWidth <= 768) {
-    // Mobile : swipe horizontal uniquement
-    if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 50) {
-      if (dx > 0) goTo(current + 1);
-      else goTo(current - 1);
-    }
-  } else {
-    // Desktop : swipe vertical
-    if (Math.abs(dy) > Math.abs(dx) && Math.abs(dy) > 50) {
-      if (dy > 0) goTo(current + 1);
-      else goTo(current - 1);
-    }
+  // Swipe vertical (mobile : vers le haut = slide suivant, comme un scroll)
+  if (Math.abs(dy) > Math.abs(dx) && Math.abs(dy) > 50) {
+    if (dy > 0) goTo(current + 1);
+    else goTo(current - 1);
   }
 }, { passive: true });
 
