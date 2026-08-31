@@ -9,6 +9,14 @@
   <link rel="stylesheet" href="style.css?v=4" />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌲</text></svg>" />
   <style>
+    .page-hero--compact { height: 42vh; min-height: 320px; }
+    .page-hero--compact .page-hero-content { padding-top: 2rem; }
+    .page-hero--compact .section-label { font-size: .62rem; letter-spacing: .12em; }
+    @media (max-width: 768px) {
+      .page-hero--compact { height: 38vh; min-height: 260px; }
+      .page-hero--compact .section-label { font-size: .58rem; letter-spacing: .1em; }
+    }
+
     .balneo-teaser {
       position: relative;
       overflow: hidden;
@@ -144,15 +152,14 @@
 </div>
 
 <!-- ── HERO PAGE ─────────────────────── -->
-<section class="page-hero">
+<section class="page-hero page-hero--compact">
   <div class="page-hero-bg">
     <img src="images/hero.jpg" alt="Les Jardins de l'Oustal — Nos services" loading="eager" />
-    <div class="page-hero-overlay"></div>
+    <div class="page-hero-overlay" style="background:none;"></div>
   </div>
   <div class="page-hero-content">
-    <span class="section-label">Pensé pour votre confort</span>
-    <h1 class="page-hero-title">Nos <em>Services</em></h1>
-    <p class="page-hero-sub">Tout le confort pensé pour vous permettre de profiter pleinement de Narbonne et de ses environs.</p>
+    <span class="section-label" style="white-space:nowrap;text-shadow:0 2px 12px rgba(0,0,0,.6);">Pensé pour votre confort</span>
+    <h1 class="page-hero-title" style="text-shadow:0 2px 20px rgba(0,0,0,.6);">Nos <em>Services</em></h1>
   </div>
 </section>
 

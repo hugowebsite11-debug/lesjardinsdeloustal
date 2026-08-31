@@ -793,7 +793,7 @@ footer { border-top: 1px solid var(--border); padding: 4rem 2rem 2rem; }
 }
 
 /* ── Masonry gallery ── */
-.masonry-section { padding: 6rem 2rem; background: var(--bg2); }
+.masonry-section { padding: 6rem 2rem; background: var(--bg); }
 .masonry-gallery {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
