@@ -587,10 +587,29 @@ a { text-decoration: none; color: inherit; }
 .activite-card:hover .activite-hours,
 .activite-card.open .activite-hours { display: flex; }
 @media (max-width: 600px) { .activites-grid { grid-template-columns: 1fr; } }
+
+.activites-more-wrap { display: none; }
+.activites-more-btn {
+  display: inline-flex; align-items: center; gap: .5rem;
+  margin: 2rem auto 0; padding: .85rem 1.8rem;
+  background: transparent; border: 1px solid rgba(201,169,110,.4); border-radius: 30px;
+  color: var(--gold); font-family: 'Inter', sans-serif; font-size: .8rem; font-weight: 600;
+  letter-spacing: .1em; text-transform: uppercase; cursor: pointer;
+  transition: background .25s, border-color .25s;
+}
+.activites-more-btn:hover { background: rgba(201,169,110,.1); border-color: var(--gold); }
+.activites-more-btn svg { width: 15px; height: 15px; transition: transform .3s; }
+.activites-more-btn.open svg { transform: rotate(180deg); }
+
 @media (max-width: 768px) {
   /* Pas de survol tactile : la photo & les horaires restent visibles en permanence */
   .activite-photo { height: 110px !important; opacity: 1 !important; margin-top: .3rem !important; }
   .activite-hours { display: flex !important; }
+
+  /* N'affiche que les 5 premières activités, le reste derrière "Voir plus" */
+  #activitesGrid .activite-card:nth-child(n+6) { display: none; }
+  #activitesGrid.expanded .activite-card:nth-child(n+6) { display: flex; }
+  .activites-more-wrap { display: flex; justify-content: center; }
 }
 
 /* ── Avis ────────────────────────────── */
