@@ -119,8 +119,10 @@ document.addEventListener('DOMContentLoaded', () => {
       if (formError) formError.style.display = 'none';
 
       const data = new FormData(form);
-      data.append('_subject', 'Nouvelle demande — Les Jardins de l\'Oustal');
+      data.append('name', 'Les Jardins de l\'Oustal — Site web');
+      data.append('_subject', 'Nouvelle demande de contact — Les Jardins de l\'Oustal');
       data.append('_template', 'table');
+      data.append('_language', 'fr');
       data.append('_captcha', 'false');
 
       fetch('https://formsubmit.co/ajax/lesjardinsdeloustal@gmail.com', {
