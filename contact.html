@@ -144,28 +144,29 @@
             <div class="form-row">
               <div class="field">
                 <label>Prénom *</label>
-                <input type="text" placeholder="Marie" required />
+                <input type="text" name="prenom" placeholder="Marie" required />
               </div>
               <div class="field">
                 <label>Nom *</label>
-                <input type="text" placeholder="Dupont" required />
+                <input type="text" name="nom" placeholder="Dupont" required />
               </div>
             </div>
 
             <div class="field">
               <label>Email *</label>
-              <input type="email" placeholder="marie@exemple.fr" required />
+              <input type="email" name="email" placeholder="marie@exemple.fr" required />
             </div>
 
             <div class="field">
               <label>Téléphone</label>
-              <input type="tel" placeholder="+33 6 00 00 00 00" />
+              <input type="tel" name="telephone" placeholder="+33 6 00 00 00 00" />
             </div>
 
             <div class="field">
               <label>Message *</label>
-              <textarea placeholder="Votre question, ou décrivez votre projet de séjour…" required style="min-height:140px;"></textarea>
+              <textarea name="message" placeholder="Votre question, ou décrivez votre projet de séjour…" required style="min-height:140px;"></textarea>
             </div>
+            <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" />
 
             <button type="submit" class="btn btn-fill form-submit-btn">
               Envoyer mon message
@@ -175,6 +176,9 @@
 
           <div class="form-success">
             ✓ Demande envoyée ! Nous vous répondons sous 24h.
+          </div>
+          <div class="form-error">
+            Une erreur est survenue lors de l'envoi. Vous pouvez nous écrire directement à <a href="mailto:lesjardinsdeloustal@gmail.com" style="color:#e08a80;text-decoration:underline;">lesjardinsdeloustal@gmail.com</a>.
           </div>
         </div>
       </div>

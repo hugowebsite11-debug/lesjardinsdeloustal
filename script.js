@@ -103,23 +103,41 @@ document.addEventListener('DOMContentLoaded', () => {
   /* ── Formulaire de contact ──────────── */
   const form = document.getElementById('contact-form');
   const formSuccess = document.querySelector('.form-success');
+  const formError = document.querySelector('.form-error');
 
   if (form) {
     form.addEventListener('submit', (e) => {
       e.preventDefault();
 
+      // Piège à spam bots : si rempli, on abandonne silencieusement
+      if (form.querySelector('[name="_honey"]')?.value) return;
+
       const btn = form.querySelector('button[type="submit"]');
       const originalText = btn.textContent;
       btn.textContent = 'Envoi en cours…';
       btn.disabled = true;
+      if (formError) formError.style.display = 'none';
 
-      // Simulation envoi (à remplacer par un vrai service : Formspree, EmailJS, etc.)
-      setTimeout(() => {
-        form.style.display = 'none';
-        if (formSuccess) {
-          formSuccess.style.display = 'block';
-        }
-      }, 1500);
+      const data = new FormData(form);
+      data.append('_subject', 'Nouvelle demande — Les Jardins de l\'Oustal');
+      data.append('_template', 'table');
+      data.append('_captcha', 'false');
+
+      fetch('https://formsubmit.co/ajax/lesjardinsdeloustal@gmail.com', {
+        method: 'POST',
+        headers: { 'Accept': 'application/json' },
+        body: data
+      })
+        .then(res => {
+          if (!res.ok) throw new Error('send failed');
+          form.style.display = 'none';
+          if (formSuccess) formSuccess.style.display = 'block';
+        })
+        .catch(() => {
+          btn.textContent = originalText;
+          btn.disabled = false;
+          if (formError) formError.style.display = 'block';
+        });
     });
   }
 

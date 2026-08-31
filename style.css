@@ -643,6 +643,7 @@ a { text-decoration: none; color: inherit; }
 .field textarea { resize: vertical; min-height: 100px; }
 .field select option { background: #111c11; }
 .form-success { display: none; text-align: center; padding: 2rem; background: var(--pine); border: 1px solid rgba(127,201,124,.3); border-radius: var(--radius); color: #7fc97c; font-size: .9rem; }
+.form-error { display: none; text-align: center; padding: 1.2rem; margin-top: 1rem; background: rgba(160,60,50,.12); border: 1px solid rgba(220,110,100,.35); border-radius: var(--radius); color: #e08a80; font-size: .85rem; }
 
 /* ── Footer ──────────────────────────── */
 footer { border-top: 1px solid var(--border); padding: 4rem 2rem 2rem; }
