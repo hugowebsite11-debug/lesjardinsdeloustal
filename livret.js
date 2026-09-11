@@ -160,7 +160,7 @@ document.addEventListener('DOMContentLoaded', () => {
   /* ── Rester plus tard ─────────────────── */
   document.getElementById('lateCheckoutBtn').addEventListener('click', () => {
     const subject = encodeURIComponent(`Demande de départ tardif — ${cottage.name}`);
-    const body = encodeURIComponent(`Bonjour,\n\nNous souhaiterions rester plus tard dans notre cottage "${cottage.name}" et profiter du jacuzzi jusqu'à 14h. Est-ce possible ?\n\nMerci !`);
+    const body = encodeURIComponent(`Bonjour,\n\nNous souhaiterions rester plus tard dans notre cottage "${cottage.name}" et profiter du jacuzzi jusqu'à 14h (supplément de 20 €). Est-ce possible ?\n\nMerci !`);
     window.location.href = `mailto:lesjardinsdeloustal@gmail.com?subject=${subject}&body=${body}`;
   });
 
