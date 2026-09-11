@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Livret d'arrivée</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="theme-color" content="#24371f" />
+  <link rel="stylesheet" href="livret.css?v=1" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌲</text></svg>" />
+  <link rel="apple-touch-icon" href="images/logo.png" />
+  <link id="manifestLink" rel="manifest" href="manifest-falaise.webmanifest" />
+</head>
+<body class="livret">
+
+<div id="app">
+
+  <!-- ── HERO ── -->
+  <header class="l-hero">
+    <img id="heroImg" src="images/falaise.png" alt="" />
+    <div class="l-hero-overlay"></div>
+    <div class="l-hero-content">
+      <span class="l-eyebrow">Les Jardins de l'Oustal</span>
+      <h1 class="l-hero-title">Bienvenue à <em id="cottageName">La Falaise</em></h1>
+      <p class="l-hero-sub">Tout ce qu'il vous faut pour profiter simplement de votre séjour.</p>
+    </div>
+  </header>
+
+  <div class="l-install-banner" id="installBanner">
+    <p>Ajoutez ce livret à votre écran d'accueil pour y accéder même sans connexion.</p>
+    <button id="installBtn">Installer</button>
+    <button id="installClose" class="l-install-close" aria-label="Fermer">✕</button>
+  </div>
+
+  <main class="l-main">
+
+    <!-- ── TAB : MON SÉJOUR ── -->
+    <section id="tab-sejour" class="l-tab active">
+      <h2 class="l-section-title">Mon séjour</h2>
+
+      <div class="l-accordion">
+        <div class="l-acc" data-acc="wifi">
+          <button class="l-acc-btn">
+            <span class="l-acc-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 13a10 10 0 0 1 14 0"/><path d="M8.5 16.5a5 5 0 0 1 7 0"/><path d="M12 20h.01"/></svg>
+            </span>
+            <span class="l-acc-label">Wi-Fi</span>
+            <span class="l-acc-plus">+</span>
+          </button>
+          <div class="l-acc-panel">
+            <div class="l-acc-panel-inner">
+              <div class="l-def">
+                <div class="l-def-label">Nom du réseau</div>
+                <div class="l-def-value">À renseigner</div>
+              </div>
+              <div class="l-def-divider"></div>
+              <div class="l-def">
+                <div class="l-def-label">Mot de passe</div>
+                <div class="l-def-value">À renseigner</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="l-acc" data-acc="tv">
+          <button class="l-acc-btn">
+            <span class="l-acc-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="14" rx="2"/><path d="M8 21h8"/><path d="M12 18v3"/></svg>
+            </span>
+            <span class="l-acc-label">Télévision</span>
+            <span class="l-acc-plus">+</span>
+          </button>
+          <div class="l-acc-panel">
+            <div class="l-acc-panel-inner">
+              <ul class="l-bullet-list">
+                <li>Pour accéder aux chaînes de télévision, utilisez l'application <strong>Molotov</strong>.</li>
+                <li>Netflix est également accessible directement depuis la TV.</li>
+                <li>En cas de souci de connexion, vérifiez d'abord le Wi-Fi.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="l-acc" data-acc="jacuzzi">
+          <button class="l-acc-btn">
+            <span class="l-acc-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M2 12h20"/><path d="M2 17c1.5 1.5 3 1.5 4.5 0s3-1.5 4.5 0 3 1.5 4.5 0 3-1.5 4.5 0"/><path d="M4 12V8a2 2 0 0 1 2-2h1"/><path d="M9 6V4"/></svg>
+            </span>
+            <span class="l-acc-label">Mon jacuzzi</span>
+            <span class="l-acc-plus">+</span>
+          </button>
+          <div class="l-acc-panel">
+            <div class="l-acc-panel-inner">
+              <ul class="l-bullet-list">
+                <li>Le jacuzzi est entièrement privatif.</li>
+                <li>Merci de vous doucher avant utilisation.</li>
+                <li>N'ajoutez aucun savon, huile ou produit dans l'eau.</li>
+                <li>Replacez la couverture après utilisation pour conserver la température.</li>
+                <li>En cas de problème, n'hésitez pas à nous contacter.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="l-acc" data-acc="cottage">
+          <button class="l-acc-btn">
+            <span class="l-acc-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/></svg>
+            </span>
+            <span class="l-acc-label">Mon cottage</span>
+            <span class="l-acc-plus">+</span>
+          </button>
+          <div class="l-acc-panel">
+            <div class="l-acc-panel-inner">
+              <p><strong>Inclus dans votre séjour :</strong></p>
+              <ul class="l-bullet-list">
+                <li>Literie préparée</li>
+                <li>Serviettes de toilette</li>
+                <li>Café et thé</li>
+                <li>Kitchenette équipée</li>
+                <li>Jacuzzi privatif</li>
+                <li>Parking gratuit</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="l-acc" data-acc="depart">
+          <button class="l-acc-btn">
+            <span class="l-acc-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+            </span>
+            <span class="l-acc-label">Départ</span>
+            <span class="l-acc-plus">+</span>
+          </button>
+          <div class="l-acc-panel">
+            <div class="l-acc-panel-inner">
+              <p><strong>Départ au plus tard à 11h</strong> (sauf option ci-dessous).</p>
+              <ul class="l-bullet-list">
+                <li>Laissez simplement les clés à l'intérieur du cottage.</li>
+                <li>Le ménage est inclus : vous n'avez rien à nettoyer avant de partir.</li>
+                <li>Pensez simplement à vérifier que vous n'avez rien oublié.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="l-cta-card">
+        <h3>Je souhaite rester plus tard</h3>
+        <p>Si le planning le permet, profitez de votre cottage et de votre jacuzzi jusqu'à 14h demain. Vous pourrez vérifier la disponibilité et régler directement l'option.</p>
+        <button class="l-btn-light" id="lateCheckoutBtn">Demander l'option</button>
+      </div>
+
+      <div class="l-feedback-card">
+        <h3>Que pensez-vous de votre cottage ?</h3>
+        <p>Votre première impression nous aide à rendre votre séjour encore plus agréable.</p>
+        <div class="l-feedback-options">
+          <button class="l-feedback-opt" data-feedback="J'adore"><span class="emoji">🥰</span>J'adore</button>
+          <button class="l-feedback-opt" data-feedback="Très bien"><span class="emoji">🙂</span>Très bien</button>
+          <button class="l-feedback-opt" data-feedback="Un souci"><span class="emoji">😟</span>Un souci</button>
+        </div>
+        <div class="l-feedback-detail" id="feedbackDetail" hidden>
+          <textarea id="feedbackText" placeholder="Dites-nous ce qui ne va pas, on revient vers vous vite."></textarea>
+          <button class="l-feedback-send" id="feedbackSend">Envoyer</button>
+        </div>
+        <p class="l-feedback-thanks" id="feedbackThanks">Merci, c'est bien reçu ! 🙏</p>
+      </div>
+    </section>
+
+    <!-- ── TAB : BONNES ADRESSES ── -->
+    <section id="tab-adresses" class="l-tab">
+      <h2 class="l-section-title">Bonnes adresses</h2>
+      <p class="l-intro">Nos coups de cœur et le pratique, autour de Narbonne.</p>
+      <div class="l-category-tabs" id="adressesCategoryTabs">
+        <button class="l-cat-btn active" data-acat="restaurants">Restaurants</button>
+        <button class="l-cat-btn" data-acat="boulangeries">Boulangeries</button>
+        <button class="l-cat-btn" data-acat="supermarches">Supermarchés</button>
+      </div>
+      <div id="adressesGroups"></div>
+    </section>
+
+    <!-- ── TAB : À DÉCOUVRIR ── -->
+    <section id="tab-decouvrir" class="l-tab">
+      <h2 class="l-section-title">À découvrir</h2>
+      <p class="l-intro">Autour des Jardins de l'Oustal, entre nature, patrimoine et gourmandise.</p>
+      <div class="l-category-tabs" id="categoryTabs">
+        <button class="l-cat-btn active" data-cat="balader">Se balader</button>
+        <button class="l-cat-btn" data-cat="visiter">Visiter</button>
+        <button class="l-cat-btn" data-cat="regaler">Se régaler</button>
+        <button class="l-cat-btn" data-cat="mer">Profiter de la mer</button>
+      </div>
+      <div id="decouvrirGroups"></div>
+    </section>
+
+    <!-- ── TAB : SERVICES ── -->
+    <section id="tab-services" class="l-tab">
+      <h2 class="l-section-title">Services</h2>
+      <p class="l-intro">Des petits plus pour prolonger votre détente, sur demande.</p>
+      <div class="l-cards">
+        <div class="l-service-card">
+          <span class="l-acc-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.29 1.51 4.04 3 5.5l7 7Z"/></svg>
+          </span>
+          <div class="l-service-body">
+            <h3>Massage</h3>
+            <p>Un moment de détente directement dans votre cottage, sur réservation.</p>
+            <button class="l-btn-outline l-service-btn" data-service="Massage">Demander</button>
+          </div>
+        </div>
+        <div class="l-service-card">
+          <span class="l-acc-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3Z"/></svg>
+          </span>
+          <div class="l-service-body">
+            <h3>Ongles</h3>
+            <p>Manucure ou pose sur place, sur réservation.</p>
+            <button class="l-btn-outline l-service-btn" data-service="Ongles">Demander</button>
+          </div>
+        </div>
+        <div class="l-service-card">
+          <span class="l-acc-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8h1a4 4 0 1 1 0 8h-1"/><path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"/><line x1="6" y1="2" x2="6" y2="4"/><line x1="10" y1="2" x2="10" y2="4"/><line x1="14" y1="2" x2="14" y2="4"/></svg>
+          </span>
+          <div class="l-service-body">
+            <h3>Petit déjeuner</h3>
+            <p>Panier gourmand livré dans votre cottage, sur réservation.</p>
+            <button class="l-btn-outline l-service-btn" data-service="Petit déjeuner">Demander</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── TAB : AIDE ── -->
+    <section id="tab-aide" class="l-tab">
+      <h2 class="l-section-title">Aide</h2>
+
+      <div class="l-help-card">
+        <h3>Besoin de nous joindre ?</h3>
+        <div class="l-help-row">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          <a href="tel:+33761507550">07 61 50 75 50</a>
+        </div>
+        <div class="l-help-row">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z" opacity="0"/><path d="m22 6-10 7L2 6"/><rect x="2" y="4" width="20" height="16" rx="2"/></svg>
+          <a href="mailto:lesjardinsdeloustal@gmail.com">lesjardinsdeloustal@gmail.com</a>
+        </div>
+        <div class="l-help-row">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span>21 Impasse Hélène Boucher, 11100 Narbonne</span>
+        </div>
+      </div>
+
+      <div class="l-accordion">
+        <div class="l-acc" data-acc="faq1">
+          <button class="l-acc-btn">
+            <span class="l-acc-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg>
+            </span>
+            <span class="l-acc-label">Le Wi-Fi ne fonctionne pas</span>
+            <span class="l-acc-plus">+</span>
+          </button>
+          <div class="l-acc-panel">
+            <div class="l-acc-panel-inner">
+              <p><em>[Astuce de dépannage à compléter — ex : emplacement de la box, redémarrage.]</em> Si le problème persiste, appelez-nous directement.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="l-acc" data-acc="faq2">
+          <button class="l-acc-btn">
+            <span class="l-acc-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg>
+            </span>
+            <span class="l-acc-label">Où puis-je me garer ?</span>
+            <span class="l-acc-plus">+</span>
+          </button>
+          <div class="l-acc-panel">
+            <div class="l-acc-panel-inner">
+              <p><em>[Emplacement / consignes de stationnement à compléter.]</em></p>
+            </div>
+          </div>
+        </div>
+
+        <div class="l-acc" data-acc="faq3">
+          <button class="l-acc-btn">
+            <span class="l-acc-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4"/><path d="M12 17h.01"/><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0Z"/></svg>
+            </span>
+            <span class="l-acc-label">Numéros utiles / urgences</span>
+            <span class="l-acc-plus">+</span>
+          </button>
+          <div class="l-acc-panel">
+            <div class="l-acc-panel-inner">
+              <p><strong>Urgences (tous services) :</strong> 112</p>
+              <p><strong>SAMU :</strong> 15 &nbsp;·&nbsp; <strong>Pompiers :</strong> 18 &nbsp;·&nbsp; <strong>Police :</strong> 17</p>
+              <p><em>[Pharmacie de garde / médecin le plus proche à compléter.]</em></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <p class="l-faq-note">Une question qui n'est pas ici ? Écrivez-nous, on répond vite.</p>
+    </section>
+
+  </main>
+
+  <!-- ── BOTTOM TAB BAR ── -->
+  <nav class="l-tabbar">
+    <button class="l-tab-btn active" data-tab="tab-sejour">
+      <span class="l-tab-icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/></svg></span>
+      Mon séjour
+    </button>
+    <button class="l-tab-btn" data-tab="tab-adresses">
+      <span class="l-tab-icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/></svg></span>
+      Bonnes adresses
+    </button>
+    <button class="l-tab-btn" data-tab="tab-decouvrir">
+      <span class="l-tab-icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m16.24 7.76-2.12 6.36-6.36 2.12 2.12-6.36 6.36-2.12z"/></svg></span>
+      À découvrir
+    </button>
+    <button class="l-tab-btn" data-tab="tab-services">
+      <span class="l-tab-icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 20h18"/><path d="M5 20a7 7 0 0 1 14 0"/><path d="M9 4h6"/><path d="M12 4v3"/></svg></span>
+      Services
+    </button>
+    <button class="l-tab-btn" data-tab="tab-aide">
+      <span class="l-tab-icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg></span>
+      Aide
+    </button>
+  </nav>
+
+</div>
+
+<script src="livret.js?v=1"></script>
+</body>
+</html>

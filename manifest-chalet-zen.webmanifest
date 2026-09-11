@@ -1,0 +1,16 @@
+{
+  "name": "Le Chalet Zen — Livret d'arrivée",
+  "short_name": "Chalet Zen",
+  "description": "Livret d'arrivée du cottage Le Chalet Zen — Les Jardins de l'Oustal",
+  "start_url": "livret.html?cottage=chalet-zen",
+  "scope": ".",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#f6f2e8",
+  "theme_color": "#24371f",
+  "lang": "fr",
+  "icons": [
+    { "src": "images/logo.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "images/logo.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}
