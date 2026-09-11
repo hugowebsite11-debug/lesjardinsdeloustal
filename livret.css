@@ -245,7 +245,9 @@ button { font-family: inherit; }
   font-size: .82rem;
   cursor: pointer;
 }
-.l-feedback-thanks { font-size: .85rem; color: var(--l-green2); font-weight: 600; margin-top: .8rem; display: none; }
+.l-feedback-confirm { text-align: center; padding: .3rem 0 .1rem; }
+.l-feedback-confirm-text { font-size: .88rem; color: var(--l-green2); font-weight: 600; line-height: 1.6; margin-bottom: 1rem; }
+.l-feedback-undo { background: none; border: none; color: var(--l-muted); font-size: .76rem; text-decoration: underline; cursor: pointer; padding: 0; }
 
 /* ── Cards (adresses / decouvrir) ────── */
 .l-cards { display: flex; flex-direction: column; gap: .8rem; }

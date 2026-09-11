@@ -153,18 +153,23 @@
       </div>
 
       <div class="l-feedback-card">
-        <h3>Que pensez-vous de votre cottage ?</h3>
-        <p>Votre première impression nous aide à rendre votre séjour encore plus agréable.</p>
-        <div class="l-feedback-options">
-          <button class="l-feedback-opt" data-feedback="J'adore"><span class="emoji">🥰</span>J'adore</button>
-          <button class="l-feedback-opt" data-feedback="Très bien"><span class="emoji">🙂</span>Très bien</button>
-          <button class="l-feedback-opt" data-feedback="Un souci"><span class="emoji">😟</span>Un souci</button>
+        <div id="feedbackForm">
+          <h3>Que pensez-vous de votre cottage ?</h3>
+          <p>Votre première impression nous aide à rendre votre séjour encore plus agréable.</p>
+          <div class="l-feedback-options">
+            <button class="l-feedback-opt" data-feedback="J'adore"><span class="emoji">🥰</span>J'adore</button>
+            <button class="l-feedback-opt" data-feedback="Très bien"><span class="emoji">🙂</span>Très bien</button>
+            <button class="l-feedback-opt" data-feedback="Un souci"><span class="emoji">😟</span>Un souci</button>
+          </div>
+          <div class="l-feedback-detail" id="feedbackDetail" hidden>
+            <textarea id="feedbackText" placeholder="Dites-nous ce qui ne va pas, on revient vers vous vite."></textarea>
+            <button class="l-feedback-send" id="feedbackSend">Envoyer</button>
+          </div>
         </div>
-        <div class="l-feedback-detail" id="feedbackDetail" hidden>
-          <textarea id="feedbackText" placeholder="Dites-nous ce qui ne va pas, on revient vers vous vite."></textarea>
-          <button class="l-feedback-send" id="feedbackSend">Envoyer</button>
+        <div class="l-feedback-confirm" id="feedbackConfirm" hidden>
+          <p class="l-feedback-confirm-text" id="feedbackConfirmText"></p>
+          <button class="l-feedback-undo" id="feedbackUndo">J'ai changé d'avis</button>
         </div>
-        <p class="l-feedback-thanks" id="feedbackThanks">Merci, c'est bien reçu ! 🙏</p>
       </div>
     </section>
 

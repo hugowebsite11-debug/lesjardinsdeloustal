@@ -179,40 +179,61 @@ document.addEventListener('DOMContentLoaded', () => {
   const feedbackOpts = document.querySelectorAll('.l-feedback-opt');
   const feedbackDetail = document.getElementById('feedbackDetail');
   const feedbackSend = document.getElementById('feedbackSend');
-  const feedbackThanks = document.getElementById('feedbackThanks');
+  const feedbackForm = document.getElementById('feedbackForm');
+  const feedbackConfirm = document.getElementById('feedbackConfirm');
+  const feedbackConfirmText = document.getElementById('feedbackConfirmText');
+  const feedbackUndo = document.getElementById('feedbackUndo');
+  const feedbackTextEl = document.getElementById('feedbackText');
   let selectedFeedback = null;
+
+  const FEEDBACK_CONFIRM_MESSAGES = {
+    "J'adore": "Merci beaucoup ! N'hésitez pas à laisser un avis pour partager votre contentement à la fin de votre séjour.",
+    "Très bien": "Merci ! N'hésitez pas à nous laisser un avis à la fin de votre séjour, pour nous dire ce qui aurait pu être encore mieux.",
+    "Un souci": "Merci pour votre retour, nous revenons vers vous au plus vite.",
+  };
+
+  function lockFeedback(rating) {
+    feedbackConfirmText.textContent = FEEDBACK_CONFIRM_MESSAGES[rating] || 'Merci, c’est bien reçu ! 🙏';
+    feedbackForm.hidden = true;
+    feedbackConfirm.hidden = false;
+  }
 
   feedbackOpts.forEach(opt => {
     opt.addEventListener('click', () => {
       feedbackOpts.forEach(o => o.classList.remove('selected'));
       opt.classList.add('selected');
       selectedFeedback = opt.dataset.feedback;
-      feedbackThanks.style.display = 'none';
 
       if (selectedFeedback === 'Un souci') {
         feedbackDetail.hidden = false;
       } else {
         feedbackDetail.hidden = true;
         sendFeedback(selectedFeedback, '');
+        lockFeedback(selectedFeedback);
       }
     });
   });
 
   feedbackSend.addEventListener('click', () => {
-    const text = document.getElementById('feedbackText').value.trim();
+    const text = feedbackTextEl.value.trim();
     sendFeedback(selectedFeedback, text);
-    feedbackDetail.hidden = true;
+    lockFeedback('Un souci');
 
     const message = `Bonjour, un souci dans notre cottage "${cottage.name}" : ${text || "(détails à suivre)"}`;
     window.location.href = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
   });
 
+  feedbackUndo.addEventListener('click', () => {
+    feedbackConfirm.hidden = true;
+    feedbackForm.hidden = false;
+    feedbackDetail.hidden = true;
+    feedbackOpts.forEach(o => o.classList.remove('selected'));
+    feedbackTextEl.value = '';
+    selectedFeedback = null;
+  });
+
   function sendFeedback(rating, comment) {
-    if (!navigator.onLine) {
-      feedbackThanks.textContent = "Merci ! Votre retour sera envoyé dès que vous aurez du réseau.";
-      feedbackThanks.style.display = 'block';
-      return;
-    }
+    if (!navigator.onLine) return;
     const data = new FormData();
     data.append('name', "Livret d'arrivée — Les Jardins de l'Oustal");
     data.append('_subject', `Avis séjour — ${cottage.name} — ${rating}`);
@@ -227,9 +248,6 @@ document.addEventListener('DOMContentLoaded', () => {
       headers: { 'Accept': 'application/json' },
       body: data,
     }).catch(() => {});
-
-    feedbackThanks.textContent = 'Merci, c’est bien reçu ! 🙏';
-    feedbackThanks.style.display = 'block';
   }
 
   /* ── PWA : service worker + install banner ── */
