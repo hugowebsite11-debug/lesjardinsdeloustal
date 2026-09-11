@@ -157,11 +157,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
   renderCategory('balader');
 
-  /* ── Rester plus tard ─────────────────── */
+  /* ── Rester plus tard (WhatsApp, plus rapide qu'un email) ── */
+  const WHATSAPP_NUMBER = '33761507550';
+
   document.getElementById('lateCheckoutBtn').addEventListener('click', () => {
-    const subject = encodeURIComponent(`Demande de départ tardif — ${cottage.name}`);
-    const body = encodeURIComponent(`Bonjour,\n\nNous souhaiterions rester plus tard dans notre cottage "${cottage.name}" et profiter du jacuzzi jusqu'à 14h (supplément de 20 €). Est-ce possible ?\n\nMerci !`);
-    window.location.href = `mailto:lesjardinsdeloustal@gmail.com?subject=${subject}&body=${body}`;
+    const message = `Bonjour, nous souhaiterions rester plus tard dans notre cottage "${cottage.name}" et profiter du jacuzzi jusqu'à 14h (supplément de 20 €). Est-ce possible ?`;
+    window.location.href = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
   });
 
   /* ── Services sur demande ─────────────── */
@@ -201,6 +202,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const text = document.getElementById('feedbackText').value.trim();
     sendFeedback(selectedFeedback, text);
     feedbackDetail.hidden = true;
+
+    const message = `Bonjour, un souci dans notre cottage "${cottage.name}" : ${text || "(détails à suivre)"}`;
+    window.location.href = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
   });
 
   function sendFeedback(rating, comment) {
