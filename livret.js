@@ -35,27 +35,27 @@ const ADRESSES = {
 
 const DECOUVRIR = {
   balader: [
-    { name: 'Peyriac-de-Mer', url: 'https://www.cotedumidi.com/', desc: "Une balade sur les pontons en bois au-dessus de l'eau, entre étangs et flamants roses à observer.", star: true },
-    { name: 'Le village de Bages', url: 'https://www.cotedumidi.com/', desc: "Flâner dans le village, découvrir les paysages de l'étang et prendre le temps d'observer les oiseaux." },
-    { name: 'Le Somail et le canal du Midi', url: 'https://www.cotedumidi.com/', desc: "Une promenade au bord du canal, une sortie en bateau et la découverte de la librairie ancienne « Le Trouve Tout du Livre ».", star: true },
+    { slug: 'peyriac-de-mer', name: 'Peyriac-de-Mer', url: 'https://www.cotedumidi.com/', desc: "Une balade sur les pontons en bois au-dessus de l'eau, entre étangs et flamants roses à observer.", star: true },
+    { slug: 'bages', name: 'Le village de Bages', url: 'https://www.cotedumidi.com/', desc: "Flâner dans le village, découvrir les paysages de l'étang et prendre le temps d'observer les oiseaux." },
+    { slug: 'le-somail', name: 'Le Somail et le canal du Midi', url: 'https://www.cotedumidi.com/', desc: "Une promenade au bord du canal, une sortie en bateau et la découverte de la librairie ancienne « Le Trouve Tout du Livre ».", star: true },
   ],
   visiter: [
-    { name: "L'abbaye de Fontfroide", url: 'https://www.fontfroide.com/', desc: "Une magnifique abbaye au milieu de la nature, avec son cloître, ses jardins et sa roseraie. Une belle sortie à deux.", star: true },
-    { name: 'Terra Vinea', url: 'https://www.terra-vinea.com/', desc: "À Portel-des-Corbières, une visite insolite à 80 mètres sous terre, dans une ancienne mine, autour de l'histoire du vin.", star: true },
-    { name: 'Narbo Via et l’Horreum', url: 'https://narbovia.fr/', desc: "Découvrir le passé romain de Narbonne, entre musée archéologique et galeries souterraines antiques." },
-    { name: 'Réserve africaine de Sigean', url: 'https://www.reserveafricainesigean.fr/', desc: "Un safari-parc à ciel ouvert pour découvrir la faune africaine, en voiture ou à pied." },
-    { name: 'Minerve', url: 'https://fr.wikipedia.org/wiki/Minerve_(H%C3%A9rault)', desc: "Un village médiéval perché au-dessus des gorges, classé parmi les Plus Beaux Villages de France." },
-    { name: 'La cité de Carcassonne', url: 'https://www.remparts-carcassonne.fr/', desc: "Pour une excursion plus loin : découvrir la cité médiévale, visiter le château et parcourir les remparts." },
+    { slug: 'fontfroide', name: "L'abbaye de Fontfroide", url: 'https://www.fontfroide.com/', desc: "Une magnifique abbaye au milieu de la nature, avec son cloître, ses jardins et sa roseraie. Une belle sortie à deux.", star: true },
+    { slug: 'terra-vinea', name: 'Terra Vinea', url: 'https://www.terra-vinea.com/', desc: "À Portel-des-Corbières, une visite insolite à 80 mètres sous terre, dans une ancienne mine, autour de l'histoire du vin.", star: true },
+    { slug: 'narbo-via', name: 'Narbo Via et l’Horreum', url: 'https://narbovia.fr/', desc: "Découvrir le passé romain de Narbonne, entre musée archéologique et galeries souterraines antiques." },
+    { slug: 'sigean', name: 'Réserve africaine de Sigean', url: 'https://www.reserveafricainesigean.fr/', desc: "Un safari-parc à ciel ouvert pour découvrir la faune africaine, en voiture ou à pied." },
+    { slug: 'minerve', name: 'Minerve', url: 'https://fr.wikipedia.org/wiki/Minerve_(H%C3%A9rault)', desc: "Un village médiéval perché au-dessus des gorges, classé parmi les Plus Beaux Villages de France." },
+    { slug: 'carcassonne', name: 'La cité de Carcassonne', url: 'https://www.remparts-carcassonne.fr/', desc: "Pour une excursion plus loin : découvrir la cité médiévale, visiter le château et parcourir les remparts." },
   ],
   regaler: [
-    { name: 'Le Salin de Gruissan', url: 'https://www.lesalindegruissan.fr/', desc: "Découverte des marais salants, visite guidée et dégustation d'huîtres. Une sortie qui mélange paysages et gourmandise.", star: true },
-    { name: 'Les Grands Buffets', url: 'https://www.lesgrandsbuffets.com/fr/infos-pratiques/', desc: "Les grands classiques de la cuisine française sous forme de buffets à volonté, à 5 minutes du cottage." },
-    { name: 'Les Halles de Narbonne', url: 'https://www.cotedumidi.com/', desc: "Une halte gourmande pour découvrir les étals, les spécialités locales et l'ambiance du marché couvert." },
-    { name: "L'Oulibo, à Bize-Minervois", url: 'https://www.cotedumidi.com/', desc: "Visiter une coopérative oléicole et découvrir le savoir-faire local autour des olives et de l'huile d'olive." },
+    { slug: 'salin-gruissan', name: 'Le Salin de Gruissan', url: 'https://www.lesalindegruissan.fr/', desc: "Découverte des marais salants, visite guidée et dégustation d'huîtres. Une sortie qui mélange paysages et gourmandise.", star: true },
+    { slug: 'grands-buffets', name: 'Les Grands Buffets', url: 'https://www.lesgrandsbuffets.com/fr/infos-pratiques/', desc: "Les grands classiques de la cuisine française sous forme de buffets à volonté, à 5 minutes du cottage." },
+    { slug: 'halles-narbonne', name: 'Les Halles de Narbonne', url: 'https://www.cotedumidi.com/', desc: "Une halte gourmande pour découvrir les étals, les spécialités locales et l'ambiance du marché couvert." },
+    { slug: 'oulibo', name: "L'Oulibo, à Bize-Minervois", url: 'https://www.cotedumidi.com/', desc: "Visiter une coopérative oléicole et découvrir le savoir-faire local autour des olives et de l'huile d'olive." },
   ],
   mer: [
-    { name: 'Narbonne-Plage et Saint-Pierre-la-Mer', url: 'https://www.cotedumidi.com/', desc: "Profiter des grandes plages de sable, se promener en bord de mer ou découvrir les activités nautiques." },
-    { name: 'Le Salin de Gruissan', url: 'https://www.lesalindegruissan.fr/', desc: "Marais salants et dégustation d'huîtres face à l'étang, à associer à la plage." },
+    { slug: 'narbonne-plage', name: 'Narbonne-Plage et Saint-Pierre-la-Mer', url: 'https://www.cotedumidi.com/', desc: "Profiter des grandes plages de sable, se promener en bord de mer ou découvrir les activités nautiques." },
+    { slug: 'salin-gruissan', name: 'Le Salin de Gruissan', url: 'https://www.lesalindegruissan.fr/', desc: "Marais salants et dégustation d'huîtres face à l'étang, à associer à la plage." },
   ],
 };
 
@@ -132,17 +132,31 @@ document.addEventListener('DOMContentLoaded', () => {
   renderAdresses('restaurants');
 
   /* ── À découvrir ─────────────────────── */
-  const catBtns = document.querySelectorAll('.l-cat-btn');
+  const catBtns = document.querySelectorAll('#categoryTabs .l-cat-btn');
   const groupsEl = document.getElementById('decouvrirGroups');
+  let currentDecouvrirCat = 'balader';
+  let currentDecouvrirItems = [];
+  let photoCredits = {};
+
+  function photosFor(slug) {
+    const list = photoCredits[slug];
+    if (!list || !list.length) return [];
+    return list.map(p => ({ src: `images/decouvrir/${slug}/${p.file}`, credit: p.credit || '' }));
+  }
 
   function renderCategory(cat) {
     const items = DECOUVRIR[cat] || [];
-    groupsEl.innerHTML = `<div class="l-cat-group active">` + items.map(p => `
+    currentDecouvrirItems = items.map(p => ({ ...p, photos: photosFor(p.slug) }));
+    groupsEl.innerHTML = `<div class="l-cat-group active">` + currentDecouvrirItems.map((p, i) => `
       <div class="l-place-card">
         ${p.star ? '<span class="l-place-badge">Coup de cœur</span>' : ''}
+        ${p.photos[0] ? `<img class="l-place-photo" src="${p.photos[0].src}" alt="${p.name}" loading="lazy">` : ''}
         <div class="l-place-name">${p.name}</div>
         <p class="l-place-desc">${p.desc}</p>
-        <a href="${p.url}" target="_blank" rel="noopener" class="l-btn-outline">Voir le site</a>
+        <div class="l-place-actions">
+          <a href="${p.url}" target="_blank" rel="noopener" class="l-btn-outline">Voir le site</a>
+          ${p.photos.length ? `<button class="l-btn-fill-green" data-photos-idx="${i}">Voir des photos</button>` : ''}
+        </div>
       </div>
     `).join('') + `</div>`;
   }
@@ -151,11 +165,60 @@ document.addEventListener('DOMContentLoaded', () => {
     btn.addEventListener('click', () => {
       catBtns.forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
-      renderCategory(btn.dataset.cat);
+      currentDecouvrirCat = btn.dataset.cat;
+      renderCategory(currentDecouvrirCat);
     });
   });
 
-  renderCategory('balader');
+  renderCategory(currentDecouvrirCat);
+
+  fetch('images/decouvrir/credits.json')
+    .then(r => (r.ok ? r.json() : {}))
+    .catch(() => ({}))
+    .then(data => {
+      photoCredits = data || {};
+      renderCategory(currentDecouvrirCat);
+    });
+
+  /* ── Lightbox photos ──────────────────── */
+  const lightbox = document.getElementById('lightbox');
+  const lightboxTrack = document.getElementById('lightboxTrack');
+  const lightboxDots = document.getElementById('lightboxDots');
+  const lightboxClose = document.getElementById('lightboxClose');
+
+  function openLightbox(photos) {
+    if (!photos || !photos.length) return;
+    lightboxTrack.innerHTML = photos.map(p => `
+      <div class="l-lightbox-slide">
+        <img src="${p.src}" alt="">
+        ${p.credit ? `<div class="l-lightbox-credit">${p.credit}</div>` : ''}
+      </div>
+    `).join('');
+    lightboxDots.innerHTML = photos.map((_, i) => `<span class="l-lightbox-dot${i === 0 ? ' active' : ''}"></span>`).join('');
+    lightbox.hidden = false;
+    document.body.style.overflow = 'hidden';
+    lightboxTrack.scrollLeft = 0;
+  }
+
+  function closeLightbox() {
+    lightbox.hidden = true;
+    lightboxTrack.innerHTML = '';
+    document.body.style.overflow = '';
+  }
+
+  lightboxClose.addEventListener('click', closeLightbox);
+  lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
+  lightboxTrack.addEventListener('scroll', () => {
+    const idx = Math.round(lightboxTrack.scrollLeft / lightboxTrack.clientWidth);
+    document.querySelectorAll('.l-lightbox-dot').forEach((d, i) => d.classList.toggle('active', i === idx));
+  });
+
+  groupsEl.addEventListener('click', (e) => {
+    const btn = e.target.closest('.l-btn-fill-green[data-photos-idx]');
+    if (!btn) return;
+    const item = currentDecouvrirItems[Number(btn.dataset.photosIdx)];
+    if (item) openLightbox(item.photos);
+  });
 
   /* ── Rester plus tard (WhatsApp, plus rapide qu'un email) ── */
   const WHATSAPP_NUMBER = '33761507550';

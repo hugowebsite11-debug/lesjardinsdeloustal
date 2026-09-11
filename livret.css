@@ -289,6 +289,79 @@ button { font-family: inherit; }
 }
 .l-place-desc { font-size: .85rem; color: var(--l-muted); line-height: 1.6; }
 
+.l-place-photo {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 14px;
+  margin-bottom: .9rem;
+}
+
+.l-place-actions { display: flex; gap: .6rem; margin-top: .9rem; flex-wrap: wrap; }
+.l-place-actions .l-btn-outline,
+.l-place-actions .l-btn-fill-green { margin-top: 0; }
+
+.l-btn-fill-green {
+  display: inline-flex; align-items: center; gap: .4rem;
+  padding: .55rem 1rem;
+  background: var(--l-green);
+  border: 1px solid var(--l-green);
+  color: #fdfbf4;
+  border-radius: 10px;
+  font-size: .78rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background .2s;
+}
+.l-btn-fill-green:hover { background: var(--l-green2); }
+.l-btn-fill-green svg { width: 14px; height: 14px; }
+
+/* ── Lightbox photos ──────────────────── */
+.l-lightbox {
+  position: fixed; inset: 0; z-index: 300;
+  background: rgba(10,12,8,.96);
+  display: flex; flex-direction: column;
+}
+.l-lightbox[hidden] { display: none; }
+.l-lightbox-close {
+  position: absolute; top: max(1rem, env(safe-area-inset-top)); right: 1rem; z-index: 2;
+  width: 38px; height: 38px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.12);
+  border: none; color: #fdfbf4;
+  font-size: 1.2rem;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+}
+.l-lightbox-track {
+  flex: 1;
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+.l-lightbox-track::-webkit-scrollbar { display: none; }
+.l-lightbox-slide {
+  flex: 0 0 100%;
+  scroll-snap-align: center;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  padding: 3.5rem 1rem 1rem;
+  position: relative;
+}
+.l-lightbox-slide img { width: 100%; max-height: 70vh; object-fit: contain; border-radius: 10px; }
+.l-lightbox-credit {
+  margin-top: .7rem;
+  font-size: .68rem;
+  color: rgba(253,251,244,.6);
+  text-align: center;
+}
+.l-lightbox-dots {
+  display: flex; justify-content: center; gap: .4rem;
+  padding: 0 0 calc(1.1rem + env(safe-area-inset-bottom));
+}
+.l-lightbox-dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,.3); transition: background .2s, transform .2s; }
+.l-lightbox-dot.active { background: var(--l-gold); transform: scale(1.3); }
+
 .l-btn-outline {
   display: inline-flex; align-items: center; gap: .4rem;
   margin-top: .9rem;
