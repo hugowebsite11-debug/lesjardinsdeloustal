@@ -187,7 +187,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let selectedFeedback = null;
 
   const FEEDBACK_CONFIRM_MESSAGES = {
-    "J'adore": "🥰 Merci beaucoup ! N'hésitez pas à laisser un avis pour partager votre contentement à la fin de votre séjour.",
+    "J'adore": "🥰 Merci beaucoup ! N'hésitez pas à laisser un avis pour nous dire à quel point vous avez apprécié votre séjour !",
     "Très bien": "😊 Merci ! N'hésitez pas à nous laisser un avis à la fin de votre séjour, pour nous dire ce qui aurait pu être encore mieux.",
     "Un souci": "🙏 Merci pour votre retour, nous revenons vers vous au plus vite.",
   };
