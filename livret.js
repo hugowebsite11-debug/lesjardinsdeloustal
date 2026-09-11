@@ -66,6 +66,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const slug = COTTAGES[params.get('cottage')] ? params.get('cottage') : 'falaise';
   const cottage = COTTAGES[slug];
 
+  document.getElementById('cottageName').textContent = cottage.name;
+  document.getElementById('heroImg').src = cottage.hero;
+  document.getElementById('heroImg').alt = cottage.name;
   document.title = `Livret d'arrivée — ${cottage.name}`;
 
   const manifestLink = document.getElementById('manifestLink');
