@@ -17,13 +17,13 @@
 
   <div class="l-promo-toast" id="promoToast" hidden>
     <button class="l-promo-close" id="promoClose" aria-label="Fermer">✕</button>
-    <a href="https://direct-book.com/properties/lesjardinsdeloustal?locale=fr&items[0][adults]=2&items[0][children]=0&items[0][infants]=0&currency=EUR&checkInDate=2026-11-23&checkOutDate=2026-11-26&trackPage=yes" target="_blank" rel="noopener" class="l-promo-link" id="promoLink">
+    <button class="l-promo-link" id="promoOpen">
       <span class="l-promo-icon">🥐</span>
       <span class="l-promo-text">
-        <strong>Petit-déjeuner offert !</strong>
-        Profitez-en lors de votre prochain séjour
+        <strong>Le petit-déjeuner offert à votre prochain séjour</strong>
+        Rejoignez Les amis de l'Oustal
       </span>
-    </a>
+    </button>
   </div>
 
   <div class="l-install-banner" id="installBanner">
@@ -45,6 +45,14 @@
           <p class="l-hero-sub">Tout ce qu'il vous faut pour profiter simplement de votre séjour.</p>
         </div>
       </header>
+
+      <button class="l-offer-card" id="offerCard">
+        <span class="l-offer-card-icon">🥐</span>
+        <span class="l-offer-card-text">
+          <strong id="offerCardTitle">Le petit-déjeuner offert à votre prochain séjour</strong>
+          <span id="offerCardSub">Rejoignez Les amis de l'Oustal</span>
+        </span>
+      </button>
 
       <h2 class="l-section-title">Mon séjour</h2>
 
@@ -350,6 +358,95 @@
   <div class="l-lightbox-track" id="lightboxTrack"></div>
   <div class="l-lightbox-dots" id="lightboxDots"></div>
 </div>
+
+<!-- ── LES AMIS DE L'OUSTAL ── -->
+<section class="l-offer-screen" id="offerScreen" hidden>
+  <div class="l-offer-screen-in">
+    <button class="l-offer-back" id="offerBack">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      Retour au livret
+    </button>
+
+    <div id="offerFormView">
+      <h2 class="l-offer-title">Rejoignez <em>Les amis de l'Oustal</em></h2>
+      <p class="l-offer-intro">C'est notre liste de contacts pour les voyageurs qui ont aimé leur séjour. En la rejoignant, le petit-déjeuner vous est offert la prochaine fois que vous revenez.</p>
+
+      <ol class="l-steps">
+        <li class="l-step">
+          <span class="l-step-num">1</span>
+          <span class="l-step-text"><strong>Inscrivez-vous</strong>Ça prend 30 secondes, juste en dessous.</span>
+        </li>
+        <li class="l-step">
+          <span class="l-step-num">2</span>
+          <span class="l-step-text"><strong>Recevez notre message après votre départ</strong>On vous écrit par email pour vous expliquer comment profiter de votre offre.</span>
+        </li>
+        <li class="l-step">
+          <span class="l-step-num">3</span>
+          <span class="l-step-text"><strong>Réservez sur notre site</strong>À la fin de votre réservation, dans la case « Vous souhaitez ajouter quelque chose ? », écrivez <em>Les amis de l'Oustal</em>. Le petit-déjeuner est pour nous.</span>
+        </li>
+      </ol>
+
+      <form id="offerForm" novalidate>
+        <input type="hidden" name="gite" id="offerGite" />
+
+        <div class="l-form-row">
+          <label class="l-form-field">
+            <span>Prénom</span>
+            <input name="prenom" autocomplete="given-name" />
+          </label>
+          <label class="l-form-field">
+            <span>Nom</span>
+            <input name="nom" autocomplete="family-name" />
+          </label>
+        </div>
+
+        <label class="l-form-field">
+          <span>Email</span>
+          <input name="email" type="email" autocomplete="email" placeholder="vous@exemple.fr" />
+        </label>
+
+        <label class="l-form-field">
+          <span>Téléphone (facultatif)</span>
+          <input name="telephone" type="tel" autocomplete="tel" placeholder="06 12 34 56 78" />
+        </label>
+
+        <label class="l-form-field">
+          <span>Date de votre départ</span>
+          <input name="depart" type="date" />
+        </label>
+
+        <label class="l-form-field">
+          <span>Comment nous avez-vous connus ? (facultatif)</span>
+          <select name="source">
+            <option value="">Choisir</option>
+            <option>Réseaux sociaux</option>
+            <option>Booking</option>
+            <option>Airbnb</option>
+            <option>Bouche à oreille</option>
+            <option>Autre</option>
+          </select>
+        </label>
+
+        <label class="l-form-consent" id="offerConsentLabel">
+          <input type="checkbox" name="consentement" value="oui" id="offerConsentInput" />
+          <span>Je rejoins Les amis de l'Oustal et j'accepte de recevoir par email ou SMS mon offre petit-déjeuner et, de temps en temps, des nouvelles du domaine. Je peux me désinscrire à tout moment.</span>
+        </label>
+
+        <p class="l-form-error" id="offerError" role="alert" hidden></p>
+
+        <button class="l-btn-fill-green l-offer-submit" type="submit" id="offerSubmit">Rejoindre Les amis de l'Oustal</button>
+        <p class="l-offer-mentions">Vos coordonnées servent uniquement aux Jardins de l'Oustal et ne sont jamais revendues.</p>
+      </form>
+    </div>
+
+    <div id="offerConfirmView" hidden>
+      <p class="l-offer-confirm-emoji">🌿</p>
+      <h2 class="l-offer-title">Bienvenue parmi <em>Les amis de l'Oustal</em><span id="offerConfirmName"></span></h2>
+      <p class="l-offer-intro">Après votre départ, vous recevrez un email qui vous explique comment profiter de votre petit-déjeuner offert lors de votre prochain séjour. Profitez bien d'ici là.</p>
+      <button class="l-btn-fill-green l-offer-submit" id="offerConfirmClose">Retour au livret</button>
+    </div>
+  </div>
+</section>
 
 </div>
 

@@ -13,6 +13,8 @@
   --l-gold:      #c9a96e;
   --l-badge:     #eef1e4;
   --l-shadow:    0 8px 24px rgba(40,40,20,.07);
+  --l-error:     #b8503a;
+  --l-error-bg:  rgba(184,80,58,.1);
   --l-radius-lg: 22px;
   --l-radius-md: 16px;
   --ease: cubic-bezier(.4,0,.2,1);
@@ -84,6 +86,107 @@ button { font-family: inherit; }
 }
 .l-hero-title em { font-style: italic; font-weight: 400; }
 .l-hero-sub { font-size: .85rem; color: rgba(253,251,244,.85); max-width: 30em; }
+
+/* ── Carte "Les amis de l'Oustal" (accueil) ── */
+.l-offer-card {
+  display: flex; align-items: center; gap: .8rem;
+  width: 100%;
+  background: var(--l-badge);
+  border: 1px solid var(--l-gold);
+  border-radius: var(--l-radius-md);
+  padding: .9rem 1rem;
+  margin-bottom: 1.6rem;
+  cursor: pointer;
+  text-align: left;
+  font-family: inherit;
+}
+.l-offer-card-icon { font-size: 1.7rem; flex-shrink: 0; }
+.l-offer-card-text { display: flex; flex-direction: column; font-size: .82rem; color: var(--l-muted); }
+.l-offer-card-text strong { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 600; color: var(--l-green2); margin-bottom: .1rem; }
+
+/* ── Écran "Les amis de l'Oustal" ─────── */
+.l-offer-screen {
+  position: fixed; inset: 0; z-index: 260;
+  background: var(--l-bg);
+  overflow-y: auto;
+  display: flex; justify-content: center;
+}
+.l-offer-screen[hidden] { display: none; }
+.l-offer-screen-in { width: 100%; max-width: 460px; padding: calc(1.2rem + env(safe-area-inset-top)) 1.1rem calc(2.5rem + env(safe-area-inset-bottom)); }
+.l-offer-back {
+  display: inline-flex; align-items: center; gap: .5rem;
+  background: none; border: none;
+  color: var(--l-muted);
+  font-size: .82rem;
+  font-family: inherit;
+  padding: .4rem 0;
+  margin-bottom: 1rem;
+  cursor: pointer;
+}
+.l-offer-back svg { width: 16px; height: 16px; }
+.l-offer-title {
+  font-family: 'Playfair Display', serif;
+  font-weight: 600;
+  font-size: 1.7rem;
+  line-height: 1.2;
+  color: var(--l-green);
+  margin-bottom: .8rem;
+}
+.l-offer-title em { font-style: italic; color: var(--l-gold); font-weight: 400; }
+.l-offer-intro { font-size: .88rem; color: var(--l-muted); line-height: 1.7; margin-bottom: 1.6rem; }
+
+.l-steps { list-style: none; display: flex; flex-direction: column; gap: 1rem; margin-bottom: 1.8rem; }
+.l-step { display: flex; gap: .9rem; align-items: flex-start; }
+.l-step-num {
+  flex-shrink: 0;
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  border: 1px solid var(--l-gold);
+  color: var(--l-green2);
+  font-family: 'Playfair Display', serif;
+  font-weight: 600;
+  display: flex; align-items: center; justify-content: center;
+}
+.l-step-text { font-size: .87rem; color: var(--l-muted); line-height: 1.6; }
+.l-step-text strong { display: block; color: var(--l-ink); font-weight: 600; margin-bottom: .15rem; }
+.l-step-text em { font-style: normal; color: var(--l-green2); font-weight: 600; }
+
+.l-form-row { display: flex; gap: .8rem; }
+.l-form-row .l-form-field { flex: 1; }
+#offerForm { display: flex; flex-direction: column; gap: 1rem; margin-bottom: 0; }
+.l-form-field { display: flex; flex-direction: column; gap: .4rem; }
+.l-form-field span { font-size: .8rem; font-weight: 600; color: var(--l-ink); }
+.l-form-field input, .l-form-field select {
+  width: 100%;
+  padding: .8rem .9rem;
+  border-radius: 10px;
+  border: 1px solid var(--l-border);
+  background: var(--l-card);
+  color: var(--l-ink);
+  font-family: inherit;
+  font-size: .9rem;
+}
+.l-form-field input.l-invalid, .l-form-consent.l-invalid { border-color: var(--l-error); }
+.l-form-consent {
+  display: flex; gap: .7rem; align-items: flex-start;
+  font-size: .78rem; color: var(--l-muted); line-height: 1.5;
+  padding: .8rem;
+  border-radius: 10px;
+  border: 1px solid transparent;
+}
+.l-form-consent input { width: 20px; height: 20px; flex-shrink: 0; accent-color: var(--l-green2); margin-top: 1px; }
+.l-form-error {
+  background: var(--l-error-bg);
+  color: var(--l-error);
+  border-radius: 10px;
+  padding: .7rem .9rem;
+  font-size: .82rem;
+}
+.l-form-error[hidden] { display: none; }
+.l-offer-submit { width: 100%; justify-content: center; padding: .95rem; font-size: .88rem; }
+.l-offer-submit:disabled { opacity: .6; cursor: default; }
+.l-offer-mentions { font-size: .7rem; color: var(--l-muted); text-align: center; margin-top: .8rem; }
+.l-offer-confirm-emoji { font-size: 2.4rem; margin-bottom: .8rem; }
 
 /* ── Layout / tabs ────────────────────── */
 .l-main { padding: calc(1.6rem + env(safe-area-inset-top)) 1.1rem 1rem; max-width: 640px; margin: 0 auto; }
@@ -496,9 +599,15 @@ button { font-family: inherit; }
 }
 .l-promo-link {
   display: flex; align-items: center; gap: .8rem;
+  width: 100%;
   padding: .9rem 2.2rem .9rem 1rem;
   text-decoration: none;
   color: var(--l-ink);
+  background: none;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  font-family: inherit;
 }
 .l-promo-icon { font-size: 1.8rem; flex-shrink: 0; }
 .l-promo-text { font-size: .82rem; line-height: 1.45; color: var(--l-muted); }

@@ -316,11 +316,11 @@ document.addEventListener('DOMContentLoaded', () => {
   /* ── Notification promo (petit-déj offert) ── */
   const promoToast = document.getElementById('promoToast');
   const promoClose = document.getElementById('promoClose');
-  const promoLink = document.getElementById('promoLink');
+  const promoOpen = document.getElementById('promoOpen');
 
-  if (promoToast && !localStorage.getItem('livretPromoDismissed')) {
+  if (promoToast && !localStorage.getItem('livretPromoDismissed') && !localStorage.getItem('livretAmisSignedUp')) {
     promoToast.hidden = false;
-    setTimeout(() => promoToast.classList.add('show'), 900);
+    setTimeout(() => promoToast.classList.add('show'), 1500);
   }
 
   function dismissPromo() {
@@ -331,7 +331,111 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   promoClose?.addEventListener('click', dismissPromo);
-  promoLink?.addEventListener('click', () => localStorage.setItem('livretPromoDismissed', '1'));
+  promoOpen?.addEventListener('click', () => { dismissPromo(); openOfferScreen(); });
+
+  /* ── Les amis de l'Oustal (carte + écran + formulaire) ── */
+  const AMIS_URL = 'https://script.google.com/macros/s/AKfycbwfUggWetPiX45QQB7YTV8Lt70RcZJFhWUhM3l65Q8IzpCtazzus0dtDCdT_i0C0rj9-Q/exec';
+
+  const offerCard = document.getElementById('offerCard');
+  const offerCardTitle = document.getElementById('offerCardTitle');
+  const offerCardSub = document.getElementById('offerCardSub');
+  const offerScreen = document.getElementById('offerScreen');
+  const offerBack = document.getElementById('offerBack');
+  const offerFormView = document.getElementById('offerFormView');
+  const offerConfirmView = document.getElementById('offerConfirmView');
+  const offerForm = document.getElementById('offerForm');
+  const offerGite = document.getElementById('offerGite');
+  const offerError = document.getElementById('offerError');
+  const offerSubmit = document.getElementById('offerSubmit');
+  const offerConsentLabel = document.getElementById('offerConsentLabel');
+  const offerConsentInput = document.getElementById('offerConsentInput');
+  const offerConfirmName = document.getElementById('offerConfirmName');
+  const offerConfirmClose = document.getElementById('offerConfirmClose');
+
+  if (offerGite) offerGite.value = cottage.name;
+
+  function isAmisSignedUp() {
+    return !!localStorage.getItem('livretAmisSignedUp');
+  }
+
+  function updateOfferCard() {
+    if (!offerCard) return;
+    if (isAmisSignedUp()) {
+      offerCardTitle.textContent = 'Vous faites partie des amis de l’Oustal';
+      offerCardSub.textContent = 'Votre email arrivera après votre départ';
+    }
+  }
+  updateOfferCard();
+
+  function openOfferScreen() {
+    if (!offerScreen) return;
+    offerScreen.hidden = false;
+    offerScreen.scrollTop = 0;
+    document.body.style.overflow = 'hidden';
+    if (isAmisSignedUp()) {
+      offerFormView.hidden = true;
+      offerConfirmView.hidden = false;
+    } else {
+      offerFormView.hidden = false;
+      offerConfirmView.hidden = true;
+    }
+  }
+
+  function closeOfferScreen() {
+    if (!offerScreen) return;
+    offerScreen.hidden = true;
+    document.body.style.overflow = '';
+  }
+
+  offerCard?.addEventListener('click', openOfferScreen);
+  offerBack?.addEventListener('click', closeOfferScreen);
+  offerConfirmClose?.addEventListener('click', closeOfferScreen);
+
+  function showOfferError(msg, field) {
+    offerError.textContent = msg;
+    offerError.hidden = false;
+    if (field) { field.classList.add('l-invalid'); field.focus(); }
+  }
+
+  offerForm?.addEventListener('input', (e) => {
+    e.target.classList.remove('l-invalid');
+    if (e.target === offerConsentInput) offerConsentLabel.classList.remove('l-invalid');
+    offerError.hidden = true;
+  });
+
+  offerForm?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    offerForm.querySelectorAll('.l-invalid').forEach((el) => el.classList.remove('l-invalid'));
+    offerConsentLabel.classList.remove('l-invalid');
+
+    const data = Object.fromEntries(new FormData(offerForm));
+
+    if (!data.prenom) return showOfferError('Indiquez votre prénom.', offerForm.prenom);
+    if (!data.nom) return showOfferError('Indiquez votre nom.', offerForm.nom);
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email || '')) return showOfferError('Vérifiez votre adresse email.', offerForm.email);
+    if (!data.depart) return showOfferError('Indiquez la date de votre départ, pour qu’on vous écrive au bon moment.', offerForm.depart);
+    if (data.consentement !== 'oui') {
+      offerConsentLabel.classList.add('l-invalid');
+      return showOfferError('Cochez la case pour rejoindre Les amis de l’Oustal.', offerConsentInput);
+    }
+
+    offerSubmit.disabled = true;
+    offerSubmit.textContent = 'Inscription en cours…';
+
+    try {
+      await fetch(AMIS_URL, { method: 'POST', mode: 'no-cors', body: new URLSearchParams(data) });
+      localStorage.setItem('livretAmisSignedUp', '1');
+      offerConfirmName.textContent = `, ${data.prenom}`;
+      offerFormView.hidden = true;
+      offerConfirmView.hidden = false;
+      offerScreen.scrollTop = 0;
+      updateOfferCard();
+    } catch (err) {
+      showOfferError('L’inscription n’a pas fonctionné. Vérifiez votre connexion et réessayez.');
+      offerSubmit.disabled = false;
+      offerSubmit.textContent = 'Rejoindre Les amis de l’Oustal';
+    }
+  });
 
   /* ── PWA : service worker + install banner ── */
   if ('serviceWorker' in navigator) {
