@@ -313,6 +313,26 @@ document.addEventListener('DOMContentLoaded', () => {
     }).catch(() => {});
   }
 
+  /* ── Notification promo (petit-déj offert) ── */
+  const promoToast = document.getElementById('promoToast');
+  const promoClose = document.getElementById('promoClose');
+  const promoLink = document.getElementById('promoLink');
+
+  if (promoToast && !localStorage.getItem('livretPromoDismissed')) {
+    promoToast.hidden = false;
+    setTimeout(() => promoToast.classList.add('show'), 900);
+  }
+
+  function dismissPromo() {
+    if (!promoToast) return;
+    promoToast.classList.remove('show');
+    localStorage.setItem('livretPromoDismissed', '1');
+    setTimeout(() => { promoToast.hidden = true; }, 400);
+  }
+
+  promoClose?.addEventListener('click', dismissPromo);
+  promoLink?.addEventListener('click', () => localStorage.setItem('livretPromoDismissed', '1'));
+
   /* ── PWA : service worker + install banner ── */
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {

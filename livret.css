@@ -469,6 +469,41 @@ button { font-family: inherit; }
 }
 .l-tab-icon-wrap { display: flex; align-items: center; justify-content: center; padding: .3rem .6rem; border-radius: 30px; }
 
+/* ── Promo toast (notification) ───────── */
+.l-promo-toast {
+  position: fixed; left: 50%; top: calc(.6rem + env(safe-area-inset-top)); z-index: 250;
+  transform: translateX(-50%) translateY(-140%);
+  width: calc(100% - 1.6rem); max-width: 430px;
+  opacity: 0;
+  transition: transform .4s var(--ease), opacity .4s var(--ease);
+  background: var(--l-card);
+  border: 1px solid var(--l-border);
+  border-radius: 16px;
+  box-shadow: 0 12px 30px rgba(20,20,10,.22);
+}
+.l-promo-toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+.l-promo-toast[hidden] { display: block; visibility: hidden; pointer-events: none; }
+.l-promo-close {
+  position: absolute; top: .4rem; right: .4rem;
+  width: 24px; height: 24px;
+  border-radius: 50%;
+  background: var(--l-badge);
+  border: none; color: var(--l-muted);
+  font-size: .78rem;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  z-index: 1;
+}
+.l-promo-link {
+  display: flex; align-items: center; gap: .8rem;
+  padding: .9rem 2.2rem .9rem 1rem;
+  text-decoration: none;
+  color: var(--l-ink);
+}
+.l-promo-icon { font-size: 1.8rem; flex-shrink: 0; }
+.l-promo-text { font-size: .82rem; line-height: 1.45; color: var(--l-muted); }
+.l-promo-text strong { display: block; font-family: 'Playfair Display', serif; font-size: 1rem; color: var(--l-green2); margin-bottom: .1rem; }
+
 /* ── Install banner ───────────────────── */
 .l-install-banner {
   display: none;
