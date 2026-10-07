@@ -6,7 +6,7 @@
   <title>Livret d'arrivée</title>
   <meta name="robots" content="noindex, nofollow" />
   <meta name="theme-color" content="#24371f" />
-  <link rel="stylesheet" href="livret.css?v=1" />
+  <link rel="stylesheet" href="livret.css?v=5" />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌲</text></svg>" />
   <link rel="apple-touch-icon" href="images/logo.png" />
   <link id="manifestLink" rel="manifest" href="manifest-falaise.webmanifest" />
@@ -46,7 +46,7 @@
         </div>
       </header>
 
-      <button class="l-offer-card" id="offerCard">
+      <button class="l-offer-card" id="offerCard" hidden>
         <span class="l-offer-card-icon">🥐</span>
         <span class="l-offer-card-text">
           <strong id="offerCardTitle">Le petit-déjeuner offert à votre prochain séjour</strong>
@@ -67,11 +67,6 @@
           </button>
           <div class="l-acc-panel">
             <div class="l-acc-panel-inner">
-              <div class="l-def">
-                <div class="l-def-label">Nom du réseau</div>
-                <div class="l-def-value">À renseigner</div>
-              </div>
-              <div class="l-def-divider"></div>
               <div class="l-def">
                 <div class="l-def-label">Mot de passe</div>
                 <div class="l-def-value">Ljdo-11100</div>
@@ -197,6 +192,7 @@
       <p class="l-intro">Nos coups de cœur et le pratique, autour de Narbonne.</p>
       <div class="l-category-tabs" id="adressesCategoryTabs">
         <button class="l-cat-btn active" data-acat="restaurants">Restaurants</button>
+        <button class="l-cat-btn" data-acat="bars">Bars</button>
         <button class="l-cat-btn" data-acat="boulangeries">Boulangeries</button>
         <button class="l-cat-btn" data-acat="supermarches">Supermarchés</button>
       </div>
@@ -219,37 +215,24 @@
     <!-- ── TAB : SERVICES ── -->
     <section id="tab-services" class="l-tab">
       <h2 class="l-section-title">Services</h2>
-      <p class="l-intro">Des petits plus pour prolonger votre détente, sur demande.</p>
-      <div class="l-cards">
-        <div class="l-service-card">
-          <span class="l-acc-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.29 1.51 4.04 3 5.5l7 7Z"/></svg>
-          </span>
-          <div class="l-service-body">
-            <h3>Massage</h3>
-            <p>Un moment de détente directement dans votre cottage, sur réservation.</p>
-            <button class="l-btn-outline l-service-btn" data-service="Massage">Demander</button>
+      <p class="l-intro">Ce qui se prépare aux Jardins de l'Oustal.</p>
+
+      <div class="l-balneo">
+        <div class="l-balneo-body">
+          <span class="l-balneo-eyebrow">Bientôt aux Jardins de l'Oustal</span>
+          <h3>Un espace <em>balnéo</em> rien que pour vous</h3>
+          <p>Les Jardins de l'Oustal ouvrent leur espace bien-être : spa, jacuzzi, massages et un bar pour prolonger la détente.</p>
+          <ul class="l-balneo-tags">
+            <li>Spa</li><li>Jacuzzi</li><li>Massages</li><li>Bar</li>
+          </ul>
+          <div class="l-countdown" id="balneoCountdown">
+            <div><strong data-cd="mois">0</strong><span>mois</span></div>
+            <div><strong data-cd="jours">0</strong><span>jours</span></div>
+            <div><strong data-cd="heures">00</strong><span>heures</span></div>
+            <div><strong data-cd="minutes">00</strong><span>min</span></div>
+            <div><strong data-cd="secondes">00</strong><span>sec</span></div>
           </div>
-        </div>
-        <div class="l-service-card">
-          <span class="l-acc-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3Z"/></svg>
-          </span>
-          <div class="l-service-body">
-            <h3>Ongles</h3>
-            <p>Manucure ou pose sur place, sur réservation.</p>
-            <button class="l-btn-outline l-service-btn" data-service="Ongles">Demander</button>
-          </div>
-        </div>
-        <div class="l-service-card">
-          <span class="l-acc-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8h1a4 4 0 1 1 0 8h-1"/><path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"/><line x1="6" y1="2" x2="6" y2="4"/><line x1="10" y1="2" x2="10" y2="4"/><line x1="14" y1="2" x2="14" y2="4"/></svg>
-          </span>
-          <div class="l-service-body">
-            <h3>Petit déjeuner</h3>
-            <p>Panier gourmand livré dans votre cottage, sur réservation.</p>
-            <button class="l-btn-outline l-service-btn" data-service="Petit déjeuner">Demander</button>
-          </div>
+          <p class="l-balneo-open" id="balneoOpen" hidden>C'est ouvert ! Demandez-nous les horaires.</p>
         </div>
       </div>
     </section>
@@ -450,6 +433,6 @@
 
 </div>
 
-<script src="livret.js?v=1"></script>
+<script src="livret.js?v=5"></script>
 </body>
 </html>

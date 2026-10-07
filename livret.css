@@ -111,6 +111,7 @@ button { font-family: inherit; }
   overflow-y: auto;
   display: flex; justify-content: center;
 }
+.l-offer-card[hidden] { display: none; }
 .l-offer-screen[hidden] { display: none; }
 .l-offer-screen-in { width: 100%; max-width: 460px; padding: calc(1.2rem + env(safe-area-inset-top)) 1.1rem calc(2.5rem + env(safe-area-inset-bottom)); }
 .l-offer-back {
@@ -282,6 +283,66 @@ button { font-family: inherit; }
   margin-bottom: .6rem;
 }
 .l-cta-card p { font-size: .85rem; color: rgba(242,239,227,.8); margin-bottom: 1.2rem; }
+
+/* ── Espace balnéo (bientôt) ─────────── */
+.l-balneo {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--l-radius-lg);
+  border: 1px solid var(--l-border);
+  box-shadow: var(--l-shadow);
+  background:
+    radial-gradient(120% 70% at 100% 0%, rgba(95,135,82,.35), transparent 60%),
+    radial-gradient(90% 60% at 0% 10%, rgba(201,169,110,.18), transparent 60%),
+    linear-gradient(170deg, #d9e5cf 0%, #eef2e4 45%, #fffdf9 100%);
+  color: var(--l-ink);
+  margin-bottom: 1.4rem;
+}
+.l-balneo-body { position: relative; padding: 1.9rem 1.5rem 1.7rem; }
+.l-balneo-eyebrow {
+  font-size: .66rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
+  color: #8a6c36;
+}
+.l-balneo h3 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 600; font-size: 1.6rem; line-height: 1.2;
+  color: var(--l-green);
+  margin: .45rem 0 .7rem;
+}
+.l-balneo h3 em { color: #3f6b37; }
+.l-balneo-body > p { font-size: .88rem; color: #4d5a43; line-height: 1.6; }
+.l-balneo-tags { list-style: none; display: flex; flex-wrap: wrap; gap: .4rem; margin: 1.1rem 0 1.4rem; padding: 0; }
+.l-balneo-tags li {
+  font-size: .72rem; font-weight: 600;
+  background: rgba(255,255,255,.65);
+  border: 1px solid rgba(36,55,31,.14);
+  color: var(--l-green);
+  padding: .3rem .8rem; border-radius: 20px;
+}
+.l-countdown { display: grid; grid-template-columns: repeat(5, 1fr); gap: .4rem; }
+.l-countdown div {
+  background: #fffdf9;
+  border: 1px solid rgba(36,55,31,.1);
+  border-radius: 12px;
+  padding: .7rem .1rem .55rem;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(36,55,31,.06);
+}
+.l-countdown strong {
+  display: block;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem; font-weight: 600; line-height: 1;
+  color: var(--l-green);
+  font-variant-numeric: tabular-nums;
+}
+.l-countdown span {
+  display: block; margin-top: .3rem;
+  font-size: .6rem; letter-spacing: .08em; text-transform: uppercase;
+  color: var(--l-muted);
+}
+.l-countdown[hidden], .l-balneo-open[hidden] { display: none; }
+.l-balneo-open { margin-top: .4rem; font-weight: 600; color: var(--l-green) !important; }
+
 .l-btn-light {
   display: inline-flex; align-items: center; gap: .5rem;
   background: #fdfbf4;
@@ -399,6 +460,17 @@ button { font-family: inherit; }
   border-radius: 14px;
   margin-bottom: .9rem;
 }
+.l-place-figure { position: relative; margin: 0 0 .9rem; }
+.l-place-figure .l-place-photo { display: block; margin-bottom: 0; }
+.l-place-credit {
+  position: absolute; right: 8px; bottom: 6px;
+  font-size: .58rem;
+  color: rgba(255,255,255,.9);
+  background: rgba(0,0,0,.35);
+  padding: .1rem .4rem;
+  border-radius: 6px;
+}
+.l-place-badge { z-index: 1; }
 
 .l-place-actions { display: flex; gap: .6rem; margin-top: .9rem; flex-wrap: wrap; }
 .l-place-actions .l-btn-outline,

@@ -2,6 +2,14 @@
    Livret d'arrivée — Les Jardins de l'Oustal
    ───────────────────────────────────────── */
 
+// Programme fidélité « Les amis de l'Oustal » : masqué pour l'instant
+// (carte sur Mon séjour + notification). Passer à true pour le réactiver.
+const AMIS_ACTIVE = false;
+
+// Ouverture de l'espace balnéo (compte à rebours, onglet Services).
+// Date au format (année, mois - 1, jour) : 7 février 2027 à minuit.
+const BALNEO_OPENING = new Date(2027, 1, 7, 0, 0, 0);
+
 const COTTAGES = {
   'falaise': { name: 'La Falaise', hero: 'images/falaise.png' },
   'chalet-zen': { name: 'Le Chalet Zen', hero: 'images/chalet-0.png' },
@@ -12,16 +20,36 @@ const COTTAGES = {
 
 const ADRESSES = {
   restaurants: [
-    { name: 'Chez Bebelle', url: 'https://www.chez-bebelle.fr/', loc: "Les Halles de Narbonne", desc: "Pour les amateurs de viande : grillades à la plancha, frites maison et commandes au mégaphone. Une vraie ambiance de marché.", star: true },
-    { name: 'Le Petit Comptoir', url: 'https://www.petitcomptoir.com/', loc: 'Narbonne', desc: "Une cuisine de bistrot soignée, des produits de saison et une belle sélection de vins. Pour un déjeuner ou un dîner gourmand." },
-    { name: 'La Cave à Manger', url: 'https://maison.saintcrescent.com/la-cave-a-manger/', loc: 'Narbonne, Maison Saint Crescent', desc: "Plats traditionnels régionaux, charcuteries et vins dans une salle voûtée en pierre. Une adresse conviviale, menu affiché à 35 €.", star: true },
-    { name: 'Les Grands Buffets', url: 'https://www.lesgrandsbuffets.com/fr/infos-pratiques/', loc: 'Narbonne, Espace de Liberté', desc: "Pour découvrir les grands classiques de la cuisine française sous forme de buffets à volonté. Menu actuellement à 65,90 € hors boissons." },
-    { name: 'La Table Lionel Giraud', url: 'https://maison.saintcrescent.com/la-table/', loc: 'Narbonne', desc: "Une table gastronomique deux étoiles Michelin, autour des produits d'Occitanie. Pour un anniversaire ou un dîner exceptionnel." },
-    { name: "L'Art de Vivre", url: 'https://chateau-hospitalet.com/pages/gastronomie-lart-de-vivre', loc: "Château L'Hospitalet, massif de la Clape", desc: "Une cuisine gastronomique de saison dans le cadre des vignobles, avec une place importante accordée aux vins du domaine." },
-    { name: 'La Cambuse du Saunier', url: 'https://www.lesalindegruissan.fr/content/16-restaurant-la-cambuse-du-saunier', loc: "Gruissan, salin de l'île Saint-Martin", desc: "Poissons en croûte de sel, coquillages et cassoulet de seiche, avec vue sur les salins. Pour associer balade et repas.", star: true },
-    { name: 'La Cranquette', url: 'https://www.lacranquette.com/', loc: 'Gruissan village, 13 rue de la République', desc: "Une cuisine tournée vers la mer, les poissons sauvages et les produits locaux, dans un ancien presbytère." },
-    { name: 'Le Portanel', url: 'https://www.restaurant-portanel-bages.fr/', loc: 'Bages, La Placette', desc: "Une vue sur l'étang et une cuisine de poissons, avec l'anguille comme spécialité. Pour découvrir les saveurs du coin.", star: true },
-    { name: 'Ô Vieux Tonneaux', url: 'https://www.audetourisme.com/fr/fiche/peyriac-de-mer/o-vieux-tonneaux_TFORESLAR011V501HTJ/', loc: 'Peyriac-de-Mer, 3 place de la Mairie', desc: "Un café-restaurant avec terrasse, cuisine de saison et ambiance conviviale. À associer à une promenade sur les pontons." },
+    { name: 'Chez Bebelle', url: 'https://www.chez-bebelle.fr/', loc: "Les Halles de Narbonne", desc: "Pour les amateurs de viande : grillades à la plancha, frites maison et commandes au mégaphone. Une vraie ambiance de marché.", star: true,
+      img: 'restos/chez-bebelle.jpg', credit: 'Jacques Le Letty, Wikimedia Commons (CC BY-SA 4.0)' },
+    { name: 'Ô Juste', loc: 'Narbonne, 21 cours Mirabeau', desc: "Un bistrot moderne face au canal : une courte carte de saison, des produits de producteurs locaux et des assiettes créatives. Terrasse sur le cours Mirabeau. Fermé le mardi et le mercredi.", star: true,
+      img: 'restos/o-juste.jpg', credit: 'Didier Descouens, Wikimedia Commons (CC BY-SA 4.0)' },
+    { name: 'Chez Marius', loc: 'Narbonne, 3 place Lamourguier', desc: "Bistrot et bar à vin à deux pas des Halles : tapas travaillées, plats à partager, une carte qui change chaque semaine et de bons vins de la région. Terrasse ombragée.", star: true,
+      img: 'restos/chez-marius.jpg', credit: 'Deniz Aydogan, Pexels' },
+    { name: 'Cadence', loc: 'Narbonne, 15 cours Mirabeau', desc: "Au bord du canal de la Robine : une cuisine bistronomique faite maison le midi, des tapas à partager et des cocktails le soir.",
+      img: 'restos/cadence.jpg', credit: 'benibeny, Wikimedia Commons (CC0)' },
+    { name: 'La Cave à Manger', url: 'https://maison.saintcrescent.com/la-cave-a-manger/', loc: 'Narbonne, Maison Saint Crescent', desc: "Plats traditionnels régionaux, charcuteries et vins dans une salle voûtée en pierre. Une adresse conviviale, menu affiché à 35 €.", star: true,
+      img: 'restos/cave-a-manger.jpg', credit: 'Taha Samett, Pexels' },
+    { name: 'Papa Ours', loc: 'Narbonne, 100 rue Georges Bouton', desc: "Une adresse généreuse et conviviale : de belles grillades et un buffet d'entrées aux produits de la région. Terrasse.",
+      img: 'restos/papa-ours.jpg', credit: 'Vidal Balielo Jr, Pexels' },
+    { name: 'La Bonne Excuse', loc: 'Narbonne, 22 rue Ancienne Porte de Béziers', desc: "Un bistrot gourmand recommandé par Gault&Millau : produits frais en circuit court, salle colorée et accueil chaleureux. Menu autour de 39 €.",
+      img: 'restos/bonne-excuse.jpg', credit: 'Rene Terp, Pexels' },
+    { name: 'Les Grands Buffets', url: 'https://www.lesgrandsbuffets.com/fr/infos-pratiques/', loc: 'Narbonne, Espace de Liberté', desc: "Les grands classiques de la cuisine française sous forme de buffets à volonté. Menu actuellement à 65,90 € hors boissons. <strong>Réservez longtemps à l'avance</strong> : les tables partent souvent plusieurs semaines avant.",
+      img: 'restos/grands-buffets.jpg', credit: 'Adrien Privat, Wikimedia Commons (CC BY-SA 4.0)' },
+    { name: 'La Table Lionel Giraud', url: 'https://maison.saintcrescent.com/la-table/', loc: 'Narbonne, Maison Saint Crescent', desc: "La table gastronomique deux étoiles Michelin de Narbonne, autour des produits d'Occitanie. Pour un anniversaire ou un dîner exceptionnel.",
+      img: 'restos/table-lionel-giraud.jpg', credit: 'Nadin Sh, Pexels' },
+  ],
+  bars: [
+    { name: 'Cadence', loc: 'Narbonne, 15 cours Mirabeau', desc: "Cocktails créatifs, vins et tapas en terrasse au bord du canal. L'ambiance devient bar musical à partir de 22h30.", star: true,
+      img: 'bars/cadence.jpg', credit: 'Vera Rishkevich, Pexels' },
+    { name: 'La Rive Gauche', loc: 'Narbonne, 37 cours de la République', desc: "Une institution depuis 1993 : grande terrasse sous les platanes, face au canal. Une vingtaine de cocktails, des tapas et des planches à partager. Concerts le vendredi soir en été.", star: true,
+      img: 'bars/rive-gauche.jpg', credit: 'Pymouss, Wikimedia Commons (CC BY-SA 4.0)' },
+    { name: 'Viny', loc: 'Narbonne, 26 boulevard Gambetta', desc: "Tout nouveau : un bar à vin et à vinyles, pour prendre un verre en musique dans une ambiance détendue.",
+      img: 'bars/viny.jpg', credit: 'Valeriya, Pexels' },
+    { name: "La Part de l'Ange", loc: 'Narbonne, 32 boulevard Frédéric Mistral', desc: "Bar à vin, cave et petite librairie : vins bio et nature, planches de charcuterie et de fromage, tapas le soir. Terrasse.",
+      img: 'bars/part-de-lange.jpg', credit: 'Vince, Pexels' },
+    { name: 'Macar', loc: 'Narbonne, 21 cours de la République', desc: "Bar à vin et tapas avec terrasse au bord du canal, en plein centre-ville. Idéal pour un apéritif en fin de journée.",
+      img: 'bars/macar.jpg', credit: 'Calips, Wikimedia Commons (CC BY-SA 3.0)' },
   ],
   boulangeries: [
     { name: 'Marie Blachère', loc: 'Centre commercial Plein Soleil, 46 Route de Perpignan, Narbonne', desc: "Boulangerie-pâtisserie en libre-service, pratique pour le pain frais et les viennoiseries à toute heure." },
@@ -49,12 +77,13 @@ const DECOUVRIR = {
   ],
   regaler: [
     { slug: 'salin-gruissan', name: 'Le Salin de Gruissan', url: 'https://www.lesalindegruissan.fr/', desc: "Découverte des marais salants, visite guidée et dégustation d'huîtres. Une sortie qui mélange paysages et gourmandise.", star: true },
-    { slug: 'grands-buffets', name: 'Les Grands Buffets', url: 'https://www.lesgrandsbuffets.com/fr/infos-pratiques/', desc: "Les grands classiques de la cuisine française sous forme de buffets à volonté, à 5 minutes du cottage." },
+    { slug: 'grands-buffets', name: 'Les Grands Buffets', url: 'https://www.lesgrandsbuffets.com/fr/infos-pratiques/', desc: "Les grands classiques de la cuisine française sous forme de buffets à volonté, à 5 minutes du cottage. Pensez à réserver longtemps à l'avance." },
     { slug: 'halles-narbonne', name: 'Les Halles de Narbonne', url: 'https://www.cotedumidi.com/', desc: "Une halte gourmande pour découvrir les étals, les spécialités locales et l'ambiance du marché couvert." },
     { slug: 'oulibo', name: "L'Oulibo, à Bize-Minervois", url: 'https://www.cotedumidi.com/', desc: "Visiter une coopérative oléicole et découvrir le savoir-faire local autour des olives et de l'huile d'olive." },
   ],
   mer: [
-    { slug: 'narbonne-plage', name: 'Narbonne-Plage et Saint-Pierre-la-Mer', url: 'https://www.cotedumidi.com/', desc: "Profiter des grandes plages de sable, se promener en bord de mer ou découvrir les activités nautiques." },
+    { slug: 'gruissan-chalets', name: 'Gruissan et la plage des Chalets', url: 'https://www.gruissan-mediterranee.com/', desc: "Les célèbres chalets sur pilotis du film « 37°2 le matin », face à une immense plage de sable. À compléter par une balade dans le vieux village, au pied de la tour Barberousse.", star: true },
+    { slug: 'narbonne-plage', name: 'Narbonne-Plage et Saint-Pierre-la-Mer', url: 'https://www.cotedumidi.com/', desc: "De grandes plages de sable au pied du massif de la Clape. À Saint-Pierre, ne manquez pas le Gouffre de l'Œil Doux, un lac d'eau turquoise au milieu des pins." },
     { slug: 'salin-gruissan', name: 'Le Salin de Gruissan', url: 'https://www.lesalindegruissan.fr/', desc: "Marais salants et dégustation d'huîtres face à l'étang, à associer à la plage." },
   ],
 };
@@ -112,6 +141,10 @@ document.addEventListener('DOMContentLoaded', () => {
       return `
         <div class="l-place-card">
           ${a.star ? '<span class="l-place-badge">Coup de cœur</span>' : ''}
+          ${a.img ? `<figure class="l-place-figure">
+            <img class="l-place-photo" src="images/${a.img}" alt="${a.name}" loading="lazy">
+            ${a.credit ? `<figcaption class="l-place-credit">${a.credit}</figcaption>` : ''}
+          </figure>` : ''}
           <div class="l-place-name">${a.name}</div>
           ${a.loc ? `<div class="l-place-loc">${a.loc}</div>` : ''}
           <p class="l-place-desc">${a.desc}</p>
@@ -318,7 +351,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const promoClose = document.getElementById('promoClose');
   const promoOpen = document.getElementById('promoOpen');
 
-  if (promoToast && !localStorage.getItem('livretPromoDismissed') && !localStorage.getItem('livretAmisSignedUp')) {
+  if (AMIS_ACTIVE && promoToast && !localStorage.getItem('livretPromoDismissed') && !localStorage.getItem('livretAmisSignedUp')) {
     promoToast.hidden = false;
     setTimeout(() => promoToast.classList.add('show'), 1500);
   }
@@ -352,6 +385,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const offerConfirmName = document.getElementById('offerConfirmName');
   const offerConfirmClose = document.getElementById('offerConfirmClose');
 
+  if (offerCard) offerCard.hidden = !AMIS_ACTIVE;
   if (offerGite) offerGite.value = cottage.name;
 
   function isAmisSignedUp() {
@@ -436,6 +470,47 @@ document.addEventListener('DOMContentLoaded', () => {
       offerSubmit.textContent = 'Rejoindre Les amis de l’Oustal';
     }
   });
+
+  /* ── Espace balnéo : compte à rebours ── */
+  const countdownEl = document.getElementById('balneoCountdown');
+  const balneoOpenEl = document.getElementById('balneoOpen');
+
+  function addMonths(date, n) {
+    const d = new Date(date);
+    d.setMonth(d.getMonth() + n);
+    return d;
+  }
+
+  function updateCountdown() {
+    if (!countdownEl) return;
+    const now = new Date();
+    if (now >= BALNEO_OPENING) {
+      countdownEl.hidden = true;
+      balneoOpenEl.hidden = false;
+      return false;
+    }
+    let months = 0;
+    while (addMonths(now, months + 1) <= BALNEO_OPENING) months++;
+    const rest = Math.floor((BALNEO_OPENING - addMonths(now, months)) / 1000);
+    const parts = {
+      mois: months,
+      jours: Math.floor(rest / 86400),
+      heures: Math.floor((rest % 86400) / 3600),
+      minutes: Math.floor((rest % 3600) / 60),
+      secondes: rest % 60,
+    };
+    for (const [key, value] of Object.entries(parts)) {
+      const el = countdownEl.querySelector(`[data-cd="${key}"]`);
+      el.textContent = (key === 'mois' || key === 'jours') ? value : String(value).padStart(2, '0');
+    }
+    return true;
+  }
+
+  if (updateCountdown()) {
+    const countdownTimer = setInterval(() => {
+      if (!updateCountdown()) clearInterval(countdownTimer);
+    }, 1000);
+  }
 
   /* ── PWA : service worker + install banner ── */
   if ('serviceWorker' in navigator) {
