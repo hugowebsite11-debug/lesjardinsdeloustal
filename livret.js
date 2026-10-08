@@ -259,7 +259,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const WHATSAPP_NUMBER = '33761507550';
 
   document.getElementById('lateCheckoutBtn').addEventListener('click', () => {
-    const message = `Bonjour, nous souhaiterions rester plus tard dans notre cottage "${cottage.name}" et profiter du jacuzzi jusqu'à 14h (supplément de 20 €). Est-ce possible ?`;
+    const message = `Bonjour, nous souhaiterions rester plus tard dans notre cottage "${cottage.name}" et profiter du jacuzzi jusqu'à 13h (supplément de 20 €). Est-ce possible ?`;
     window.location.href = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
   });
 

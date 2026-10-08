@@ -18,7 +18,7 @@ Page **cachée** (non liée dans le menu, `noindex`), accessible uniquement via 
 - Liens (à mettre sur les QR codes, déjà générés dans `images/qr/`) :
   `https://www.lesjardinsdeloustal.com/livret.html?cottage=<slug>`
 - Wifi : mot de passe `Ljdo-11100` (identique pour tous les cottages), nom du réseau encore "à renseigner"
-- Départ tardif (jusqu'à 14h) : supplément de 20€, demande envoyée via WhatsApp (07 61 50 75 50)
+- Départ tardif (jusqu'à 13h) : supplément de 20€, demande envoyée via WhatsApp (07 61 50 75 50)
 - Avis séjour ("un souci") : envoyé par email (formsubmit.co) + WhatsApp
 - Programme fidélité **"Les amis de l'Oustal"** : notification + carte d'accueil + formulaire d'inscription, envoie en `POST`/`no-cors` vers un Google Apps Script déjà déployé par le client (URL et contrat de champs dans le code — `livret.js`, section "Les amis de l'Oustal"). Le Google Sheet et l'automatisation d'email (envoyé à 15h le jour du départ) sont gérés côté client, pas dans ce dépôt.
 - Photos "À découvrir" (`images/decouvrir/<slug>/`) : sourcées légalement (Wikimedia Commons / Pexels), crédits dans `images/decouvrir/credits.json` — toujours vérifier la licence avant d'ajouter une nouvelle photo (pas d'images Google Images non libres de droits)
