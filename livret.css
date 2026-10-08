@@ -258,6 +258,10 @@ button { font-family: inherit; }
 }
 .l-acc-panel-inner p + p { margin-top: .6rem; }
 .l-acc-panel-inner strong { color: var(--l-ink); }
+.l-acc-panel-inner ul { margin: .5rem 0 .6rem 1.1rem; padding: 0; }
+.l-acc-panel-inner li + li { margin-top: .3rem; }
+.l-acc-panel-inner a { color: var(--l-green); font-weight: 600; }
+.l-wifi-help { font-size: .82rem; line-height: 1.6; }
 .l-def { margin-bottom: .9rem; }
 .l-def:last-child { margin-bottom: 0; }
 .l-def-label { font-weight: 700; color: var(--l-ink); font-size: .85rem; margin-bottom: .2rem; }

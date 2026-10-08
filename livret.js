@@ -11,11 +11,11 @@ const AMIS_ACTIVE = false;
 const BALNEO_OPENING = new Date(2027, 1, 7, 0, 0, 0);
 
 const COTTAGES = {
-  'falaise': { name: 'La Falaise', hero: 'images/falaise.png' },
-  'chalet-zen': { name: 'Le Chalet Zen', hero: 'images/chalet-0.png' },
-  'sous-les-pins-1': { name: 'Sous les Pins 1', hero: 'images/slp.png' },
-  'sous-les-pins-2': { name: 'Sous les Pins 2', hero: 'images/slp2.avif' },
-  'bois-flottee': { name: 'La Bois Flottée', hero: 'images/bf-hero.png' },
+  'falaise': { name: 'La Falaise', hero: 'images/falaise.png', wifi: 'Xiaomi_B2BC', box: 'sous la télé' },
+  'chalet-zen': { name: 'Le Chalet Zen', hero: 'images/chalet-0.png', wifi: 'Xiaomi_B2BC', box: 'sous la télé' },
+  'sous-les-pins-1': { name: 'Sous les Pins 1', hero: 'images/slp.png', wifi: 'Xiaomi_B2BC', box: "sous les peignoirs, à droite de l'armoire" },
+  'sous-les-pins-2': { name: 'Sous les Pins 2', hero: 'images/slp2.avif', wifi: 'Xiaomi_B2BC', box: "sous les peignoirs, à droite de l'armoire" },
+  'bois-flottee': { name: 'La Bois Flottée', hero: 'images/bf-hero.png', wifi: 'Xiaomi_B3B2', box: 'sous la télé' },
 };
 
 const ADRESSES = {
@@ -99,6 +99,8 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('heroImg').src = cottage.hero;
   document.getElementById('heroImg').alt = cottage.name;
   document.title = `Livret d'arrivée — ${cottage.name}`;
+  document.getElementById('wifiName').textContent = cottage.wifi;
+  document.querySelectorAll('.js-wifi-box').forEach(el => { el.textContent = cottage.box; });
 
   const manifestLink = document.getElementById('manifestLink');
   if (manifestLink) manifestLink.setAttribute('href', `manifest-${slug}.webmanifest`);
