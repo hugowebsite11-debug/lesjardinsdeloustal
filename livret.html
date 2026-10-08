@@ -6,12 +6,42 @@
   <title>Livret d'arrivée</title>
   <meta name="robots" content="noindex, nofollow" />
   <meta name="theme-color" content="#24371f" />
-  <link rel="stylesheet" href="livret.css?v=9" />
+  <link rel="stylesheet" href="livret.css?v=13" />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌲</text></svg>" />
   <link rel="apple-touch-icon" href="images/logo.png" />
   <link id="manifestLink" rel="manifest" href="manifest-falaise.webmanifest" />
+  <script>
+    // Écran d'accueil animé : une seule fois par visite, et pas si l'utilisateur limite les animations.
+    try {
+      if (sessionStorage.getItem('livretIntroSeen') || matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        document.documentElement.classList.add('no-splash');
+      }
+    } catch (e) {}
+  </script>
 </head>
 <body class="livret">
+
+<div class="l-splash" id="splash" aria-hidden="true">
+  <div class="l-splash-inner">
+    <svg class="l-splash-pine" viewBox="0 0 120 100" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path class="l-splash-canopy" pathLength="1" d="M14 44 C 8 35, 20 27, 31 30 C 35 19, 52 16, 60 23 C 69 15, 87 17, 91 28 C 102 25, 113 34, 105 43 C 96 50, 24 51, 14 44 Z" />
+      <path class="l-splash-stroke" pathLength="1" d="M60 95 C 58 80, 63 66, 57 50" />
+      <path class="l-splash-stroke l-splash-branch" pathLength="1" d="M58 58 C 51 52, 43 49, 35 47" />
+      <path class="l-splash-stroke l-splash-branch" pathLength="1" d="M59 55 C 67 50, 77 48, 86 46" />
+      <path class="l-splash-stroke l-splash-ground" pathLength="1" d="M38 95 H 82" />
+    </svg>
+    <div class="l-splash-text">
+      <span class="l-splash-line l-splash-line-1">
+        <span class="l-splash-ink">Bienvenue à</span>
+        <i class="l-splash-pen"></i>
+      </span>
+      <span class="l-splash-line l-splash-line-2">
+        <span class="l-splash-ink" id="splashName">votre cottage</span>
+        <i class="l-splash-pen"></i>
+      </span>
+    </div>
+  </div>
+</div>
 
 <div id="app">
 
@@ -443,6 +473,6 @@
 
 </div>
 
-<script src="livret.js?v=9"></script>
+<script src="livret.js?v=13"></script>
 </body>
 </html>

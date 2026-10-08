@@ -102,6 +102,32 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('wifiName').textContent = cottage.wifi;
   document.querySelectorAll('.js-wifi-box').forEach(el => { el.textContent = cottage.box; });
 
+  /* ── Écran d'accueil animé ───────────── */
+  const splash = document.getElementById('splash');
+  if (splash && !document.documentElement.classList.contains('no-splash')) {
+    document.getElementById('splashName').textContent = cottage.name;
+    try { sessionStorage.setItem('livretIntroSeen', '1'); } catch (e) {}
+
+    const hideSplash = () => {
+      if (splash.classList.contains('is-leaving')) return;
+      splash.classList.add('is-leaving');
+      setTimeout(() => splash.remove(), 550);
+    };
+    const playSplash = () => {
+      splash.classList.add('is-playing');
+      setTimeout(hideSplash, 2500);
+    };
+    splash.addEventListener('click', hideSplash);
+
+    // On attend la police manuscrite (300 ms max) pour que l'écriture soit nette.
+    const fontReady = document.fonts && document.fonts.load
+      ? document.fonts.load('3.4rem "Great Vibes"')
+      : Promise.resolve();
+    Promise.race([fontReady, new Promise(r => setTimeout(r, 300))]).then(playSplash, playSplash);
+  } else if (splash) {
+    splash.remove();
+  }
+
   const manifestLink = document.getElementById('manifestLink');
   if (manifestLink) manifestLink.setAttribute('href', `manifest-${slug}.webmanifest`);
 
