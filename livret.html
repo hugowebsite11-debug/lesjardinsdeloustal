@@ -6,7 +6,7 @@
   <title>Livret d'arrivée</title>
   <meta name="robots" content="noindex, nofollow" />
   <meta name="theme-color" content="#24371f" />
-  <link rel="stylesheet" href="livret.css?v=13" />
+  <link rel="stylesheet" href="livret.css?v=15" />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌲</text></svg>" />
   <link rel="apple-touch-icon" href="images/logo.png" />
   <link id="manifestLink" rel="manifest" href="manifest-falaise.webmanifest" />
@@ -22,23 +22,34 @@
 <body class="livret">
 
 <div class="l-splash" id="splash" aria-hidden="true">
+  <div class="l-splash-dusk"></div>
+  <div class="l-sun">
+    <div class="l-sun-rays"></div>
+    <div class="l-sun-core"></div>
+  </div>
+  <div class="l-sun-wash"></div>
   <div class="l-splash-inner">
-    <svg class="l-splash-pine" viewBox="0 0 120 100" fill="none" stroke-linecap="round" stroke-linejoin="round">
-      <path class="l-splash-canopy" pathLength="1" d="M14 44 C 8 35, 20 27, 31 30 C 35 19, 52 16, 60 23 C 69 15, 87 17, 91 28 C 102 25, 113 34, 105 43 C 96 50, 24 51, 14 44 Z" />
-      <path class="l-splash-stroke" pathLength="1" d="M60 95 C 58 80, 63 66, 57 50" />
-      <path class="l-splash-stroke l-splash-branch" pathLength="1" d="M58 58 C 51 52, 43 49, 35 47" />
-      <path class="l-splash-stroke l-splash-branch" pathLength="1" d="M59 55 C 67 50, 77 48, 86 46" />
-      <path class="l-splash-stroke l-splash-ground" pathLength="1" d="M38 95 H 82" />
+    <svg class="l-splash-pine" viewBox="0 0 240 170">
+      <defs>
+        <linearGradient id="splashPineFill" x1="0" y1="40" x2="0" y2="167" gradientUnits="userSpaceOnUse">
+          <stop offset="0" stop-color="#4b7040"/><stop offset=".35" stop-color="#27411f"/><stop offset="1" stop-color="#1e2f19"/>
+        </linearGradient>
+      </defs>
+      <line x1="92" y1="167" x2="160" y2="167" stroke="#c9a96e" stroke-width="1.2" stroke-linecap="round"/>
+      <g fill="url(#splashPineFill)">
+        <path d="M113 167 C 118 162, 120 150, 122 134 C 124 120, 126.5 108, 130 97 L 133.2 97.8 C 131 108, 129.6 120, 129.2 134 C 128.8 150, 130.5 162, 136 167 Z"/>
+        <path d="M126.6 110 C 118 101, 106 93, 96 86 L 97.4 84.4 C 108 91, 120 98.5, 129 105.5 Z"/>
+        <path d="M124.6 121.5 C 108 113, 88 101, 68 89 L 69.4 87 C 90 98.5, 110 108.5, 126.2 116.8 Z"/>
+        <path d="M131 103 C 142 94, 156 86, 170 80 L 171 82.2 C 157.5 88.5, 144.5 96, 133.4 106.6 Z"/>
+        <path d="M130.4 113.5 C 152 106, 178 97, 205 90 L 205.6 92.4 C 179 99.5, 153 108.5, 131.2 118 Z"/>
+        <path d="M130.8 100.5 C 131.6 92, 132.6 84, 134.2 76 L 136.6 76.4 C 135.2 84.4, 134.4 92.4, 134 101.5 Z"/>
+        <path d="M131.6 106 C 138 98, 145 90, 150 83 L 152 84.2 C 147 91.2, 140 99.6, 133.6 108 Z"/>
+        <path d="M25 89 L27.4 86.8 L29.8 86.4 L32.2 83 L34.6 83.6 L37 79.5 L39.4 81.3 L41.8 77.9 L44.2 79.3 L46.6 75.2 L49 77 L51.4 73.2 L53.8 76.1 L56.2 74 L58.6 75.1 L61 72.5 L63.4 74.6 L65.8 71.1 L68.2 74.2 L70.6 71.3 L73 74.5 L75.4 72.5 L77.8 75.3 L80.2 73.1 L82.6 77.6 L85 76.4 L87.4 80 L89.8 79.1 L92.2 83.1 L94.6 81 L97 85.7 L99.4 86.4 L101.8 89.2 L103 89 Q98 91.6 93 90.1 Q88 91.6 83 89.8 Q78 91.6 73 90.2 Q68 91.6 63 91.2 Q58 91.6 53 89.9 Q48 91.6 43 90.9 Q38 91.6 33 89.9 Z"/><path d="M64 77 L66.4 73.9 L68.8 73.7 L71.2 69.6 L73.6 69.5 L76 63.3 L78.4 64.3 L80.8 60 L83.2 59.5 L85.6 55.3 L88 56.4 L90.4 51.4 L92.8 54 L95.2 49 L97.6 51.5 L100 48.4 L102.4 50.2 L104.8 47.8 L107.2 49.5 L109.6 46.6 L112 48.7 L114.4 45.3 L116.8 48.1 L119.2 45.1 L121.6 46.7 L124 44.1 L126.4 46 L128.8 44.2 L131.2 46 L133.6 43.1 L136 47.4 L138.4 45.4 L140.8 49.6 L143.2 48.6 L145.6 52.5 L148 52.2 L150.4 56.2 L152.8 55.5 L155.2 59.6 L157.6 58.5 L160 64.1 L162.4 62.8 L164.8 68.8 L167.2 67.7 L169.6 72.5 L172 73.4 L174.4 76.2 L176 77 Q171 79.6 166 77.7 Q161 79.6 156 78.4 Q151 79.6 146 78.9 Q141 79.6 136 79.1 Q131 79.6 126 77.8 Q121 79.6 116 78.5 Q111 79.6 106 78.7 Q101 79.6 96 78.2 Q91 79.6 86 78.4 Q81 79.6 76 77.8 Z"/><path d="M133 81 L135.4 77.8 L137.8 77.6 L140.2 73.4 L142.6 74.4 L145 70 L147.4 70.3 L149.8 67.4 L152.2 68.3 L154.6 64.9 L157 66.3 L159.4 61.9 L161.8 64.1 L164.2 61.8 L166.6 63.6 L169 59.8 L171.4 62.4 L173.8 59.8 L176.2 61.9 L178.6 59.3 L181 61.3 L183.4 58 L185.8 61.6 L188.2 58.6 L190.6 62.7 L193 62 L195.4 64.9 L197.8 63.9 L200.2 67.1 L202.6 66.4 L205 71.4 L207.4 70.7 L209.8 75.2 L212.2 74.5 L214.6 79.1 L217 78.5 L219 81 Q214 83.6 209 82.1 Q204 83.6 199 82.6 Q194 83.6 189 82 Q184 83.6 179 83 Q174 83.6 169 83 Q164 83.6 159 82.6 Q154 83.6 149 83 Q144 83.6 139 81.6 Z"/><path d="M190 91 L192.4 88.4 L194.8 87.5 L197.2 82.2 L199.6 84 L202 80.9 L204.4 81.8 L206.8 78.1 L209.2 81.1 L211.6 79.1 L214 82.3 L216.4 79.9 L218.8 82.9 L221.2 81.2 L223.6 85.4 L226 85.6 L228.4 89.2 L230.8 89.2 L232 91 Q227 93.6 222 93 Q217 93.6 212 91.7 Q207 93.6 202 92.1 Z"/><path d="M71 85 L73.4 82.1 L75.8 81.2 L78.2 75.2 L80.6 76.8 L83 72.6 L85.4 73.6 L87.8 69.6 L90.2 71.7 L92.6 69.3 L95 71.2 L97.4 68.8 L99.8 71.9 L102.2 70.8 L104.6 73.4 L107 71.6 L109.4 75.9 L111.8 76.3 L114.2 79.8 L116.6 80.4 L119 84.4 L121 85 Q116 87.6 111 86.6 Q106 87.6 101 87 Q96 87.6 91 87 Q86 87.6 81 87.1 Z"/><path d="M125 83 L127.4 79.4 L129.8 79.8 L132.2 75.4 L134.6 75.1 L137 71 L139.4 72.2 L141.8 69 L144.2 70.9 L146.6 67.4 L149 70.2 L151.4 67 L153.8 70.8 L156.2 69.2 L158.6 72.2 L161 70 L163.4 75 L165.8 73.7 L168.2 78.2 L170.6 77.5 L173 81.8 L175 83 Q170 85.6 165 84.1 Q160 85.6 155 83.7 Q150 85.6 145 85.1 Q140 85.6 135 84.5 Z"/>
+      </g>
     </svg>
     <div class="l-splash-text">
-      <span class="l-splash-line l-splash-line-1">
-        <span class="l-splash-ink">Bienvenue à</span>
-        <i class="l-splash-pen"></i>
-      </span>
-      <span class="l-splash-line l-splash-line-2">
-        <span class="l-splash-ink" id="splashName">votre cottage</span>
-        <i class="l-splash-pen"></i>
-      </span>
+      <span class="l-splash-kicker">Bienvenue à</span>
+      <span class="l-splash-name" id="splashName">votre cottage</span>
     </div>
   </div>
 </div>
@@ -473,6 +484,6 @@
 
 </div>
 
-<script src="livret.js?v=13"></script>
+<script src="livret.js?v=15"></script>
 </body>
 </html>

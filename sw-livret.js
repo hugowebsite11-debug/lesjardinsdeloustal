@@ -1,9 +1,9 @@
-const CACHE_NAME = 'livret-oustal-v13';
+const CACHE_NAME = 'livret-oustal-v15';
 
 const CORE_ASSETS = [
   'livret.html',
-  'livret.css?v=13',
-  'livret.js?v=13',
+  'livret.css?v=15',
+  'livret.js?v=15',
   'images/logo.png',
   'images/falaise.png',
   'images/chalet-0.png',

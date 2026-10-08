@@ -115,13 +115,13 @@ document.addEventListener('DOMContentLoaded', () => {
     };
     const playSplash = () => {
       splash.classList.add('is-playing');
-      setTimeout(hideSplash, 2500);
+      setTimeout(hideSplash, 2900);
     };
     splash.addEventListener('click', hideSplash);
 
     // On attend la police manuscrite (300 ms max) pour que l'écriture soit nette.
     const fontReady = document.fonts && document.fonts.load
-      ? document.fonts.load('3.4rem "Great Vibes"')
+      ? document.fonts.load('italic 600 3.4rem "Cormorant Garamond"')
       : Promise.resolve();
     Promise.race([fontReady, new Promise(r => setTimeout(r, 300))]).then(playSplash, playSplash);
   } else if (splash) {
