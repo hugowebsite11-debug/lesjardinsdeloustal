@@ -11,11 +11,11 @@ const AMIS_ACTIVE = false;
 const BALNEO_OPENING = new Date(2027, 1, 7, 0, 0, 0);
 
 const COTTAGES = {
-  'falaise': { name: 'La Falaise', hero: 'images/falaise.png', wifi: 'Xiaomi_B2BC', box: 'sous la télé' },
-  'chalet-zen': { name: 'Le Chalet Zen', hero: 'images/chalet-0.png', wifi: 'Xiaomi_B2BC', box: 'sous la télé' },
-  'sous-les-pins-1': { name: 'Sous les Pins 1', hero: 'images/slp.png', wifi: 'Xiaomi_B2BC', box: "sous les peignoirs, à droite de l'armoire" },
-  'sous-les-pins-2': { name: 'Sous les Pins 2', hero: 'images/slp2.avif', wifi: 'Xiaomi_B2BC', box: "sous les peignoirs, à droite de l'armoire" },
-  'bois-flottee': { name: 'La Bois Flottée', hero: 'images/bf-hero.png', wifi: 'Xiaomi_B3B2', box: 'sous la télé' },
+  'falaise': { name: 'La Falaise', hero: 'images/falaise.png', wifi: 'Xiaomi_B2BC', box: 'tv' },
+  'chalet-zen': { name: 'Le Chalet Zen', hero: 'images/chalet-0.png', wifi: 'Xiaomi_B2BC', box: 'tv' },
+  'sous-les-pins-1': { name: 'Sous les Pins 1', hero: 'images/slp.png', wifi: 'Xiaomi_B2BC', box: 'robes' },
+  'sous-les-pins-2': { name: 'Sous les Pins 2', hero: 'images/slp2.avif', wifi: 'Xiaomi_B2BC', box: 'robes' },
+  'bois-flottee': { name: 'La Bois Flottée', hero: 'images/bf-hero.png', wifi: 'Xiaomi_B3B2', box: 'tv' },
 };
 
 const ADRESSES = {
@@ -88,6 +88,34 @@ const DECOUVRIR = {
   ],
 };
 
+/* ── Langue (traductions dans livret-i18n.js) ─── */
+let LANG = 'fr';
+let LANG_CHOSEN = false;
+try {
+  const saved = localStorage.getItem('livretLang');
+  if (saved && I18N[saved]) { LANG = saved; LANG_CHOSEN = true; }
+} catch (e) {}
+
+// Texte d'interface généré par le script, ex. t('title', { cottage: 'La Falaise' })
+function t(key, vars = {}) {
+  const str = (I18N[LANG] && I18N[LANG][key]) ?? I18N.fr[key] ?? key;
+  return str.replace(/\{(\w+)\}/g, (_, k) => (vars[k] ?? ''));
+}
+
+// Nom et description d'une adresse / d'un lieu dans la langue choisie
+function itemText(cat, item) {
+  const tr = LANG !== 'fr' && I18N_ITEMS[LANG] ? I18N_ITEMS[LANG][`${cat}:${item.slug || item.name}`] : null;
+  return { name: (tr && tr.name) || item.name, desc: (tr && tr.desc) || item.desc };
+}
+
+// Message WhatsApp : dans la langue du client, suivi du français pour nous
+function waMessage(key, vars, frVars = vars) {
+  const msg = t(key, vars);
+  if (LANG === 'fr') return msg;
+  const fr = I18N.fr[key].replace(/\{(\w+)\}/g, (_, k) => (frVars[k] ?? ''));
+  return `${msg}\n\n(FR) ${fr}`;
+}
+
 document.addEventListener('DOMContentLoaded', () => {
 
   /* ── Cottage courant (via ?cottage=slug) ─── */
@@ -98,28 +126,67 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('cottageName').textContent = cottage.name;
   document.getElementById('heroImg').src = cottage.hero;
   document.getElementById('heroImg').alt = cottage.name;
-  document.title = `Livret d'arrivée — ${cottage.name}`;
   document.getElementById('wifiName').textContent = cottage.wifi;
-  document.querySelectorAll('.js-wifi-box').forEach(el => { el.textContent = cottage.box; });
+
+  /* ── Choix de la langue (boutons de l'écran d'accueil et du panneau) ── */
+  const langSheet = document.getElementById('langSheet');
+  document.querySelectorAll('.js-lang-grid').forEach(grid => {
+    grid.innerHTML = LIVRET_LANGS.map(l =>
+      `<button class="l-lang-opt" type="button" data-lang="${l.code}"><span class="l-lang-flag">${l.flag}</span>${l.label}</button>`
+    ).join('');
+  });
+
+  let hideSplash = () => {};
+
+  function chooseLang(code) {
+    if (!I18N[code]) return;
+    try { localStorage.setItem('livretLang', code); } catch (e) {}
+    LANG_CHOSEN = true;
+    applyLang(code);
+    langSheet.hidden = true;
+    hideSplash();
+  }
+
+  document.addEventListener('click', (e) => {
+    const opt = e.target.closest('.l-lang-opt');
+    if (opt) chooseLang(opt.dataset.lang);
+  });
+  document.getElementById('langBtn').addEventListener('click', () => { langSheet.hidden = false; });
+  langSheet.addEventListener('click', (e) => { if (e.target === langSheet) langSheet.hidden = true; });
 
   /* ── Écran d'accueil animé ───────────── */
   const splash = document.getElementById('splash');
   if (splash && !document.documentElement.classList.contains('no-splash')) {
+    const needLang = !LANG_CHOSEN;
+    const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    splash.classList.add('js-ctl');
     document.getElementById('splashName').textContent = cottage.name;
+    const kicker = splash.querySelector('.l-splash-kicker');
+    if (needLang) {
+      kicker.textContent = 'Bienvenue · Welcome · Bienvenidos · Welkom';
+      kicker.classList.add('is-multi');
+    } else {
+      kicker.textContent = t('splash.kicker');
+    }
     try { sessionStorage.setItem('livretIntroSeen', '1'); } catch (e) {}
 
-    const hideSplash = () => {
+    hideSplash = () => {
       if (splash.classList.contains('is-leaving')) return;
       splash.classList.add('is-leaving');
       setTimeout(() => splash.remove(), 550);
     };
     const playSplash = () => {
-      splash.classList.add('is-playing');
-      setTimeout(hideSplash, 2900);
+      splash.classList.add(reduced ? 'is-static' : 'is-playing');
+      if (needLang) {
+        // On attend que la personne choisisse sa langue
+        setTimeout(() => splash.classList.add('show-langs'), reduced ? 0 : 2300);
+      } else {
+        setTimeout(hideSplash, reduced ? 1200 : 2900);
+      }
     };
-    splash.addEventListener('click', hideSplash);
+    if (!needLang) splash.addEventListener('click', hideSplash);
 
-    // On attend la police manuscrite (300 ms max) pour que l'écriture soit nette.
+    // On attend la police du nom (300 ms max) pour qu'il apparaisse net.
     const fontReady = document.fonts && document.fonts.load
       ? document.fonts.load('italic 600 3.4rem "Cormorant Garamond"')
       : Promise.resolve();
@@ -160,15 +227,19 @@ document.addEventListener('DOMContentLoaded', () => {
     return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(name + ', ' + loc)}`;
   }
 
+  let currentAdresseCat = 'restaurants';
+
   function renderAdresses(cat) {
+    currentAdresseCat = cat;
     const items = ADRESSES[cat] || [];
-    adressesGroupsEl.innerHTML = `<div class="l-cat-group active">` + items.map(a => {
+    adressesGroupsEl.innerHTML = `<div class="l-cat-group active">` + items.map(item => {
+      const a = { ...item, ...itemText(cat, item) };
       const btn = a.url
-        ? `<a href="${a.url}" target="_blank" rel="noopener" class="l-btn-outline">Voir le site</a>`
-        : `<a href="${mapsUrl(a.name, a.loc)}" target="_blank" rel="noopener" class="l-btn-outline">Voir sur la carte</a>`;
+        ? `<a href="${a.url}" target="_blank" rel="noopener" class="l-btn-outline">${t('btn.site')}</a>`
+        : `<a href="${mapsUrl(item.name, a.loc)}" target="_blank" rel="noopener" class="l-btn-outline">${t('btn.map')}</a>`;
       return `
         <div class="l-place-card">
-          ${a.star ? '<span class="l-place-badge">Coup de cœur</span>' : ''}
+          ${a.star ? `<span class="l-place-badge">${t('badge')}</span>` : ''}
           ${a.img ? `<figure class="l-place-figure">
             <img class="l-place-photo" src="images/${a.img}" alt="${a.name}" loading="lazy">
             ${a.credit ? `<figcaption class="l-place-credit">${a.credit}</figcaption>` : ''}
@@ -207,16 +278,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function renderCategory(cat) {
     const items = DECOUVRIR[cat] || [];
-    currentDecouvrirItems = items.map(p => ({ ...p, photos: photosFor(p.slug) }));
+    currentDecouvrirItems = items.map(p => ({ ...p, ...itemText(cat, p), photos: photosFor(p.slug) }));
     groupsEl.innerHTML = `<div class="l-cat-group active">` + currentDecouvrirItems.map((p, i) => `
       <div class="l-place-card">
-        ${p.star ? '<span class="l-place-badge">Coup de cœur</span>' : ''}
+        ${p.star ? `<span class="l-place-badge">${t('badge')}</span>` : ''}
         ${p.photos[0] ? `<img class="l-place-photo" src="${p.photos[0].src}" alt="${p.name}" loading="lazy">` : ''}
         <div class="l-place-name">${p.name}</div>
         <p class="l-place-desc">${p.desc}</p>
         <div class="l-place-actions">
-          <a href="${p.url}" target="_blank" rel="noopener" class="l-btn-outline">Voir le site</a>
-          ${p.photos.length ? `<button class="l-btn-fill-green" data-photos-idx="${i}">Voir des photos</button>` : ''}
+          <a href="${p.url}" target="_blank" rel="noopener" class="l-btn-outline">${t('btn.site')}</a>
+          ${p.photos.length ? `<button class="l-btn-fill-green" data-photos-idx="${i}">${t('btn.photos')}</button>` : ''}
         </div>
       </div>
     `).join('') + `</div>`;
@@ -285,7 +356,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const WHATSAPP_NUMBER = '33761507550';
 
   document.getElementById('lateCheckoutBtn').addEventListener('click', () => {
-    const message = `Bonjour, nous souhaiterions rester plus tard dans notre cottage "${cottage.name}" et profiter du jacuzzi jusqu'à 13h (supplément de 20 €). Est-ce possible ?`;
+    const message = waMessage('wa.late', { cottage: cottage.name });
     window.location.href = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
   });
 
@@ -310,14 +381,17 @@ document.addEventListener('DOMContentLoaded', () => {
   const feedbackTextEl = document.getElementById('feedbackText');
   let selectedFeedback = null;
 
-  const FEEDBACK_CONFIRM_MESSAGES = {
-    "J'adore": "🥰 Merci beaucoup ! N'hésitez pas à laisser un avis pour nous dire à quel point vous avez apprécié votre séjour !",
-    "Très bien": "😊 Merci ! N'hésitez pas à nous laisser un avis à la fin de votre séjour, pour nous dire ce qui aurait pu être encore mieux.",
-    "Un souci": "🙏 Merci pour votre retour, nous revenons vers vous au plus vite.",
+  // Les valeurs envoyées (data-feedback) restent en français, pour nous
+  const FEEDBACK_CONFIRM_KEYS = {
+    "J'adore": 'fb.confirm.love',
+    "Très bien": 'fb.confirm.good',
+    "Un souci": 'fb.confirm.issue',
   };
+  let lockedRating = null;
 
   function lockFeedback(rating) {
-    feedbackConfirmText.textContent = FEEDBACK_CONFIRM_MESSAGES[rating] || 'Merci, c’est bien reçu ! 🙏';
+    lockedRating = rating;
+    feedbackConfirmText.textContent = t(FEEDBACK_CONFIRM_KEYS[rating] || 'fb.confirm.default');
     feedbackForm.hidden = true;
     feedbackConfirm.hidden = false;
   }
@@ -343,7 +417,9 @@ document.addEventListener('DOMContentLoaded', () => {
     sendFeedback(selectedFeedback, text);
     lockFeedback('Un souci');
 
-    const message = `Bonjour, un souci dans notre cottage "${cottage.name}" : ${text || "(détails à suivre)"}`;
+    const message = waMessage('wa.issue',
+      { cottage: cottage.name, text: text || t('wa.pending') },
+      { cottage: cottage.name, text: text ? '(voir ci-dessus)' : I18N.fr['wa.pending'] });
     window.location.href = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
   });
 
@@ -354,6 +430,7 @@ document.addEventListener('DOMContentLoaded', () => {
     feedbackOpts.forEach(o => o.classList.remove('selected'));
     feedbackTextEl.value = '';
     selectedFeedback = null;
+    lockedRating = null;
   });
 
   function sendFeedback(rating, comment) {
@@ -539,6 +616,44 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!updateCountdown()) clearInterval(countdownTimer);
     }, 1000);
   }
+
+  /* ── Appliquer la langue à toute la page ── */
+  // Le français d'origine de chaque élément est gardé pour pouvoir y revenir.
+  function applyLang(lang) {
+    LANG = I18N[lang] ? lang : 'fr';
+    const dict = I18N[LANG];
+    document.documentElement.lang = LANG;
+
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      if (el.dataset.i18nFr === undefined) el.dataset.i18nFr = el.textContent;
+      const v = LANG !== 'fr' ? dict[el.dataset.i18n] : undefined;
+      el.textContent = v ?? el.dataset.i18nFr;
+    });
+    document.querySelectorAll('[data-i18n-html]').forEach(el => {
+      if (el.dataset.i18nFr === undefined) el.dataset.i18nFr = el.innerHTML;
+      const v = LANG !== 'fr' ? dict[el.dataset.i18nHtml] : undefined;
+      el.innerHTML = v ?? el.dataset.i18nFr;
+    });
+    document.querySelectorAll('[data-i18n-ph]').forEach(el => {
+      if (el.dataset.i18nFr === undefined) el.dataset.i18nFr = el.placeholder;
+      const v = LANG !== 'fr' ? dict[el.dataset.i18nPh] : undefined;
+      el.placeholder = v ?? el.dataset.i18nFr;
+    });
+
+    document.title = t('title', { cottage: cottage.name });
+    document.querySelectorAll('.js-wifi-box').forEach(el => { el.textContent = t(`box.${cottage.box}`); });
+
+    const current = LIVRET_LANGS.find(l => l.code === LANG);
+    document.getElementById('langBtnFlag').textContent = current.flag;
+    document.getElementById('langBtnCode').textContent = LANG.toUpperCase();
+    document.querySelectorAll('.l-lang-opt').forEach(b => b.classList.toggle('active', LANG_CHOSEN && b.dataset.lang === LANG));
+
+    renderAdresses(currentAdresseCat);
+    renderCategory(currentDecouvrirCat);
+    if (lockedRating) lockFeedback(lockedRating);
+  }
+
+  applyLang(LANG);
 
   /* ── PWA : service worker + install banner ── */
   if ('serviceWorker' in navigator) {

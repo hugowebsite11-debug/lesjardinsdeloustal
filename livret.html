@@ -6,14 +6,16 @@
   <title>Livret d'arrivée</title>
   <meta name="robots" content="noindex, nofollow" />
   <meta name="theme-color" content="#24371f" />
-  <link rel="stylesheet" href="livret.css?v=15" />
+  <link rel="stylesheet" href="livret.css?v=17" />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌲</text></svg>" />
   <link rel="apple-touch-icon" href="images/logo.png" />
   <link id="manifestLink" rel="manifest" href="manifest-falaise.webmanifest" />
   <script>
     // Écran d'accueil animé : une seule fois par visite, et pas si l'utilisateur limite les animations.
+    // Tant qu'aucune langue n'a été choisie, il s'affiche quand même (c'est là qu'on la choisit).
     try {
-      if (sessionStorage.getItem('livretIntroSeen') || matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      var hasLang = !!localStorage.getItem('livretLang');
+      if (hasLang && (sessionStorage.getItem('livretIntroSeen') || matchMedia('(prefers-reduced-motion: reduce)').matches)) {
         document.documentElement.classList.add('no-splash');
       }
     } catch (e) {}
@@ -51,6 +53,17 @@
       <span class="l-splash-kicker">Bienvenue à</span>
       <span class="l-splash-name" id="splashName">votre cottage</span>
     </div>
+    <div class="l-splash-langs" id="splashLangs">
+      <p class="l-splash-langs-hint">Choisissez votre langue · Choose your language</p>
+      <div class="l-lang-grid js-lang-grid"></div>
+    </div>
+  </div>
+</div>
+
+<div class="l-lang-sheet" id="langSheet" hidden>
+  <div class="l-lang-sheet-card" role="dialog" aria-modal="true" aria-labelledby="langSheetTitle">
+    <p class="l-lang-sheet-title" id="langSheetTitle" data-i18n="lang.title">Choisissez votre langue</p>
+    <div class="l-lang-grid js-lang-grid"></div>
   </div>
 </div>
 
@@ -68,8 +81,8 @@
   </div>
 
   <div class="l-install-banner" id="installBanner">
-    <p>Ajoutez ce livret à votre écran d'accueil pour y accéder même sans connexion.</p>
-    <button id="installBtn">Installer</button>
+    <p data-i18n="install.text">Ajoutez ce livret à votre écran d'accueil pour y accéder même sans connexion.</p>
+    <button id="installBtn" data-i18n="install.btn">Installer</button>
     <button id="installClose" class="l-install-close" aria-label="Fermer">✕</button>
   </div>
 
@@ -80,10 +93,11 @@
       <header class="l-hero">
         <img id="heroImg" src="images/falaise.png" alt="" />
         <div class="l-hero-overlay"></div>
+        <button class="l-lang-btn" id="langBtn" type="button" aria-label="Langue / Language"><span id="langBtnFlag">🇫🇷</span><span id="langBtnCode">FR</span></button>
         <div class="l-hero-content">
           <span class="l-eyebrow">Les Jardins de l'Oustal</span>
-          <h1 class="l-hero-title">Bienvenue à <em id="cottageName">La Falaise</em></h1>
-          <p class="l-hero-sub">Tout ce qu'il vous faut pour profiter simplement de votre séjour.</p>
+          <h1 class="l-hero-title"><span data-i18n="hero.welcome">Bienvenue à</span> <em id="cottageName">La Falaise</em></h1>
+          <p class="l-hero-sub" data-i18n="hero.sub">Tout ce qu'il vous faut pour profiter simplement de votre séjour.</p>
         </div>
       </header>
 
@@ -95,7 +109,7 @@
         </span>
       </button>
 
-      <h2 class="l-section-title">Mon séjour</h2>
+      <h2 class="l-section-title" data-i18n="sec.sejour">Mon séjour</h2>
 
       <div class="l-accordion">
         <div class="l-acc" data-acc="wifi">
@@ -109,16 +123,16 @@
           <div class="l-acc-panel">
             <div class="l-acc-panel-inner">
               <div class="l-def">
-                <div class="l-def-label">Nom du réseau</div>
+                <div class="l-def-label" data-i18n="wifi.name">Nom du réseau</div>
                 <div class="l-def-value" id="wifiName"></div>
               </div>
               <div class="l-def-divider"></div>
               <div class="l-def">
-                <div class="l-def-label">Mot de passe</div>
+                <div class="l-def-label" data-i18n="wifi.pass">Mot de passe</div>
                 <div class="l-def-value">Ljdo-11100</div>
               </div>
               <div class="l-def-divider"></div>
-              <p class="l-wifi-help"><strong>Le wifi ne fonctionne pas ?</strong> Débranchez la box de la prise, attendez 30 secondes, puis rebranchez-la. La box se trouve <span class="js-wifi-box"></span>. Si le problème persiste, appelez-nous directement au <a href="tel:+33761507550">07 61 50 75 50</a>.</p>
+              <p class="l-wifi-help" data-i18n-html="wifi.help"><strong>Le wifi ne fonctionne pas ?</strong> Débranchez la box de la prise, attendez 30 secondes, puis rebranchez-la. La box se trouve <span class="js-wifi-box"></span>. Si le problème persiste, appelez-nous directement au <a href="tel:+33761507550">07 61 50 75 50</a>.</p>
             </div>
           </div>
         </div>
@@ -128,12 +142,12 @@
             <span class="l-acc-icon">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="14" rx="2"/><path d="M8 21h8"/><path d="M12 18v3"/></svg>
             </span>
-            <span class="l-acc-label">Télévision</span>
+            <span class="l-acc-label" data-i18n="acc.tv">Télévision</span>
             <span class="l-acc-plus">+</span>
           </button>
           <div class="l-acc-panel">
             <div class="l-acc-panel-inner">
-              <ul class="l-bullet-list">
+              <ul class="l-bullet-list" data-i18n-html="tv.list">
                 <li>Pour accéder aux chaînes de télévision, utilisez l'application <strong>Molotov</strong>.</li>
                 <li>Netflix est également accessible directement depuis la TV.</li>
                 <li>En cas de souci de connexion, vérifiez d'abord le Wi-Fi.</li>
@@ -147,17 +161,17 @@
             <span class="l-acc-icon">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M2 12h20"/><path d="M2 17c1.5 1.5 3 1.5 4.5 0s3-1.5 4.5 0 3 1.5 4.5 0 3-1.5 4.5 0"/><path d="M4 12V8a2 2 0 0 1 2-2h1"/><path d="M9 6V4"/></svg>
             </span>
-            <span class="l-acc-label">Mon jacuzzi</span>
+            <span class="l-acc-label" data-i18n="acc.jacuzzi">Mon jacuzzi</span>
             <span class="l-acc-plus">+</span>
           </button>
           <div class="l-acc-panel">
             <div class="l-acc-panel-inner">
-              <ul class="l-bullet-list">
+              <ul class="l-bullet-list" data-i18n-html="jacuzzi.list">
                 <li>Le jacuzzi est entièrement privatif.</li>
-                <li>Merci de vous doucher avant utilisation.</li>
-                <li>N'ajoutez aucun savon, huile ou produit dans l'eau.</li>
-                <li>Replacez la couverture après utilisation pour conserver la température.</li>
-                <li>En cas de problème, n'hésitez pas à nous contacter.</li>
+                <li>Pour le confort de tous, nous vous remercions de bien vouloir prendre une douche avant d'en profiter.</li>
+                <li>Nous vous prions de ne pas ajouter de savon, d'huile ni aucun autre produit dans l'eau.</li>
+                <li>Pensez à replacer la couverture après chaque utilisation : l'eau restera bien chaude.</li>
+                <li>Au moindre souci, n'hésitez pas à nous contacter.</li>
               </ul>
             </div>
           </div>
@@ -168,13 +182,13 @@
             <span class="l-acc-icon">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/></svg>
             </span>
-            <span class="l-acc-label">Mon cottage</span>
+            <span class="l-acc-label" data-i18n="acc.cottage">Mon cottage</span>
             <span class="l-acc-plus">+</span>
           </button>
           <div class="l-acc-panel">
             <div class="l-acc-panel-inner">
-              <p><strong>Inclus dans votre séjour :</strong></p>
-              <ul class="l-bullet-list">
+              <p data-i18n-html="cottage.included"><strong>Inclus dans votre séjour :</strong></p>
+              <ul class="l-bullet-list" data-i18n-html="cottage.list">
                 <li>Literie préparée</li>
                 <li>Serviettes de toilette</li>
                 <li>Café et thé</li>
@@ -191,13 +205,13 @@
             <span class="l-acc-icon">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
             </span>
-            <span class="l-acc-label">Départ</span>
+            <span class="l-acc-label" data-i18n="acc.depart">Départ</span>
             <span class="l-acc-plus">+</span>
           </button>
           <div class="l-acc-panel">
             <div class="l-acc-panel-inner">
-              <p><strong>Départ au plus tard à 11h</strong> (sauf option ci-dessous).</p>
-              <ul class="l-bullet-list">
+              <p data-i18n-html="depart.time"><strong>Départ au plus tard à 11h</strong> (sauf option ci-dessous).</p>
+              <ul class="l-bullet-list" data-i18n-html="depart.list">
                 <li>Laissez simplement les clés à l'intérieur du cottage.</li>
                 <li>Le ménage est inclus : vous n'avez rien à nettoyer avant de partir.</li>
                 <li>Pensez simplement à vérifier que vous n'avez rien oublié.</li>
@@ -208,89 +222,89 @@
       </div>
 
       <div class="l-cta-card">
-        <h3>Je souhaite rester plus tard</h3>
-        <p>Si le planning le permet, profitez de votre cottage et de votre jacuzzi jusqu'à 13h demain, pour un supplément de <strong>20 €</strong>. Vous pourrez vérifier la disponibilité et régler directement l'option.</p>
-        <button class="l-btn-light" id="lateCheckoutBtn">Demander l'option</button>
+        <h3 data-i18n="late.title">Je souhaite rester plus tard</h3>
+        <p data-i18n-html="late.text">Si le planning le permet, profitez de votre cottage et de votre jacuzzi jusqu'à 13h demain, pour un supplément de <strong>20 €</strong>. Vous pourrez vérifier la disponibilité et régler directement l'option.</p>
+        <button class="l-btn-light" id="lateCheckoutBtn" data-i18n="late.btn">Demander l'option</button>
       </div>
 
       <div class="l-feedback-card">
         <div id="feedbackForm">
-          <h3>Que pensez-vous de votre cottage ?</h3>
-          <p>Votre première impression nous aide à rendre votre séjour encore plus agréable.</p>
+          <h3 data-i18n="fb.title">Que pensez-vous de votre cottage ?</h3>
+          <p data-i18n="fb.text">Votre première impression nous aide à rendre votre séjour encore plus agréable.</p>
           <div class="l-feedback-options">
-            <button class="l-feedback-opt" data-feedback="J'adore"><span class="emoji">🥰</span>J'adore</button>
-            <button class="l-feedback-opt" data-feedback="Très bien"><span class="emoji">🙂</span>Très bien</button>
-            <button class="l-feedback-opt" data-feedback="Un souci"><span class="emoji">😟</span>Un souci</button>
+            <button class="l-feedback-opt" data-feedback="J'adore"><span class="emoji">🥰</span><span data-i18n="fb.love">J'adore</span></button>
+            <button class="l-feedback-opt" data-feedback="Très bien"><span class="emoji">🙂</span><span data-i18n="fb.good">Très bien</span></button>
+            <button class="l-feedback-opt" data-feedback="Un souci"><span class="emoji">😟</span><span data-i18n="fb.issue">Un souci</span></button>
           </div>
           <div class="l-feedback-detail" id="feedbackDetail" hidden>
-            <textarea id="feedbackText" placeholder="Dites-nous ce qui ne va pas, on revient vers vous vite."></textarea>
-            <button class="l-feedback-send" id="feedbackSend">Envoyer</button>
+            <textarea id="feedbackText" data-i18n-ph="fb.ph" placeholder="Dites-nous ce qui ne va pas, on revient vers vous vite."></textarea>
+            <button class="l-feedback-send" id="feedbackSend" data-i18n="fb.send">Envoyer</button>
           </div>
         </div>
         <div class="l-feedback-confirm" id="feedbackConfirm" hidden>
           <p class="l-feedback-confirm-text" id="feedbackConfirmText"></p>
-          <button class="l-feedback-undo" id="feedbackUndo">J'ai changé d'avis</button>
+          <button class="l-feedback-undo" id="feedbackUndo" data-i18n="fb.undo">J'ai changé d'avis</button>
         </div>
       </div>
     </section>
 
     <!-- ── TAB : BONNES ADRESSES ── -->
     <section id="tab-adresses" class="l-tab">
-      <h2 class="l-section-title">Bonnes adresses</h2>
-      <p class="l-intro">Nos coups de cœur et le pratique, autour de Narbonne.</p>
+      <h2 class="l-section-title" data-i18n="adr.title">Bonnes adresses</h2>
+      <p class="l-intro" data-i18n="adr.intro">Nos coups de cœur et le pratique, autour de Narbonne.</p>
       <div class="l-category-tabs" id="adressesCategoryTabs">
-        <button class="l-cat-btn active" data-acat="restaurants">Restaurants</button>
-        <button class="l-cat-btn" data-acat="bars">Bars</button>
-        <button class="l-cat-btn" data-acat="boulangeries">Boulangeries</button>
-        <button class="l-cat-btn" data-acat="supermarches">Supermarchés</button>
+        <button class="l-cat-btn active" data-acat="restaurants" data-i18n="cat.restaurants">Restaurants</button>
+        <button class="l-cat-btn" data-acat="bars" data-i18n="cat.bars">Bars</button>
+        <button class="l-cat-btn" data-acat="boulangeries" data-i18n="cat.boulangeries">Boulangeries</button>
+        <button class="l-cat-btn" data-acat="supermarches" data-i18n="cat.supermarches">Supermarchés</button>
       </div>
       <div id="adressesGroups"></div>
     </section>
 
     <!-- ── TAB : À DÉCOUVRIR ── -->
     <section id="tab-decouvrir" class="l-tab">
-      <h2 class="l-section-title">À découvrir</h2>
-      <p class="l-intro">Autour des Jardins de l'Oustal, entre nature, patrimoine et gourmandise.</p>
+      <h2 class="l-section-title" data-i18n="dec.title">À découvrir</h2>
+      <p class="l-intro" data-i18n="dec.intro">Autour des Jardins de l'Oustal, entre nature, patrimoine et gourmandise.</p>
       <div class="l-category-tabs" id="categoryTabs">
-        <button class="l-cat-btn active" data-cat="balader">Se balader</button>
-        <button class="l-cat-btn" data-cat="visiter">Visiter</button>
-        <button class="l-cat-btn" data-cat="regaler">Se régaler</button>
-        <button class="l-cat-btn" data-cat="mer">Profiter de la mer</button>
+        <button class="l-cat-btn active" data-cat="balader" data-i18n="cat.balader">Se balader</button>
+        <button class="l-cat-btn" data-cat="visiter" data-i18n="cat.visiter">Visiter</button>
+        <button class="l-cat-btn" data-cat="regaler" data-i18n="cat.regaler">Se régaler</button>
+        <button class="l-cat-btn" data-cat="mer" data-i18n="cat.mer">Profiter de la mer</button>
       </div>
       <div id="decouvrirGroups"></div>
     </section>
 
     <!-- ── TAB : SERVICES ── -->
     <section id="tab-services" class="l-tab">
-      <h2 class="l-section-title">Services</h2>
-      <p class="l-intro">Ce qui se prépare aux Jardins de l'Oustal.</p>
+      <h2 class="l-section-title" data-i18n="srv.title">Services</h2>
+      <p class="l-intro" data-i18n="srv.intro">Ce qui se prépare aux Jardins de l'Oustal.</p>
 
       <div class="l-balneo">
         <div class="l-balneo-body">
-          <span class="l-balneo-eyebrow">Bientôt aux Jardins de l'Oustal</span>
-          <h3>Un espace <em>balnéo</em> rien que pour vous</h3>
-          <p>Les Jardins de l'Oustal ouvrent leur espace bien-être : spa, jacuzzi, massages et un bar pour prolonger la détente.</p>
+          <span class="l-balneo-eyebrow" data-i18n="balneo.eyebrow">Bientôt aux Jardins de l'Oustal</span>
+          <h3 data-i18n-html="balneo.title">Un espace <em>balnéo</em> rien que pour vous</h3>
+          <p data-i18n="balneo.text">Les Jardins de l'Oustal ouvrent leur espace bien-être : spa, jacuzzi, massages et un bar pour prolonger la détente.</p>
           <ul class="l-balneo-tags">
-            <li>Spa</li><li>Jacuzzi</li><li>Massages</li><li>Bar</li>
+            <li>Spa</li><li>Jacuzzi</li><li data-i18n="tag.massages">Massages</li><li>Bar</li>
           </ul>
           <div class="l-countdown" id="balneoCountdown">
-            <div><strong data-cd="mois">0</strong><span>mois</span></div>
-            <div><strong data-cd="jours">0</strong><span>jours</span></div>
-            <div><strong data-cd="heures">00</strong><span>heures</span></div>
-            <div><strong data-cd="minutes">00</strong><span>min</span></div>
-            <div><strong data-cd="secondes">00</strong><span>sec</span></div>
+            <div><strong data-cd="mois">0</strong><span data-i18n="cd.mois">mois</span></div>
+            <div><strong data-cd="jours">0</strong><span data-i18n="cd.jours">jours</span></div>
+            <div><strong data-cd="heures">00</strong><span data-i18n="cd.heures">heures</span></div>
+            <div><strong data-cd="minutes">00</strong><span data-i18n="cd.min">min</span></div>
+            <div><strong data-cd="secondes">00</strong><span data-i18n="cd.sec">sec</span></div>
           </div>
-          <p class="l-balneo-open" id="balneoOpen" hidden>C'est ouvert ! Demandez-nous les horaires.</p>
+          <p class="l-balneo-open" id="balneoOpen" data-i18n="balneo.open" hidden>C'est ouvert ! Demandez-nous les horaires.</p>
         </div>
       </div>
     </section>
 
     <!-- ── TAB : AIDE ── -->
     <section id="tab-aide" class="l-tab">
-      <h2 class="l-section-title">Aide</h2>
+      <h2 class="l-section-title" data-i18n="aide.title">Aide</h2>
 
       <div class="l-help-card">
-        <h3>Besoin de nous joindre ?</h3>
+        <h3 data-i18n="help.title">Besoin de nous joindre ?</h3>
         <div class="l-help-row">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
           <a href="tel:+33761507550">07 61 50 75 50</a>
@@ -311,11 +325,11 @@
             <span class="l-acc-icon">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg>
             </span>
-            <span class="l-acc-label">Le Wi-Fi ne fonctionne pas</span>
+            <span class="l-acc-label" data-i18n="faq1.q">Le Wi-Fi ne fonctionne pas</span>
             <span class="l-acc-plus">+</span>
           </button>
           <div class="l-acc-panel">
-            <div class="l-acc-panel-inner">
+            <div class="l-acc-panel-inner" data-i18n-html="faq1.a">
               <p>Débranchez la box de la prise, attendez 30 secondes, puis rebranchez-la. La box se trouve <span class="js-wifi-box"></span>.</p>
               <p>Si le problème persiste, appelez-nous directement au <a href="tel:+33761507550">07 61 50 75 50</a>.</p>
             </div>
@@ -327,11 +341,11 @@
             <span class="l-acc-icon">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg>
             </span>
-            <span class="l-acc-label">Où puis-je me garer ?</span>
+            <span class="l-acc-label" data-i18n="faq2.q">Où puis-je me garer ?</span>
             <span class="l-acc-plus">+</span>
           </button>
           <div class="l-acc-panel">
-            <div class="l-acc-panel-inner">
+            <div class="l-acc-panel-inner" data-i18n-html="faq2.a">
               <p>En arrivant dans la rue, le portail du domaine est ouvert : <strong>passez-le, des places vous attendent à l'intérieur.</strong></p>
               <p>S'il y a déjà des voitures, merci de ne pas vous garer à la file derrière elles, pour ne bloquer personne. Garez-vous plutôt <strong>juste avant le portail</strong> : il y a des places sur la droite et sur la gauche.</p>
               <p><strong>Attention à ne pas vous garer devant le portail du voisin.</strong></p>
@@ -344,11 +358,11 @@
             <span class="l-acc-icon">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4"/><path d="M12 17h.01"/><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0Z"/></svg>
             </span>
-            <span class="l-acc-label">Numéros utiles / urgences</span>
+            <span class="l-acc-label" data-i18n="faq3.q">Numéros utiles / urgences</span>
             <span class="l-acc-plus">+</span>
           </button>
           <div class="l-acc-panel">
-            <div class="l-acc-panel-inner">
+            <div class="l-acc-panel-inner" data-i18n-html="faq3.a">
               <p><strong>Urgences (tous services) :</strong> 112</p>
               <p><strong>SAMU :</strong> 15 &nbsp;·&nbsp; <strong>Pompiers :</strong> 18 &nbsp;·&nbsp; <strong>Police :</strong> 17</p>
               <p><strong>Pharmacie la plus proche :</strong> Pharmacie Combettes-Chevillard, centre commercial route de Perpignan (à environ 1 km) · <a href="tel:+33468320561">04 68 32 05 61</a></p>
@@ -357,7 +371,7 @@
         </div>
       </div>
 
-      <p class="l-faq-note">Une question qui n'est pas ici ? Écrivez-nous, on répond vite.</p>
+      <p class="l-faq-note" data-i18n="faq.note">Une question qui n'est pas ici ? Écrivez-nous, on répond vite.</p>
     </section>
 
   </main>
@@ -366,23 +380,23 @@
   <nav class="l-tabbar">
     <button class="l-tab-btn active" data-tab="tab-sejour">
       <span class="l-tab-icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/></svg></span>
-      Mon séjour
+      <span data-i18n="tab.sejour">Mon séjour</span>
     </button>
     <button class="l-tab-btn" data-tab="tab-adresses">
       <span class="l-tab-icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/></svg></span>
-      Bonnes adresses
+      <span data-i18n="tab.adresses">Bonnes adresses</span>
     </button>
     <button class="l-tab-btn" data-tab="tab-decouvrir">
       <span class="l-tab-icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m16.24 7.76-2.12 6.36-6.36 2.12 2.12-6.36 6.36-2.12z"/></svg></span>
-      À découvrir
+      <span data-i18n="tab.decouvrir">À découvrir</span>
     </button>
     <button class="l-tab-btn" data-tab="tab-services">
       <span class="l-tab-icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 20h18"/><path d="M5 20a7 7 0 0 1 14 0"/><path d="M9 4h6"/><path d="M12 4v3"/></svg></span>
-      Services
+      <span data-i18n="tab.services">Services</span>
     </button>
     <button class="l-tab-btn" data-tab="tab-aide">
       <span class="l-tab-icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg></span>
-      Aide
+      <span data-i18n="tab.aide">Aide</span>
     </button>
   </nav>
 
@@ -484,6 +498,7 @@
 
 </div>
 
-<script src="livret.js?v=15"></script>
+<script src="livret-i18n.js?v=17"></script>
+<script src="livret.js?v=17"></script>
 </body>
 </html>
