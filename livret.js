@@ -128,6 +128,20 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('heroImg').alt = cottage.name;
   document.getElementById('wifiName').textContent = cottage.wifi;
 
+  /* ── Statistiques (Umami, via analytics.js) ── */
+  // Chaque action est envoyée avec le cottage et la langue du livret.
+  function track(name, data = {}) {
+    if (window.ljdoTrack) window.ljdoTrack(name, { cottage: slug, langue: LANG, ...data });
+  }
+  // Attributs pour qu'Umami compte le clic sur un lien généré (adresses, lieux)
+  const attr = (v) => String(v).replace(/"/g, '&quot;');
+  function trackAttrs(event, data) {
+    return `data-umami-event="${attr(event)}" data-umami-event-cottage="${attr(slug)}" data-umami-event-langue="${attr(LANG)}" ` +
+      Object.entries(data).map(([k, v]) => `data-umami-event-${k}="${attr(v)}"`).join(' ');
+  }
+  // Laisse le temps à l'envoi de partir avant de quitter la page (WhatsApp)
+  const goTo = (url) => setTimeout(() => { window.location.href = url; }, 250);
+
   /* ── Choix de la langue (boutons de l'écran d'accueil et du panneau) ── */
   const langSheet = document.getElementById('langSheet');
   document.querySelectorAll('.js-lang-grid').forEach(grid => {
@@ -141,6 +155,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function chooseLang(code) {
     if (!I18N[code]) return;
     try { localStorage.setItem('livretLang', code); } catch (e) {}
+    track('Langue choisie', { langue: code, moment: LANG_CHOSEN ? 'changement' : 'accueil' });
     LANG_CHOSEN = true;
     applyLang(code);
     langSheet.hidden = true;
@@ -209,13 +224,16 @@ document.addEventListener('DOMContentLoaded', () => {
       btn.classList.add('active');
       document.getElementById(btn.dataset.tab).classList.add('active');
       window.scrollTo({ top: 0, behavior: 'smooth' });
+      track('Onglet ouvert', { onglet: btn.dataset.tab.replace('tab-', '') });
     });
   });
 
   /* ── Accordéons ──────────────────────── */
   document.querySelectorAll('.l-acc-btn').forEach(btn => {
     btn.addEventListener('click', () => {
-      btn.closest('.l-acc').classList.toggle('open');
+      const acc = btn.closest('.l-acc');
+      if (!acc.classList.contains('open')) track('Rubrique ouverte', { rubrique: acc.dataset.acc });
+      acc.classList.toggle('open');
     });
   });
 
@@ -235,8 +253,8 @@ document.addEventListener('DOMContentLoaded', () => {
     adressesGroupsEl.innerHTML = `<div class="l-cat-group active">` + items.map(item => {
       const a = { ...item, ...itemText(cat, item) };
       const btn = a.url
-        ? `<a href="${a.url}" target="_blank" rel="noopener" class="l-btn-outline">${t('btn.site')}</a>`
-        : `<a href="${mapsUrl(item.name, a.loc)}" target="_blank" rel="noopener" class="l-btn-outline">${t('btn.map')}</a>`;
+        ? `<a href="${a.url}" target="_blank" rel="noopener" class="l-btn-outline" ${trackAttrs('Adresse - site', { nom: item.name, categorie: cat })}>${t('btn.site')}</a>`
+        : `<a href="${mapsUrl(item.name, a.loc)}" target="_blank" rel="noopener" class="l-btn-outline" ${trackAttrs('Adresse - carte', { nom: item.name, categorie: cat })}>${t('btn.map')}</a>`;
       return `
         <div class="l-place-card">
           ${a.star ? `<span class="l-place-badge">${t('badge')}</span>` : ''}
@@ -286,8 +304,8 @@ document.addEventListener('DOMContentLoaded', () => {
         <div class="l-place-name">${p.name}</div>
         <p class="l-place-desc">${p.desc}</p>
         <div class="l-place-actions">
-          <a href="${p.url}" target="_blank" rel="noopener" class="l-btn-outline">${t('btn.site')}</a>
-          ${p.photos.length ? `<button class="l-btn-fill-green" data-photos-idx="${i}">${t('btn.photos')}</button>` : ''}
+          <a href="${p.url}" target="_blank" rel="noopener" class="l-btn-outline" ${trackAttrs('Lieu - site', { lieu: p.slug, categorie: cat })}>${t('btn.site')}</a>
+          ${p.photos.length ? `<button class="l-btn-fill-green" data-photos-idx="${i}" ${trackAttrs('Lieu - photos', { lieu: p.slug, categorie: cat })}>${t('btn.photos')}</button>` : ''}
         </div>
       </div>
     `).join('') + `</div>`;
@@ -357,7 +375,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   document.getElementById('lateCheckoutBtn').addEventListener('click', () => {
     const message = waMessage('wa.late', { cottage: cottage.name });
-    window.location.href = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+    track('Départ tardif demandé');
+    goTo(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`);
   });
 
   /* ── Services sur demande ─────────────── */
@@ -420,7 +439,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const message = waMessage('wa.issue',
       { cottage: cottage.name, text: text || t('wa.pending') },
       { cottage: cottage.name, text: text ? '(voir ci-dessus)' : I18N.fr['wa.pending'] });
-    window.location.href = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+    goTo(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`);
   });
 
   feedbackUndo.addEventListener('click', () => {
@@ -434,6 +453,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   function sendFeedback(rating, comment) {
+    track('Avis séjour', { avis: rating, commentaire: comment ? 'oui' : 'non' });
     if (!navigator.onLine) return;
     const data = new FormData();
     data.append('name', "Livret d'arrivée — Les Jardins de l'Oustal");
@@ -679,7 +699,8 @@ document.addEventListener('DOMContentLoaded', () => {
     installBanner.classList.remove('show');
     if (deferredPrompt) {
       deferredPrompt.prompt();
-      await deferredPrompt.userChoice;
+      const choice = await deferredPrompt.userChoice;
+      if (choice && choice.outcome === 'accepted') track('Livret installé');
       deferredPrompt = null;
     }
   });
