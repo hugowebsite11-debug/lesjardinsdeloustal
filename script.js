@@ -2,10 +2,33 @@
    Les Gîtes de l'Aude — JavaScript
    ───────────────────────────────────────── */
 
+// Notification "travaux / tarif réduit" sur les pages des cottages.
+// Passer à false pour la retirer quand les travaux sont terminés.
+const WORKS_NOTICE = true;
+
 document.addEventListener('DOMContentLoaded', () => {
 
   /* ── Navbar scroll ──────────────────── */
   const navbar = document.getElementById('navbar');
+
+  /* ── Notification travaux (pages cottages) ── */
+  // Elle s'affiche à chaque arrivée sur une page cottage, même si elle a été fermée avant.
+  if (WORKS_NOTICE && document.body.classList.contains('cottage-page')) {
+    const notice = document.createElement('aside');
+    notice.className = 'works-notice';
+    notice.setAttribute('role', 'status');
+    notice.innerHTML = `
+      <button class="works-notice-close" type="button" aria-label="Fermer">✕</button>
+      <span class="works-notice-badge">Tarif réduit en ce moment</span>
+      <p>Nous agrandissons le domaine pour accueillir un <strong>spa</strong> et une <strong>piscine intérieure</strong>. Les travaux peuvent occasionner des nuisances sonores pendant votre séjour&nbsp;: c'est pourquoi nos tarifs sont actuellement réduits.</p>
+    `;
+    document.body.appendChild(notice);
+    setTimeout(() => notice.classList.add('show'), 700);
+    notice.querySelector('.works-notice-close').addEventListener('click', () => {
+      notice.classList.remove('show');
+      setTimeout(() => notice.remove(), 400);
+    });
+  }
 
   window.addEventListener('scroll', () => {
     if (window.scrollY > 60) {

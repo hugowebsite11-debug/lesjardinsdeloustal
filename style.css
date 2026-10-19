@@ -1794,3 +1794,40 @@ footer { border-top: 1px solid var(--border); padding: 4rem 2rem 2rem; }
   }
 }
 
+
+/* ── Notification travaux / tarif réduit (pages cottages) ── */
+.works-notice {
+  position: fixed; z-index: 150;
+  top: 84px; left: 50%;
+  width: calc(100% - 2rem); max-width: 560px;
+  padding: 1rem 2.8rem 1.05rem 1.2rem;
+  background: rgba(16,28,16,.96);
+  -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+  border: 1px solid rgba(201,169,110,.45);
+  border-radius: 14px;
+  box-shadow: 0 14px 40px rgba(0,0,0,.4);
+  color: var(--cream);
+  opacity: 0; transform: translate(-50%, -14px); pointer-events: none;
+  transition: opacity .45s var(--ease), transform .45s var(--ease);
+}
+.works-notice.show { opacity: 1; transform: translate(-50%, 0); pointer-events: auto; }
+.works-notice-badge {
+  display: inline-block;
+  background: var(--gold); color: var(--bg);
+  font-size: .72rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+  padding: .32rem .75rem; border-radius: 20px;
+  margin-bottom: .55rem;
+}
+.works-notice p { font-size: .84rem; line-height: 1.6; color: rgba(240,235,224,.88); margin: 0; }
+.works-notice strong { color: var(--gold-light); font-weight: 600; }
+.works-notice-close {
+  position: absolute; top: .55rem; right: .6rem;
+  width: 32px; height: 32px; border-radius: 50%;
+  border: none; background: transparent;
+  color: rgba(240,235,224,.7); font-size: 1rem; cursor: pointer;
+}
+.works-notice-close:hover { background: rgba(255,255,255,.08); color: var(--cream); }
+@media (max-width: 600px) {
+  .works-notice { top: 76px; padding: .9rem 2.6rem .95rem 1rem; }
+  .works-notice p { font-size: .8rem; }
+}

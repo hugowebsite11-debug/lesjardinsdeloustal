@@ -455,6 +455,8 @@ document.addEventListener('DOMContentLoaded', () => {
   function sendFeedback(rating, comment) {
     track('Avis séjour', { avis: rating, commentaire: comment ? 'oui' : 'non' });
     if (!navigator.onLine) return;
+    // Pas d'envoi pendant les tests en local (sinon FormSubmit demande une activation)
+    if (/^(localhost|127\.0\.0\.1)$/.test(location.hostname)) return;
     const data = new FormData();
     data.append('name', "Livret d'arrivée — Les Jardins de l'Oustal");
     data.append('_subject', `Avis séjour — ${cottage.name} — ${rating}`);
