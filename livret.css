@@ -1197,3 +1197,23 @@ button { font-family: inherit; }
 .spa-simple-emoji { font-size: 2.3rem; line-height: 1; flex: 0 0 auto; }
 .spa-simple strong { display: block; font-family: 'Playfair Display', serif; font-size: 1.15rem; font-weight: 600; line-height: 1.3; color: var(--l-green); }
 .spa-simple p { font-size: .82rem; color: #7a6a45; margin-top: .25rem; line-height: 1.45; }
+
+/* Aide : horaires de l'accueil téléphonique */
+.l-help-hours {
+  margin: 0 0 .9rem; padding: .95rem 1rem;
+  border-radius: 14px;
+  background: rgba(255,255,255,.07);
+  border: 1px solid rgba(242,239,227,.14);
+}
+.l-help-hours p { font-size: .82rem; line-height: 1.55; color: rgba(242,239,227,.82); }
+.l-help-hours p + p { margin-top: .55rem; }
+.l-help-hours strong { color: #fdfbf4; }
+.l-help-open { font-size: .92rem !important; color: #fdfbf4 !important; }
+.l-help-open strong { color: var(--l-gold) !important; }
+.l-help-wa {
+  display: inline-flex; align-items: center; gap: .4rem;
+  margin-top: .85rem; padding: .6rem 1rem;
+  border-radius: 10px;
+  background: #25d366; color: #0b3d1e;
+  font-size: .8rem; font-weight: 700; text-decoration: none;
+}
