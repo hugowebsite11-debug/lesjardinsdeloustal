@@ -17,8 +17,9 @@ Page **cachée** (non liée dans le menu, `noindex`), accessible uniquement via 
 - 5 onglets en bas : Mon séjour / Bonnes adresses / À découvrir / Services / Aide
 - Liens (à mettre sur les QR codes, déjà générés dans `images/qr/`) :
   `https://www.lesjardinsdeloustal.com/livret.html?cottage=<slug>`
-- Wifi : mot de passe `Ljdo-11100` (identique pour tous les cottages), nom du réseau encore "à renseigner"
-- Départ tardif (jusqu'à 13h) : supplément de 20€, demande envoyée via WhatsApp (07 61 50 75 50)
+- Wifi : mot de passe `Ljdo-11100` (identique partout) ; réseau `Xiaomi_B3B2` pour La Bois Flottée, `Xiaomi_B2BC` pour les 4 autres (champ `wifi` dans `COTTAGES`)
+- Départ tardif (jusqu'à 13h, 20€, demande WhatsApp) : **masqué pour l'instant** (`LATE_CHECKOUT_ACTIVE = false` dans `livret.js`). Réactivable : bouton actif seulement de 9h00 à 18h54 (heure de Paris), option validée uniquement après réponse des propriétaires
+- Jacuzzi : bouton « Voir le mode d'emploi » qui ouvre une page plein écran générée par `livret-spa.js` (4 langues), selon le modèle de spa du cottage (champ `spa` dans `COTTAGES`) : `menu` = La Bois Flottée et Sous les Pins 2 (Aux, Menu, codes R/IR/RR, pas de voyant HEAT), `heat` = La Falaise (codes St/Ec/Sl, voyant HEAT), `noheat` = Sous les Pins 1 et Chalet Zen (codes St/Ec/Sl, sans voyant HEAT)
 - Avis séjour ("un souci") : envoyé par email (formsubmit.co) + WhatsApp
 - Programme fidélité **"Les amis de l'Oustal"** : notification + carte d'accueil + formulaire d'inscription, envoie en `POST`/`no-cors` vers un Google Apps Script déjà déployé par le client (URL et contrat de champs dans le code — `livret.js`, section "Les amis de l'Oustal"). Le Google Sheet et l'automatisation d'email (envoyé à 15h le jour du départ) sont gérés côté client, pas dans ce dépôt.
 - Photos "À découvrir" (`images/decouvrir/<slug>/`) : sourcées légalement (Wikimedia Commons / Pexels), crédits dans `images/decouvrir/credits.json` — toujours vérifier la licence avant d'ajouter une nouvelle photo (pas d'images Google Images non libres de droits)

@@ -6,16 +6,20 @@
 // (carte sur Mon séjour + notification). Passer à true pour le réactiver.
 const AMIS_ACTIVE = false;
 
+// Départ tardif (carte « Je souhaite rester plus tard ») : masqué pour l'instant.
+// Passer à true pour le réactiver (demandes de 9h à 18h55, voir plus bas).
+const LATE_CHECKOUT_ACTIVE = false;
+
 // Ouverture de l'espace balnéo (compte à rebours, onglet Services).
 // Date au format (année, mois - 1, jour) : 7 février 2027 à minuit.
 const BALNEO_OPENING = new Date(2027, 1, 7, 0, 0, 0);
 
 const COTTAGES = {
-  'falaise': { name: 'La Falaise', hero: 'images/falaise.png', wifi: 'Xiaomi_B2BC', box: 'tv' },
-  'chalet-zen': { name: 'Le Chalet Zen', hero: 'images/chalet-0.png', wifi: 'Xiaomi_B2BC', box: 'tv' },
-  'sous-les-pins-1': { name: 'Sous les Pins 1', hero: 'images/slp.png', wifi: 'Xiaomi_B2BC', box: 'robes' },
-  'sous-les-pins-2': { name: 'Sous les Pins 2', hero: 'images/slp2.avif', wifi: 'Xiaomi_B2BC', box: 'robes' },
-  'bois-flottee': { name: 'La Bois Flottée', hero: 'images/bf-hero.png', wifi: 'Xiaomi_B3B2', box: 'tv' },
+  'falaise': { name: 'La Falaise', hero: 'images/falaise.png', wifi: 'Xiaomi_B2BC', box: 'tv', spa: 'heat' },
+  'chalet-zen': { name: 'Le Chalet Zen', hero: 'images/chalet-0.png', wifi: 'Xiaomi_B2BC', box: 'tv', spa: 'noheat' },
+  'sous-les-pins-1': { name: 'Sous les Pins 1', hero: 'images/slp.png', wifi: 'Xiaomi_B2BC', box: 'robes', spa: 'noheat' },
+  'sous-les-pins-2': { name: 'Sous les Pins 2', hero: 'images/slp2.avif', wifi: 'Xiaomi_B2BC', box: 'robes', spa: 'menu' },
+  'bois-flottee': { name: 'La Bois Flottée', hero: 'images/bf-hero.png', wifi: 'Xiaomi_B3B2', box: 'tv', spa: 'menu' },
 };
 
 const ADRESSES = {
@@ -370,14 +374,83 @@ document.addEventListener('DOMContentLoaded', () => {
     if (item) openLightbox(item.photos);
   });
 
+  /* ── Mode d'emploi du jacuzzi (modèle de spa propre au cottage, dans livret-spa.js) ── */
+  const spaSheet = document.getElementById('spaSheet');
+  const spaContent = document.getElementById('spaContent');
+
+  function renderSpa() {
+    spaContent.innerHTML = renderSpaManual(cottage.spa, LANG, cottage.name);
+    document.getElementById('spaClose').setAttribute('aria-label', (SPA_TEXT[LANG] || SPA_TEXT.fr).close);
+  }
+  function closeSpa() {
+    spaSheet.classList.remove('show');
+    document.body.style.overflow = '';
+    setTimeout(() => { spaSheet.hidden = true; }, 350);
+  }
+
+  document.getElementById('jacuzziManualBtn').addEventListener('click', () => {
+    track("Mode d'emploi jacuzzi");
+    renderSpa();
+    spaSheet.hidden = false;
+    spaContent.scrollTop = 0;
+    document.body.style.overflow = 'hidden';
+    requestAnimationFrame(() => spaSheet.classList.add('show'));
+  });
+  document.getElementById('spaClose').addEventListener('click', closeSpa);
+
   /* ── Rester plus tard (WhatsApp, plus rapide qu'un email) ── */
   const WHATSAPP_NUMBER = '33761507550';
 
-  document.getElementById('lateCheckoutBtn').addEventListener('click', () => {
+  // Demandes acceptées de 9h00 à 18h54, heure de France (quel que soit le réglage du téléphone)
+  const LATE_OPEN_MIN = 9 * 60;        // 9h00
+  const LATE_CLOSE_MIN = 18 * 60 + 55; // 18h55
+  const lateBtn = document.getElementById('lateCheckoutBtn');
+  const lateStatus = document.getElementById('lateStatus');
+  const lateKey = `lateRequested-${slug}`;
+
+  function parisMinutes() {
+    try {
+      const parts = new Intl.DateTimeFormat('en-GB', { timeZone: 'Europe/Paris', hour: '2-digit', minute: '2-digit', hourCycle: 'h23' }).formatToParts(new Date());
+      const get = (type) => Number(parts.find(p => p.type === type).value);
+      return get('hour') * 60 + get('minute');
+    } catch (e) {
+      const d = new Date();
+      return d.getHours() * 60 + d.getMinutes();
+    }
+  }
+  const isLateOpen = () => { const m = parisMinutes(); return m >= LATE_OPEN_MIN && m < LATE_CLOSE_MIN; };
+
+  // Demande déjà faite dans les 20 dernières heures ?
+  function lateAlreadyRequested() {
+    try { return Date.now() - Number(localStorage.getItem(lateKey) || 0) < 20 * 3600 * 1000; } catch (e) { return false; }
+  }
+
+  function updateLateCard() {
+    if (!LATE_CHECKOUT_ACTIVE) return;
+    const open = isLateOpen();
+    lateBtn.disabled = !open;
+    lateBtn.classList.toggle('is-closed', !open);
+    let msg = '';
+    if (lateAlreadyRequested()) msg = t('late.sent');
+    else if (!open) msg = t('late.closed');
+    lateStatus.textContent = msg;
+    lateStatus.hidden = !msg;
+  }
+
+  lateBtn.addEventListener('click', () => {
+    if (!isLateOpen()) { updateLateCard(); return; }
+    try { localStorage.setItem(lateKey, String(Date.now())); } catch (e) {}
+    updateLateCard();
     const message = waMessage('wa.late', { cottage: cottage.name });
     track('Départ tardif demandé');
     goTo(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`);
   });
+
+  if (LATE_CHECKOUT_ACTIVE) {
+    document.getElementById('lateCheckoutCard').hidden = false;
+    updateLateCard();
+    setInterval(updateLateCard, 30 * 1000);
+  }
 
   /* ── Services sur demande ─────────────── */
   document.querySelectorAll('.l-service-btn').forEach(btn => {
@@ -673,6 +746,8 @@ document.addEventListener('DOMContentLoaded', () => {
     renderAdresses(currentAdresseCat);
     renderCategory(currentDecouvrirCat);
     if (lockedRating) lockFeedback(lockedRating);
+    updateLateCard();
+    if (!spaSheet.hidden) renderSpa();
   }
 
   applyLang(LANG);
