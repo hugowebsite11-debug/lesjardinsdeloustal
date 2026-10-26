@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Notre Domaine — Les Jardins de l'Oustal</title>
   <meta name="theme-color" content="#0b120b" />
-  <link rel="stylesheet" href="style.css?v=25" />
+  <link rel="stylesheet" href="style.css?v=34" />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2020/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌿</text></svg>" />
   <style>
     .page-hero--compact { height: 42vh; min-height: 320px; }
@@ -123,9 +123,9 @@
 </section>
 
 <!-- ══ CHIFFRES CLÉS ══════════════════════ -->
-<section style="padding:1.4rem 2rem;background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+<section class="dstats-section" style="padding:1.4rem 2rem;background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
   <div class="container">
-    <div style="display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:0 2.5rem;text-align:center;">
+    <div class="dstats-box" style="display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:0 2.5rem;text-align:center;">
       <div style="display:flex;align-items:baseline;gap:.5rem;padding:.3rem 0;">
         <span style="font-family:'Playfair Display',serif;font-size:1.5rem;color:var(--gold);font-style:italic;line-height:1;">5</span>
         <span style="font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);">Cottages</span>
@@ -149,42 +149,75 @@
   </div>
 </section>
 
-<!-- ══ GALERIE PLEIN ÉCRAN (sticky scroll, desktop) ══════════ -->
-<div class="dgallery-wrapper" id="dGallery">
-  <div class="dgallery-sticky">
-
-    <!-- Images du domaine -->
-    <div class="dgallery-img active"  style="background-image:url('images/domaine1.jpg')"></div>
-    <div class="dgallery-img"         style="background-image:url('images/domaine2.png')"></div>
-    <div class="dgallery-img"         style="background-image:url('images/domaine3.png')"></div>
-    <div class="dgallery-img"         style="background-image:url('images/domaine4.png')"></div>
-    <div class="dgallery-img"         style="background-image:url('images/domaine5.png')"></div>
-    <div class="dgallery-img"         style="background-image:url('images/domaine6.png')"></div>
-    <div class="dgallery-img"         style="background-image:url('images/domaine7.png')"></div>
-    <div class="dgallery-img"         style="background-image:url('images/domaine-salon.jpg')"></div>
-    <div class="dgallery-img"         style="background-image:url('images/domaine-jacuzzi.jpg')"></div>
-    <div class="dgallery-img"         style="background-image:url('images/domaine-terrasse.jpg')"></div>
-    <div class="dgallery-img"         style="background-image:url('images/domaine-escalier.jpg')"></div>
-    <div class="dgallery-img"         style="background-image:url('images/domaine-table.jpg')"></div>
-
-    <div class="dgallery-overlay"></div>
-
-    <!-- Texte central qui s'accumule -->
-    <div class="dgallery-content">
-      <h2 class="dgallery-title">Notre domaine <em>en images</em></h2>
-      <div class="dgallery-lines" id="dLines">
-        <p class="dgallery-line" data-from="1">Niché entre ciel et garrigue, le domaine s'étend sur un terrain arboré où chaque recoin invite à la contemplation.</p>
-        <p class="dgallery-line" data-from="2">Des allées ombragées serpentent entre les cottages, menant à des terrasses baignées de lumière dorée.</p>
-        <p class="dgallery-line" data-from="3">Ici, le temps s'étire. On se lève au chant des cigales, on s'endort sous les étoiles. C'est cela, l'Oustal — un art de vivre languedocien entre nature préservée et douceur de vivre.</p>
-        <p class="dgallery-line" data-from="4">Découvrez nos magnifiques Servals — résidents sauvages et attachants, gardiens silencieux de l'Oustal.</p>
-      </div>
+<!-- ══ NOTRE DOMAINE EN IMAGES — mise en page magazine (ordinateur ; le téléphone a son carrousel) ══ -->
+<section class="mag-section" id="dGallery">
+  <div class="mag-fluid" aria-hidden="true"></div>
+  <div class="container">
+    <div class="mag-head">
+      <span class="section-label">Le domaine</span>
+      <h2 class="section-title">Notre domaine <em>en images</em></h2>
     </div>
+    <div class="mag-grid">
+      <figure class="mag-item mag-a" data-speed="-0.04" data-src="images/domaine-salon.jpg" data-caption="Le salon sous la pergola">
+        <img src="images/domaine-salon.jpg" alt="Salon de jardin sous la pergola au coucher du soleil" loading="lazy" />
+        <figcaption>Le salon sous la pergola</figcaption>
+      </figure>
+      <blockquote class="mag-quote mag-q1">
+        <p>Niché entre ciel et garrigue, le domaine s’étend sur un terrain arboré où chaque recoin invite à la contemplation.</p>
+      </blockquote>
+      <figure class="mag-item mag-b" data-speed="0.03" data-src="images/domaine-jacuzzi.jpg" data-caption="Le jacuzzi sous les pins">
+        <img src="images/domaine-jacuzzi.jpg" alt="Jacuzzi privatif sous les pins" loading="lazy" />
+        <figcaption>Le jacuzzi sous les pins</figcaption>
+      </figure>
+      <figure class="mag-item mag-c" data-speed="0.03" data-src="images/domaine-terrasse.jpg" data-caption="Café sur la terrasse">
+        <img src="images/domaine-terrasse.jpg" alt="Café sur la terrasse au lever du soleil" loading="lazy" />
+        <figcaption>Café sur la terrasse</figcaption>
+      </figure>
+      <figure class="mag-item mag-d" data-speed="-0.03" data-src="images/domaine1.jpg" data-caption="Le domaine">
+        <img src="images/domaine1.jpg" alt="Vue générale du domaine" loading="lazy" />
+        <figcaption>Le domaine</figcaption>
+      </figure>
 
-    <div class="dgallery-progress"><div class="dgallery-bar" id="dBar"></div></div>
-    <div class="dgallery-counter"><span id="dCurrent">01</span> <span style="opacity:.4;margin:0 .3rem">/</span> <span id="dTotal">07</span></div>
-    <div class="dgallery-hint">↓ Défiler pour explorer</div>
+      <blockquote class="mag-quote mag-q2">
+        <p>Ici, le temps s’étire. On se lève au chant des cigales, on s’endort sous les étoiles.</p>
+        <cite>L’art de vivre à l’Oustal</cite>
+      </blockquote>
+
+      <figure class="mag-item mag-e" data-speed="0.03" data-src="images/domaine-escalier.jpg" data-caption="Les allées du jardin">
+        <img src="images/domaine-escalier.jpg" alt="Escalier en pierre dans le jardin du domaine" loading="lazy" />
+        <figcaption>Les allées du jardin</figcaption>
+      </figure>
+      <figure class="mag-item mag-f" data-speed="-0.03" data-src="images/domaine2.png" data-caption="Le domaine">
+        <img src="images/domaine2.png" alt="Le domaine" loading="lazy" />
+        <figcaption>Le domaine</figcaption>
+      </figure>
+      <figure class="mag-item mag-g" data-speed="0.035" data-src="images/domaine-table.jpg" data-caption="Coucher de soleil sur le jardin">
+        <img src="images/domaine-table.jpg" alt="Table en bois face au jardin au coucher du soleil" loading="lazy" />
+        <figcaption>Coucher de soleil sur le jardin</figcaption>
+      </figure>
+      <figure class="mag-item mag-h" data-speed="0.02" data-src="images/domaine4.png" data-caption="Le domaine">
+        <img src="images/domaine4.png" alt="Le domaine" loading="lazy" />
+        <figcaption>Le domaine</figcaption>
+      </figure>
+
+      <blockquote class="mag-quote mag-q3">
+        <p>Et parfois, au détour d’une allée, nos servals : résidents sauvages et attachants, gardiens silencieux de l’Oustal.</p>
+      </blockquote>
+      <figure class="mag-item mag-i" data-speed="-0.035" data-src="images/domaine5.png" data-caption="Nos servals">
+        <img src="images/domaine5.png" alt="Les servals du domaine" loading="lazy" />
+        <figcaption>Nos servals</figcaption>
+      </figure>
+      <figure class="mag-item mag-j" data-speed="0.04" data-src="images/domaine3.png" data-caption="Le domaine">
+        <img src="images/domaine3.png" alt="Le domaine" loading="lazy" />
+        <figcaption>Le domaine</figcaption>
+      </figure>
+      <figure class="mag-item mag-k" data-speed="-0.02" data-src="images/domaine6.png" data-caption="Le domaine">
+        <img src="images/domaine6.png" alt="Le domaine" loading="lazy" />
+        <figcaption>Le domaine</figcaption>
+      </figure>
+    </div>
   </div>
-</div>
+</section>
 
 <!-- ══ LE DOMAINE EN IMAGES (téléphone uniquement : la galerie plein écran ci-dessus est masquée sur mobile) ══ -->
 <section class="dmg-section">
@@ -354,46 +387,25 @@
 
 <script src="script.js?v=6"></script>
 <script>
-/* ── Galerie plein écran (sticky scroll) ── */
+/* ── Notre domaine en images : léger effet de profondeur au défilement (ordinateur) ── */
 (function () {
-  const wrapper = document.getElementById('dGallery');
-  if (!wrapper || window.matchMedia('(max-width:768px)').matches) return;
-
-  const imgs  = Array.from(wrapper.querySelectorAll('.dgallery-img'));
-  const lines = Array.from(wrapper.querySelectorAll('.dgallery-line'));
-  const bar   = document.getElementById('dBar');
-  const curr  = document.getElementById('dCurrent');
-  const n     = imgs.length;
-  const total = document.getElementById('dTotal');
-
-  wrapper.style.height = (n * 65) + 'vh';
-  if (total) total.textContent = String(n).padStart(2, '0');
-
-  let lastSlide = -1;
+  const items = Array.from(document.querySelectorAll('.mag-section [data-speed]'));
+  if (!items.length) return;
+  const desktop = window.matchMedia('(min-width: 769px)');
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
 
   function update() {
-    const rect     = wrapper.getBoundingClientRect();
-    const scrolled = -rect.top;
-    const total    = wrapper.offsetHeight - window.innerHeight;
-    if (total <= 0) return;
-
-    const progress = Math.max(0, Math.min(1, scrolled / total));
-    const slide    = Math.min(n - 1, Math.floor(progress * n));
-
-    if (slide !== lastSlide) {
-      imgs.forEach((img, i) => img.classList.toggle('active', i === slide));
-      if (curr) curr.textContent = String(slide + 1).padStart(2, '0');
-      lastSlide = slide;
-    }
-
-    lines.forEach(function (line) {
-      line.classList.toggle('visible', slide >= +line.dataset.from);
+    if (!desktop.matches || reduced.matches) { items.forEach(function (el) { el.style.transform = ''; }); return; }
+    const mid = window.innerHeight / 2;
+    items.forEach(function (el) {
+      const r = el.getBoundingClientRect();
+      if (r.bottom < -200 || r.top > window.innerHeight + 200) return;
+      const offset = (r.top + r.height / 2 - mid) * parseFloat(el.dataset.speed);
+      el.style.transform = 'translate3d(0,' + offset.toFixed(1) + 'px,0)';
     });
-
-    if (bar) bar.style.width = (progress * 100) + '%';
   }
-
   window.addEventListener('scroll', update, { passive: true });
+  window.addEventListener('resize', update);
   update();
 })();
 
@@ -405,7 +417,7 @@
   const lbClose = document.getElementById('lightboxClose');
   if (!lb) return;
 
-  document.querySelectorAll('.masonry-item, .dmg-item').forEach(function (item) {
+  document.querySelectorAll('.masonry-item, .dmg-item, .mag-item').forEach(function (item) {
     item.addEventListener('click', function () {
       lbImg.src = item.dataset.src;
       lbImg.alt = item.dataset.caption || '';

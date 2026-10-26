@@ -245,16 +245,37 @@
     $('xmGo').href = mapsUrl(p);
     $('xmCount').textContent = `${current + 1} / ${PLACES.length}`;
 
-    if (open && isMobile()) {
+    if (open && isMobile() && !card.classList.contains('open')) {
       card.classList.add('open');
       backdrop.classList.add('open');
+      card.scrollTop = 0;
+      lockPageScroll();
     }
     if (open && window.ljdoTrack) window.ljdoTrack('Carte - lieu', { lieu: p.id });
   }
 
+  // Bloque le défilement de la page tant que la fiche est ouverte (téléphone) ;
+  // seule la fiche défile si besoin.
+  let lockedY = 0;
+  function lockPageScroll() {
+    lockedY = window.scrollY;
+    const b = document.body.style;
+    b.position = 'fixed'; b.top = `-${lockedY}px`; b.left = '0'; b.right = '0'; b.width = '100%';
+  }
+  function unlockPageScroll() {
+    const b = document.body.style;
+    b.position = ''; b.top = ''; b.left = ''; b.right = ''; b.width = '';
+    const html = document.documentElement, prev = html.style.scrollBehavior;
+    html.style.scrollBehavior = 'auto';
+    window.scrollTo(0, lockedY);
+    html.style.scrollBehavior = prev;
+  }
+
   function closeCard() {
+    if (!card.classList.contains('open')) return;
     card.classList.remove('open');
     backdrop.classList.remove('open');
+    unlockPageScroll();
   }
 
   pins.forEach((b) => b.addEventListener('click', () => select(Number(b.dataset.i))));
@@ -271,6 +292,18 @@
     if (startY !== null && e.changedTouches[0].clientY - startY > 70 && card.scrollTop <= 0) closeCard();
     startY = null;
   });
+
+  // Sur téléphone, la fiche et son voile sont rattachés directement à la page :
+  // ainsi rien (photos des blocs suivants, etc.) ne peut passer devant.
+  const cardHome = card.parentNode;
+  function placeCard() {
+    const target = isMobile() ? document.body : cardHome;
+    if (backdrop.parentNode !== target) target.appendChild(backdrop);
+    if (card.parentNode !== target) target.appendChild(card);
+    if (!isMobile()) closeCard();
+  }
+  window.addEventListener('resize', placeCard);
+  placeCard();
 
   // Au départ : les Grands Buffets affichés sur ordinateur (fiche fermée sur téléphone)
   select(0, { open: false });
