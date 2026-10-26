@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Notre Domaine — Les Jardins de l'Oustal</title>
   <meta name="theme-color" content="#0b120b" />
-  <link rel="stylesheet" href="style.css?v=5" />
+  <link rel="stylesheet" href="style.css?v=8" />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2020/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌿</text></svg>" />
   <style>
     .page-hero--compact { height: 42vh; min-height: 320px; }
@@ -161,6 +161,11 @@
     <div class="dgallery-img"         style="background-image:url('images/domaine5.png')"></div>
     <div class="dgallery-img"         style="background-image:url('images/domaine6.png')"></div>
     <div class="dgallery-img"         style="background-image:url('images/domaine7.png')"></div>
+    <div class="dgallery-img"         style="background-image:url('images/domaine-salon.jpg')"></div>
+    <div class="dgallery-img"         style="background-image:url('images/domaine-jacuzzi.jpg')"></div>
+    <div class="dgallery-img"         style="background-image:url('images/domaine-terrasse.jpg')"></div>
+    <div class="dgallery-img"         style="background-image:url('images/domaine-escalier.jpg')"></div>
+    <div class="dgallery-img"         style="background-image:url('images/domaine-table.jpg')"></div>
 
     <div class="dgallery-overlay"></div>
 
@@ -180,6 +185,29 @@
     <div class="dgallery-hint">↓ Défiler pour explorer</div>
   </div>
 </div>
+
+<!-- ══ LE DOMAINE EN IMAGES (téléphone uniquement : la galerie plein écran ci-dessus est masquée sur mobile) ══ -->
+<section class="dmg-section">
+  <div class="dmg-head">
+    <span class="section-label">Le domaine</span>
+    <h2 class="section-title">Notre domaine <em>en images</em></h2>
+  </div>
+  <div class="dmg-track">
+    <div class="dmg-item" data-src="images/domaine-salon.jpg" data-caption="Le salon sous la pergola"><img src="images/domaine-salon.jpg" alt="Salon de jardin sous la pergola au coucher du soleil" loading="lazy" /></div>
+    <div class="dmg-item" data-src="images/domaine-jacuzzi.jpg" data-caption="Jacuzzi privatif sous les pins"><img src="images/domaine-jacuzzi.jpg" alt="Jacuzzi privatif sous les pins" loading="lazy" /></div>
+    <div class="dmg-item" data-src="images/domaine-terrasse.jpg" data-caption="Café sur la terrasse"><img src="images/domaine-terrasse.jpg" alt="Café sur la terrasse au lever du soleil" loading="lazy" /></div>
+    <div class="dmg-item" data-src="images/domaine-escalier.jpg" data-caption="Les allées du jardin"><img src="images/domaine-escalier.jpg" alt="Escalier en pierre dans le jardin du domaine" loading="lazy" /></div>
+    <div class="dmg-item" data-src="images/domaine-table.jpg" data-caption="Coucher de soleil sur le jardin"><img src="images/domaine-table.jpg" alt="Table en bois face au jardin au coucher du soleil" loading="lazy" /></div>
+    <div class="dmg-item" data-src="images/domaine1.jpg" data-caption="Le domaine"><img src="images/domaine1.jpg" alt="Vue générale du domaine" loading="lazy" /></div>
+    <div class="dmg-item" data-src="images/domaine2.png" data-caption="Le domaine"><img src="images/domaine2.png" alt="Le domaine" loading="lazy" /></div>
+    <div class="dmg-item" data-src="images/domaine3.png" data-caption="Le domaine"><img src="images/domaine3.png" alt="Le domaine" loading="lazy" /></div>
+    <div class="dmg-item" data-src="images/domaine4.png" data-caption="Le domaine"><img src="images/domaine4.png" alt="Le domaine" loading="lazy" /></div>
+    <div class="dmg-item" data-src="images/domaine5.png" data-caption="Le domaine"><img src="images/domaine5.png" alt="Le domaine" loading="lazy" /></div>
+    <div class="dmg-item" data-src="images/domaine6.png" data-caption="Le domaine"><img src="images/domaine6.png" alt="Le domaine" loading="lazy" /></div>
+    <div class="dmg-item" data-src="images/domaine7.png" data-caption="Le domaine"><img src="images/domaine7.png" alt="Le domaine" loading="lazy" /></div>
+  </div>
+  <p class="dmg-hint">Faites glisser pour découvrir →</p>
+</section>
 
 <!-- ══ GALERIE MASONRY ════════════════════════════════════════ -->
 <section class="masonry-section">
@@ -324,7 +352,7 @@
   </a>
 </div>
 
-<script src="script.js"></script>
+<script src="script.js?v=5"></script>
 <script>
 /* ── Galerie plein écran (sticky scroll) ── */
 (function () {
@@ -377,7 +405,7 @@
   const lbClose = document.getElementById('lightboxClose');
   if (!lb) return;
 
-  document.querySelectorAll('.masonry-item').forEach(function (item) {
+  document.querySelectorAll('.masonry-item, .dmg-item').forEach(function (item) {
     item.addEventListener('click', function () {
       lbImg.src = item.dataset.src;
       lbImg.alt = item.dataset.caption || '';

@@ -1883,3 +1883,28 @@ footer { border-top: 1px solid var(--border); padding: 4rem 2rem 2rem; }
   html.logo-morph .hero-logo-img { transform-origin: 50% 0; will-change: transform; transition: opacity .2s ease; }
   html.logo-morph .hero-logo-img.is-docked { opacity: 0; }
 }
+
+/* ── Page Notre domaine : carrousel de photos (téléphone uniquement) ── */
+.dmg-section { display: none; }
+@media (max-width: 768px) {
+  .dmg-section { display: block; padding: 3.2rem 0 2.6rem; background: var(--bg); }
+  .dmg-head { text-align: center; padding: 0 1.2rem; margin-bottom: 1.4rem; }
+  .dmg-track {
+    display: flex; gap: .8rem;
+    overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch;
+    padding: 0 1.2rem .4rem; scrollbar-width: none;
+  }
+  .dmg-track::-webkit-scrollbar { display: none; }
+  .dmg-item {
+    flex: 0 0 78%; aspect-ratio: 4 / 5;
+    border-radius: 12px; overflow: hidden;
+    scroll-snap-align: center; cursor: zoom-in;
+    box-shadow: 0 10px 28px rgba(0,0,0,.35);
+  }
+  .dmg-item img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .dmg-hint {
+    text-align: center; margin-top: 1rem;
+    font-family: 'Playfair Display', serif; font-style: italic;
+    font-size: .82rem; color: rgba(240,235,224,.5);
+  }
+}
