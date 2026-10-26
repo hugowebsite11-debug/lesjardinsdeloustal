@@ -38,12 +38,32 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }, { passive: true });
 
+  /* ── En-tête : se cache quand on descend, revient dès qu'on remonte ── */
+  // Il reste toujours visible sur la photo d'accueil (et menu mobile ouvert).
+  if (navbar) {
+    const heroSection = document.getElementById('hero');
+    let lastY = window.scrollY;
+    window.addEventListener('scroll', () => {
+      const y = window.scrollY;
+      const keepVisibleUntil = heroSection ? heroSection.offsetHeight - 80 : 160;
+      const menuOpen = document.querySelector('.mobile-menu.open');
+      if (y < keepVisibleUntil || menuOpen) {
+        navbar.classList.remove('nav-hidden');
+      } else if (y > lastY + 6) {
+        navbar.classList.add('nav-hidden');
+      } else if (y < lastY - 6) {
+        navbar.classList.remove('nav-hidden');
+      }
+      if (Math.abs(y - lastY) > 6) lastY = y;
+    }, { passive: true });
+  }
+
   /* ── Accueil mobile : le logo de la photo rétrécit en défilant et devient le logo de l'en-tête ── */
   const heroLogo = document.querySelector('.hero-logo-img');
   const mobileQuery = window.matchMedia('(max-width: 768px)');
   if (heroLogo && navbar) {
     const heroLogoWrap = heroLogo.closest('.hero-logo-wrap') || heroLogo.parentElement;
-    const NAV_LOGO_HEIGHT = 44;
+    const navLogoImg = navbar.querySelector('.nav-logo-scroll img');
 
     const updateLogoMorph = () => {
       if (!mobileQuery.matches) {
@@ -54,12 +74,14 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
       }
       document.documentElement.classList.add('logo-morph');
-      const navBottom = navbar.offsetHeight || 56;
+      // Bas de l'en-tête (capsule flottante : décalage du haut + hauteur)
+      const navBottom = (navbar.offsetTop || 0) + (navbar.offsetHeight || 56);
       const y = window.scrollY;
       // Distance à parcourir : du haut du logo (au repos) jusqu'au bas de l'en-tête
       const travel = heroLogoWrap.getBoundingClientRect().top + y - navBottom;
       const p = travel > 0 ? Math.min(Math.max(y / travel, 0), 1) : 1;
-      const targetScale = Math.min(1, NAV_LOGO_HEIGHT / (heroLogo.offsetHeight || NAV_LOGO_HEIGHT));
+      const navLogoH = (navLogoImg && navLogoImg.offsetHeight) || 38;
+      const targetScale = Math.min(1, navLogoH / (heroLogo.offsetHeight || navLogoH));
       heroLogo.style.transform = `scale(${1 - p * (1 - targetScale)})`;
       const docked = p >= 1;
       heroLogo.classList.toggle('is-docked', docked);

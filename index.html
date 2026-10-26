@@ -54,7 +54,7 @@
 
   <meta name="theme-color" content="#0b120b" />
   <link rel="preload" as="image" href="images/hero.jpg" />
-  <link rel="stylesheet" href="style.css?v=10" />
+  <link rel="stylesheet" href="style.css?v=25" />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌲</text></svg>" />
   <!-- Statistiques de visite (Umami, sans cookies) -->
   <script defer src="https://cloud.umami.is/script.js" data-website-id="2b6baa3b-5b9f-4acf-9977-17b361b1402a" data-domains="www.lesjardinsdeloustal.com,lesjardinsdeloustal.com"></script>
@@ -297,6 +297,19 @@
   </div>
 </section>
 
+<!-- ══ ACTIVITÉS ════════════════════════ -->
+<section id="activites" style="padding:7rem 2rem;">
+  <div class="container">
+    <div style="text-align:center;max-width:620px;margin:0 auto 4rem;">
+      <span class="section-label reveal">Dans la région</span>
+      <h2 class="section-title reveal reveal-delay-1">À explorer <em>autour de Narbonne</em></h2>
+      <p class="section-desc reveal reveal-delay-2" style="margin:0 auto;">Entre mer, garrigue et patrimoine, la région regorge de découvertes à quelques minutes de vos cottages — jusqu'aux portes de l'Espagne.</p>
+    </div>
+    <div class="xmap" id="exploreMap"></div>
+  </div>
+</section>
+
+
 <!-- ══ NOTRE DOMAINE ════════════════════ -->
 <section id="domaine">
   <div class="container">
@@ -348,18 +361,6 @@
   <button class="lightbox-btn lightbox-next" id="domaineLbNext">&#8250;</button>
   <div class="lightbox-counter" id="domaineLbCounter"></div>
 </div>
-
-<!-- ══ ACTIVITÉS ════════════════════════ -->
-<section id="activites" style="padding:7rem 2rem;background:var(--bg2);">
-  <div class="container">
-    <div style="text-align:center;max-width:620px;margin:0 auto 4rem;">
-      <span class="section-label reveal">Dans la région</span>
-      <h2 class="section-title reveal reveal-delay-1">À explorer <em>autour de Narbonne</em></h2>
-      <p class="section-desc reveal reveal-delay-2" style="margin:0 auto;">Entre mer, garrigue et patrimoine, la région regorge de découvertes à quelques minutes de vos cottages — jusqu'aux portes de l'Espagne.</p>
-    </div>
-    <div class="xmap" id="exploreMap"></div>
-  </div>
-</section>
 
 <div class="divider"></div>
 
@@ -520,8 +521,8 @@
   </a>
 </div>
 
-<script src="script.js?v=5"></script>
-<script src="explore-map.js?v=3"></script>
+<script src="script.js?v=6"></script>
+<script src="explore-map.js?v=7"></script>
 <script>
   /* ── Dots carousel ── */
   function initDots(gridId, dotsId) {
