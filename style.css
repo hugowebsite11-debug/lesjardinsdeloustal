@@ -1908,3 +1908,219 @@ footer { border-top: 1px solid var(--border); padding: 4rem 2rem 2rem; }
     font-size: .82rem; color: rgba(240,235,224,.5);
   }
 }
+
+/* ══════════════════════════════════════
+   ACCUEIL — CARTE INTERACTIVE « À explorer » (ordinateur + téléphone)
+══════════════════════════════════════ */
+.xmap {
+  display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr);
+  gap: 2.4rem; align-items: center;
+  max-width: 1100px; margin: 0 auto;
+}
+.xmap-stage { position: relative; }
+.xmap-canvas {
+  position: relative; width: 100%; aspect-ratio: 1 / 1;
+  border-radius: 22px; overflow: hidden;
+  border: 1px solid rgba(201,169,110,.28);
+  box-shadow: 0 30px 70px rgba(0,0,0,.45), inset 0 0 0 1px rgba(255,255,255,.03);
+}
+.xmap-svg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.xmap-coast { fill: none; stroke: rgba(201,169,110,.45); stroke-width: 1.4; stroke-dasharray: 2 5; }
+.xmap-hills path { fill: none; stroke: rgba(201,169,110,.22); stroke-width: 1.3; stroke-linejoin: round; }
+.xmap-sea-label {
+  fill: rgba(200,235,235,.38); font-family: 'Playfair Display', serif; font-style: italic;
+  font-size: 15px; letter-spacing: 4px; text-anchor: middle;
+}
+.xmap-ring { fill: none; stroke: rgba(201,169,110,.32); stroke-width: 1; stroke-dasharray: 3 6; }
+.xmap-ring-label {
+  fill: rgba(201,169,110,.75); font-family: 'Inter', sans-serif; font-size: 10.5px;
+  letter-spacing: 1.5px; text-anchor: middle; text-transform: uppercase;
+  paint-order: stroke; stroke: #1c2f1b; stroke-width: 4px;
+}
+.xmap-compass circle { fill: rgba(11,18,11,.4); stroke: rgba(201,169,110,.4); }
+.xmap-compass path { fill: rgba(201,169,110,.75); }
+.xmap-compass text { fill: rgba(201,169,110,.85); font-size: 10px; font-family: 'Inter', sans-serif; text-anchor: middle; font-weight: 700; }
+.xmap-route {
+  fill: none; stroke: var(--gold); stroke-width: 2.2; stroke-linecap: round;
+  stroke-dasharray: 600; stroke-dashoffset: 600; opacity: .9;
+  filter: drop-shadow(0 0 6px rgba(201,169,110,.6));
+}
+.xmap-route.draw { animation: xmap-route 1.1s cubic-bezier(.4,0,.2,1) forwards; }
+@keyframes xmap-route { to { stroke-dashoffset: 0; } }
+
+/* Le domaine, au centre */
+.xmap-home { position: absolute; transform: translate(-50%, -50%); display: flex; flex-direction: column; align-items: center; pointer-events: none; z-index: 3; }
+.xmap-home-dot {
+  position: relative; z-index: 1;
+  display: grid; place-items: center;
+  width: 42px; height: 42px; border-radius: 50%;
+  background: var(--gold); color: #142213;
+  box-shadow: 0 0 0 4px rgba(20,34,19,.9), 0 8px 22px rgba(0,0,0,.5);
+}
+.xmap-home-dot svg { width: 20px; height: 20px; }
+.xmap-home-pulse {
+  position: absolute; top: 0; left: 50%; width: 42px; height: 42px; margin-left: -21px; border-radius: 50%;
+  border: 2px solid var(--gold); animation: xmap-pulse 2.4s ease-out infinite;
+}
+@keyframes xmap-pulse { from { transform: scale(1); opacity: .8; } to { transform: scale(2.6); opacity: 0; } }
+.xmap-home-label {
+  margin-top: .45rem; white-space: nowrap;
+  font-family: 'Playfair Display', serif; font-style: italic; font-size: .82rem; color: var(--cream);
+  background: rgba(11,18,11,.72); padding: .18rem .6rem; border-radius: 20px;
+  border: 1px solid rgba(201,169,110,.35);
+}
+
+/* Les lieux */
+.xmap-pin {
+  position: absolute; z-index: 4;
+  transform: translate(-50%, -50%) scale(.4); opacity: 0;
+  background: none; border: none; padding: 0; cursor: pointer;
+  display: flex; align-items: center; gap: .35rem;
+  transition: transform .5s cubic-bezier(.3,1.5,.5,1), opacity .4s ease;
+}
+.xmap-stage.in .xmap-pin { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+.xmap-stage.in .xmap-pin:nth-of-type(2) { transition-delay: .05s; }
+.xmap-stage.in .xmap-pin:nth-of-type(3) { transition-delay: .12s; }
+.xmap-stage.in .xmap-pin:nth-of-type(4) { transition-delay: .19s; }
+.xmap-stage.in .xmap-pin:nth-of-type(5) { transition-delay: .26s; }
+.xmap-stage.in .xmap-pin:nth-of-type(6) { transition-delay: .33s; }
+.xmap-stage.in .xmap-pin:nth-of-type(7) { transition-delay: .40s; }
+.xmap-stage.in .xmap-pin:nth-of-type(8) { transition-delay: .47s; }
+.xmap-stage.in .xmap-pin:nth-of-type(9) { transition-delay: .54s; }
+.xmap-stage.in .xmap-pin:nth-of-type(10) { transition-delay: .61s; }
+.xmap-pin-dot {
+  flex: 0 0 auto; display: grid; place-items: center;
+  width: 34px; height: 34px; border-radius: 50%;
+  background: #f4ecdc; border: 2px solid var(--gold);
+  box-shadow: 0 6px 16px rgba(0,0,0,.45);
+  font-size: 1rem; line-height: 1;
+  transition: transform .25s ease, box-shadow .25s ease, background .25s ease;
+}
+.xmap-pin-label {
+  white-space: nowrap; font-size: .7rem; font-weight: 600; letter-spacing: .04em;
+  color: var(--cream); background: rgba(11,18,11,.72);
+  padding: .16rem .5rem; border-radius: 20px;
+  border: 1px solid rgba(201,169,110,.22);
+  transition: background .25s, color .25s;
+}
+/* Position de l'étiquette autour de l'épingle */
+.xmap-pin.is-top, .xmap-pin.is-bottom { flex-direction: column; }
+.xmap-pin.is-top { flex-direction: column-reverse; }
+.xmap-pin.is-left { flex-direction: row-reverse; }
+.xmap-pin.is-top .xmap-pin-label, .xmap-pin.is-bottom .xmap-pin-label { position: absolute; left: 50%; transform: translateX(-50%); }
+.xmap-pin.is-top .xmap-pin-label { bottom: calc(100% + 4px); }
+.xmap-pin.is-bottom .xmap-pin-label { top: calc(100% + 4px); }
+.xmap-pin.is-right .xmap-pin-label { position: absolute; left: calc(100% + 5px); }
+.xmap-pin.is-left .xmap-pin-label { position: absolute; right: calc(100% + 5px); }
+.xmap-pin:hover .xmap-pin-dot, .xmap-pin:focus-visible .xmap-pin-dot { transform: scale(1.12); }
+.xmap-pin.active { z-index: 5; }
+.xmap-pin.active .xmap-pin-dot {
+  transform: scale(1.22); background: var(--gold);
+  box-shadow: 0 0 0 5px rgba(201,169,110,.28), 0 0 24px rgba(201,169,110,.7), 0 6px 16px rgba(0,0,0,.45);
+}
+.xmap-pin.active .xmap-pin-label { background: var(--gold); color: #142213; border-color: var(--gold); }
+.xmap-note { text-align: center; margin-top: .8rem; font-size: .72rem; letter-spacing: .06em; color: rgba(240,235,224,.4); font-style: italic; }
+
+/* Fiche du lieu */
+.xmap-card {
+  position: relative;
+  background: linear-gradient(180deg, rgba(30,50,32,.95), rgba(20,34,19,.98));
+  border: 1px solid rgba(201,169,110,.28);
+  border-radius: 20px; overflow: hidden;
+  box-shadow: 0 30px 60px rgba(0,0,0,.4);
+}
+.xmap-card.swap .xmap-card-photo, .xmap-card.swap .xmap-card-body { animation: xmap-swap .5s ease both; }
+@keyframes xmap-swap { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+.xmap-card-photo { height: 230px; background: #1c2f1b center / cover no-repeat; position: relative; }
+.xmap-card-photo::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to bottom, transparent 55%, rgba(20,34,19,.95)); }
+.xmap-card-body { padding: 0 1.6rem 1.6rem; margin-top: -1.4rem; position: relative; z-index: 1; }
+.xmap-card-top { display: flex; align-items: center; justify-content: space-between; gap: .8rem; margin-bottom: .7rem; }
+.xmap-card-icon {
+  display: grid; place-items: center; width: 50px; height: 50px; border-radius: 50%;
+  background: #f4ecdc; border: 2px solid var(--gold); font-size: 1.4rem;
+  box-shadow: 0 8px 20px rgba(0,0,0,.4);
+}
+.xmap-card-chips { display: flex; flex-wrap: wrap; gap: .4rem; justify-content: flex-end; }
+.xmap-chip {
+  font-size: .66rem; letter-spacing: .1em; text-transform: uppercase; font-weight: 600;
+  color: var(--gold); background: rgba(201,169,110,.1); border: 1px solid rgba(201,169,110,.3);
+  padding: .3rem .7rem; border-radius: 20px; white-space: nowrap;
+}
+.xmap-chip.is-time { color: var(--cream); background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.14); }
+.xmap-card-name { font-family: 'Playfair Display', serif; font-size: 1.55rem; line-height: 1.2; color: var(--cream); margin-bottom: .45rem; font-weight: 600; }
+.xmap-card-hours { font-size: .76rem; color: var(--gold); margin-bottom: .8rem; }
+.xmap-card-desc { font-size: .9rem; line-height: 1.75; color: rgba(240,235,224,.72); }
+.xmap-card-actions { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-top: 1.3rem; }
+.xmap-go {
+  display: inline-flex; align-items: center; gap: .5rem;
+  background: var(--gold); color: #142213; text-decoration: none;
+  font-size: .76rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
+  padding: .8rem 1.3rem; border-radius: 8px;
+  transition: background .2s;
+}
+.xmap-go:hover { background: var(--gold-light); }
+.xmap-go svg { width: 16px; height: 16px; }
+.xmap-nav { display: flex; align-items: center; gap: .55rem; font-size: .76rem; color: rgba(240,235,224,.55); }
+.xmap-nav button {
+  width: 36px; height: 36px; border-radius: 50%;
+  border: 1px solid rgba(201,169,110,.35); background: transparent;
+  color: var(--gold); font-size: 1.3rem; line-height: 1; cursor: pointer;
+  transition: background .2s;
+}
+.xmap-nav button:hover { background: rgba(201,169,110,.12); }
+.xmap-card-close { display: none; }
+.xmap-backdrop { display: none; }
+
+/* Téléphone : la fiche glisse depuis le bas de l'écran */
+@media (max-width: 768px) {
+  .xmap { display: block; }
+  .xmap-canvas { border-radius: 16px; }
+  .xmap-pin-dot { width: 28px; height: 28px; font-size: .82rem; }
+  .xmap-pin-label { font-size: .58rem; padding: .12rem .38rem; letter-spacing: .02em; }
+  .xmap-home-dot { width: 34px; height: 34px; }
+  .xmap-home-dot svg { width: 16px; height: 16px; }
+  .xmap-home-pulse { width: 34px; height: 34px; margin-left: -17px; }
+  .xmap-home-label { font-size: .66rem; padding: .12rem .45rem; }
+  .xmap-ring-label { font-size: 13px; }
+  .xmap-sea-label { font-size: 17px; }
+
+  .xmap-backdrop {
+    display: block; position: fixed; inset: 0; z-index: 900;
+    background: rgba(5,10,5,.55); opacity: 0; pointer-events: none; transition: opacity .3s ease;
+  }
+  .xmap-backdrop.open { opacity: 1; pointer-events: auto; }
+  .xmap-card {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 901;
+    max-height: 82vh; overflow-y: auto;
+    border-radius: 22px 22px 0 0; border-bottom: none;
+    transform: translateY(105%); transition: transform .42s cubic-bezier(.2,.8,.2,1);
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  .xmap-card.open { transform: none; }
+  .xmap-card::before {
+    content: ''; position: absolute; top: 8px; left: 50%; z-index: 3;
+    width: 42px; height: 4px; margin-left: -21px; border-radius: 4px; background: rgba(255,255,255,.55);
+  }
+  .xmap-card-close {
+    display: grid; place-items: center; position: absolute; top: .8rem; right: .8rem; z-index: 3;
+    width: 36px; height: 36px; border-radius: 50%; border: none;
+    background: rgba(11,18,11,.55); color: #fff; font-size: 1rem; cursor: pointer;
+    -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+  }
+  .xmap-card-photo { height: 200px; }
+  .xmap-card-body { padding: 0 1.2rem 1.4rem; }
+  .xmap-card-name { font-size: 1.35rem; }
+  .xmap-card-desc { font-size: .86rem; }
+  .xmap-go { padding: .75rem 1.1rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .xmap-home-pulse { animation: none; }
+  .xmap-route.draw { animation: none; stroke-dashoffset: 0; }
+}
+@media (max-width: 768px) {
+  /* Carte en pleine largeur sur téléphone */
+  .xmap-stage { width: calc(100vw - 20px); margin-left: calc(50% - 50vw + 10px); }
+  /* La fiche passe au-dessus de la barre Appeler / Réserver */
+  .xmap-backdrop { z-index: 1190; }
+  .xmap-card { z-index: 1200; }
+}
