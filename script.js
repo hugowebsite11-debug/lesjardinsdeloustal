@@ -38,6 +38,39 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }, { passive: true });
 
+  /* ── Accueil mobile : le logo de la photo rétrécit en défilant et devient le logo de l'en-tête ── */
+  const heroLogo = document.querySelector('.hero-logo-img');
+  const mobileQuery = window.matchMedia('(max-width: 768px)');
+  if (heroLogo && navbar) {
+    const heroLogoWrap = heroLogo.closest('.hero-logo-wrap') || heroLogo.parentElement;
+    const NAV_LOGO_HEIGHT = 44;
+
+    const updateLogoMorph = () => {
+      if (!mobileQuery.matches) {
+        document.documentElement.classList.remove('logo-morph');
+        heroLogo.style.transform = '';
+        heroLogo.classList.remove('is-docked');
+        navbar.classList.remove('logo-docked');
+        return;
+      }
+      document.documentElement.classList.add('logo-morph');
+      const navBottom = navbar.offsetHeight || 56;
+      const y = window.scrollY;
+      // Distance à parcourir : du haut du logo (au repos) jusqu'au bas de l'en-tête
+      const travel = heroLogoWrap.getBoundingClientRect().top + y - navBottom;
+      const p = travel > 0 ? Math.min(Math.max(y / travel, 0), 1) : 1;
+      const targetScale = Math.min(1, NAV_LOGO_HEIGHT / (heroLogo.offsetHeight || NAV_LOGO_HEIGHT));
+      heroLogo.style.transform = `scale(${1 - p * (1 - targetScale)})`;
+      const docked = p >= 1;
+      heroLogo.classList.toggle('is-docked', docked);
+      navbar.classList.toggle('logo-docked', docked);
+    };
+    window.addEventListener('scroll', updateLogoMorph, { passive: true });
+    window.addEventListener('resize', updateLogoMorph);
+    heroLogo.addEventListener('load', updateLogoMorph);
+    updateLogoMorph();
+  }
+
 
   /* ── Hero image Ken Burns ───────────── */
   const heroBgImg = document.querySelector('.hero-bg img');

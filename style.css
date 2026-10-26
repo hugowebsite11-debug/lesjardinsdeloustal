@@ -1831,3 +1831,55 @@ footer { border-top: 1px solid var(--border); padding: 4rem 2rem 2rem; }
   .works-notice { top: 76px; padding: .9rem 2.6rem .95rem 1rem; }
   .works-notice p { font-size: .8rem; }
 }
+
+/* ══════════════════════════════════════
+   ACCUEIL — MOBILE UNIQUEMENT (≤ 768px)
+   Rien ici ne s'applique à la version ordinateur.
+══════════════════════════════════════ */
+@media (max-width: 768px) {
+  /* Photo d'accueil = exactement la hauteur visible de l'écran (au-dessus de la barre Appeler / Réserver) */
+  #hero {
+    height: calc(100vh - 75px) !important;
+    height: calc(100svh - 75px) !important;
+    min-height: 0 !important;
+    padding: 56px 1.5rem 0 !important;
+    justify-content: center !important;
+  }
+  /* Photo visible jusqu'en bas : on n'assombrit que la toute fin pour la transition */
+  #hero .hero-overlay {
+    background: linear-gradient(
+      to bottom,
+      rgba(11,18,11,.30) 0%,
+      rgba(11,18,11,.28) 40%,
+      rgba(11,18,11,.45) 75%,
+      rgba(11,18,11,.85) 94%,
+      rgba(11,18,11,1)   100%
+    );
+  }
+  #hero .hero-bg img { object-position: center 35%; }
+
+  /* « Charmants cottages à Narbonne » en blanc */
+  .hero-sub-brand { color: #fff !important; opacity: 1 !important; }
+
+  /* « 5 min en voiture des » sur une ligne, en petit ; seul « Grands Buffets » en grand */
+  .hero-usp-accent.hero-usp-min {
+    font-family: 'Inter', sans-serif !important;
+    font-size: 0.68rem !important;
+    font-weight: 400 !important;
+    letter-spacing: 0.18em !important;
+    text-transform: uppercase;
+    color: rgba(240,235,224,.55) !important;
+  }
+  .hero-usp-accent:not(.hero-usp-min) { display: block !important; margin-top: .2rem; }
+
+  /* « Cottages avec jacuzzi privatif » sous le dernier trait */
+  .hero-usp { border-bottom: none !important; padding-bottom: 0 !important; display: block !important; }
+  .hero-usp-main { border-bottom: 1px solid rgba(201,169,110,.3); padding-bottom: .75rem; margin-bottom: 0 !important; }
+  .hero-usp-sub { margin-top: .75rem; }
+
+  /* Logo de l'en-tête : caché au départ sur l'accueil, il apparaît quand le logo de la photo l'a rejoint */
+  html.logo-morph .nav-logo-scroll { opacity: 0 !important; pointer-events: none !important; transition: opacity .25s ease; }
+  html.logo-morph #navbar.logo-docked .nav-logo-scroll { opacity: 1 !important; pointer-events: auto !important; }
+  html.logo-morph .hero-logo-img { transform-origin: 50% 0; will-change: transform; transition: opacity .2s ease; }
+  html.logo-morph .hero-logo-img.is-docked { opacity: 0; }
+}
