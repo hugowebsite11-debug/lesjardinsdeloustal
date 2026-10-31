@@ -54,7 +54,7 @@
 
   <meta name="theme-color" content="#0b120b" />
   <link rel="preload" as="image" href="images/hero.jpg" />
-  <link rel="stylesheet" href="style.css?v=34" />
+  <link rel="stylesheet" href="style.css?v=37" />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌲</text></svg>" />
   <!-- Statistiques de visite (Umami, sans cookies) -->
   <script defer src="https://cloud.umami.is/script.js" data-website-id="2b6baa3b-5b9f-4acf-9977-17b361b1402a" data-domains="www.lesjardinsdeloustal.com,lesjardinsdeloustal.com"></script>
@@ -78,13 +78,14 @@
     </li>
     <li><a href="domaine.html">Notre domaine</a></li>
     <li><a href="services.html">Services</a></li>
+    <li><a href="bons-cadeaux.html">Bons cadeaux</a></li>
     <li><a href="contact.html">Contact</a></li>
   </ul>
   <a href="https://direct-book.com/properties/lesjardinsdeloustal?locale=fr&items[0][adults]=2&items[0][children]=0&items[0][infants]=0&currency=EUR&checkInDate=2026-11-23&checkOutDate=2026-11-26&trackPage=yes" target="_blank" class="nav-reserver">
     Réserver<span>Meilleur tarif</span>
   </a>
   <a href="index.html" class="nav-logo-scroll">
-    <img src="images/logo.png" alt="Les Jardins de l'Oustal" />
+    <img src="images/logo-nav.png" alt="Les Jardins de l'Oustal" />
   </a>
 </nav>
 
@@ -103,6 +104,7 @@
   </details>
   <a href="domaine.html">Notre domaine</a>
   <a href="services.html">Services</a>
+  <a href="bons-cadeaux.html">Bons cadeaux</a>
   <a href="contact.html">Contact</a>
   <a href="https://direct-book.com/properties/lesjardinsdeloustal?locale=fr&items[0][adults]=2&items[0][children]=0&items[0][infants]=0&currency=EUR&checkInDate=2026-11-23&checkOutDate=2026-11-26&trackPage=yes" target="_blank" class="btn btn-fill">Réserver</a>
 </div>
@@ -115,7 +117,7 @@
   </div>
   <div class="hero-content">
     <div class="hero-logo-wrap">
-      <img src="images/logo.png" alt="Logo Les Jardins de l'Oustal — Cottages à Narbonne" class="hero-logo-img" />
+      <img src="images/logo-nav.png" alt="Logo Les Jardins de l'Oustal — Cottages à Narbonne" class="hero-logo-img" />
       <p class="hero-sub-brand">CHARMANTS COTTAGES À NARBONNE</p>
     </div>
     <div class="hero-usp">
@@ -364,6 +366,31 @@
 
 <div class="divider"></div>
 
+<!-- ══ BONS CADEAUX ═══════════════════════ -->
+<section class="gift-teaser">
+  <div class="gift-teaser-inner">
+    <div class="gift-teaser-photo reveal">
+      <img src="images/bf-hero.png" alt="Cottage des Jardins de l'Oustal sous les pins" loading="lazy" />
+      <span class="gift-teaser-tag">Bons cadeaux <strong>dès 50 €</strong></span>
+    </div>
+    <div class="gift-teaser-text">
+      <span class="section-label">Bons cadeaux</span>
+      <h2 class="section-title reveal">Offrez un moment aux <em>Jardins de l'Oustal</em></h2>
+      <p class="section-desc reveal reveal-delay-1">Une nuit sous les pins, un week-end à deux avec spa privatif… Le bénéficiaire choisit son gîte et ses dates.</p>
+      <ul class="gift-teaser-points reveal reveal-delay-1">
+        <li>Bon cadeau en PDF envoyé par email sous 24 h</li>
+        <li>Valable 12 mois, dans nos 5 gîtes</li>
+      </ul>
+      <a href="bons-cadeaux.html" class="btn btn-fill reveal reveal-delay-2">
+        Découvrir les bons cadeaux
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
 <!-- ══ AVIS GOOGLE ════════════════════════ -->
 <section id="avis" style="background:var(--bg2);padding:7rem 2rem;">
   <div class="container">
@@ -608,5 +635,7 @@
     });
   })();
 </script>
+<script src="site-config.js"></script>
+<script src="promo-banner.js"></script>
 </body>
 </html>
