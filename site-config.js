@@ -17,7 +17,7 @@ window.GIFT_LINKS = {
 // Pour la Saint-Valentin ou la fête des mères : changez `id`, `text`, `link` et les dates.
 // Astuce test : ajoutez « ?bandeau=1 » à l'adresse d'une page pour l'afficher hors période.
 window.SEASONAL_BANNER = {
-  enabled: true,
+  enabled: false,                                    // true = bandeau affiché (désactivé pour l'instant)
   id: 'noel',                                         // changer l'id pour qu'une nouvelle campagne réapparaisse
   start: '11-15',                                     // du 15 novembre…
   end: '12-31',                                       // …au 31 décembre (inclus)

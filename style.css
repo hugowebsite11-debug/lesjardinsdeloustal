@@ -2493,6 +2493,7 @@ html.has-promo .works-notice { top: calc(84px + var(--promo-h)); }
 .gift-card-desc { font-size: .86rem; line-height: 1.65; color: rgba(240,235,224,.7); margin: .9rem 0 1.6rem; flex: 1; }
 .gift-card .btn { width: 100%; justify-content: center; }
 .gift-card.is-unavailable { cursor: default; }
+.gift-card.is-unavailable:hover { transform: none; border-color: rgba(201,169,110,.35); box-shadow: 0 20px 50px rgba(0,0,0,.3); }
 .gift-card.is-unavailable .btn { opacity: .55; }
 .gift-secure { text-align: center; margin-top: 1.6rem; font-size: .78rem; color: var(--muted); }
 
