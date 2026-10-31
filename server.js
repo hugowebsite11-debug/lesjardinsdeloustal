@@ -20,8 +20,18 @@ const mimeTypes = {
 
 http.createServer((req, res) => {
   const urlPath = req.url.split('?')[0]; // strip query string
+  // /bons-cadeaux/ → /bons-cadeaux (sinon les chemins relatifs des images/CSS cassent)
+  if (urlPath.length > 1 && urlPath.endsWith('/')) {
+    const query = req.url.slice(urlPath.length);
+    res.writeHead(301, { 'Location': urlPath.replace(/\/+$/, '') + query });
+    res.end();
+    return;
+  }
+
   let filePath = '.' + urlPath;
   if (filePath === './') filePath = './index.html';
+  // Adresses courtes : /bons-cadeaux sert bons-cadeaux.html
+  if (!path.extname(filePath) && fs.existsSync(filePath + '.html')) filePath += '.html';
 
   const ext = path.extname(filePath);
   const contentType = mimeTypes[ext] || 'text/plain';
